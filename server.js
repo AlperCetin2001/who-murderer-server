@@ -47,9 +47,6 @@ io.on('connection', (socket) => {
         let roomCode = generateRoomCode();
         while(rooms.has(roomCode)) { roomCode = generateRoomCode(); }
 
-        const isPrivate = (visibility === 'private');
-        const roomPassword = (visibility === 'protected' && password) ? password : null;
-
         rooms.set(roomCode, {
             host: socket.id,
             players: [{ id: socket.id, name: playerName, score: 0 }],
@@ -57,9 +54,9 @@ io.on('connection', (socket) => {
             mode: 'individual', 
             votes: {},          
             currentCase: null,
-            isPrivate: isPrivate,
-            password: roomPassword,
-            hintCount: 3 // Sunucu tarafı ipucu takibi
+            isPrivate: (visibility === 'private'),
+            password: (visibility === 'protected' && password) ? password : null,
+            hintCount: 3 
         });
 
         socket.join(roomCode);
@@ -98,13 +95,13 @@ io.on('connection', (socket) => {
             room.gameState = 'playing';
             room.currentCase = caseId;
             room.mode = mode || 'individual';
-            room.hintCount = 3; // İpuçlarını sıfırla
+            room.hintCount = 3; 
             
-            // Odayı başlatırken ipucu sayısını da gönderiyoruz
+            // Başlangıç ipucu sayısını gönderiyoruz
             io.to(roomCode).emit('game_started', { 
                 caseId, 
                 mode: room.mode,
-                currentHintCount: room.hintCount 
+                currentHintCount: 3 
             });
             
             io.emit('room_list_update', getPublicRoomList());
@@ -149,20 +146,22 @@ io.on('connection', (socket) => {
         }
     });
 
-    // İPUCU İSTEĞİ
+    // İPUCU İSTEĞİ - KESİN ÇÖZÜM
     socket.on('request_hint', ({ roomCode, hintText, playerName }) => {
         const room = rooms.get(roomCode);
         if (room && room.mode === 'voting') {
             if (room.hintCount > 0) {
-                room.hintCount--; 
+                room.hintCount--; // Sunucuda azalt
                 
+                // Herkese yeni sayıyı gönder
                 io.to(roomCode).emit('hint_revealed', { 
                     hintText: hintText, 
                     newCount: room.hintCount,
                     user: playerName
                 });
             } else {
-                // Hakkı kalmadıysa isteği yapan kişiye hata dön (isteğe bağlı)
+                // Hakkı bittiyse isteği yapana bildir
+                socket.emit('error_message', '⚠️ İpucu hakkınız kalmadı!');
             }
         }
     });
