@@ -43,7 +43,6 @@ io.on('connection', (socket) => {
     console.log(`🔌 Yeni bağlantı: ${socket.id}`);
     socket.emit('room_list_update', getPublicRoomList());
 
-    // ODA OLUŞTURMA
     socket.on('create_room', ({ playerName, visibility, password }) => {
         let roomCode = generateRoomCode();
         while(rooms.has(roomCode)) { roomCode = generateRoomCode(); }
@@ -60,7 +59,7 @@ io.on('connection', (socket) => {
             currentCase: null,
             isPrivate: isPrivate,
             password: roomPassword,
-            hintCount: 3 // Başlangıç ipucu sayısı
+            hintCount: 3 // Sunucu tarafı ipucu takibi
         });
 
         socket.join(roomCode);
@@ -69,7 +68,6 @@ io.on('connection', (socket) => {
         io.to(roomCode).emit('update_player_list', rooms.get(roomCode).players);
     });
 
-    // ODAYA KATILMA
     socket.on('join_room', ({ roomCode, playerName, password }) => {
         const room = rooms.get(roomCode);
 
@@ -88,7 +86,6 @@ io.on('connection', (socket) => {
         io.emit('room_list_update', getPublicRoomList());
     });
 
-    // OYUNU BAŞLATMA
     socket.on('start_game', ({ roomCode, caseId, mode }) => {
         const room = rooms.get(roomCode);
         if (room && room.host === socket.id) {
@@ -103,12 +100,17 @@ io.on('connection', (socket) => {
             room.mode = mode || 'individual';
             room.hintCount = 3; // İpuçlarını sıfırla
             
-            io.to(roomCode).emit('game_started', { caseId, mode: room.mode });
+            // Odayı başlatırken ipucu sayısını da gönderiyoruz
+            io.to(roomCode).emit('game_started', { 
+                caseId, 
+                mode: room.mode,
+                currentHintCount: room.hintCount 
+            });
+            
             io.emit('room_list_update', getPublicRoomList());
         }
     });
 
-    // OY KULLANMA
     socket.on('cast_vote', ({ roomCode, nextSceneId }) => {
         const room = rooms.get(roomCode);
         if (!room || room.mode !== 'voting') return;
@@ -147,16 +149,21 @@ io.on('connection', (socket) => {
         }
     });
 
-    // İPUCU İSTEĞİ (DÜZELTİLDİ)
+    // İPUCU İSTEĞİ
     socket.on('request_hint', ({ roomCode, hintText, playerName }) => {
         const room = rooms.get(roomCode);
-        if (room && room.mode === 'voting' && room.hintCount > 0) {
-            room.hintCount--; 
-            io.to(roomCode).emit('hint_revealed', { 
-                hintText: hintText, 
-                newCount: room.hintCount,
-                user: playerName
-            });
+        if (room && room.mode === 'voting') {
+            if (room.hintCount > 0) {
+                room.hintCount--; 
+                
+                io.to(roomCode).emit('hint_revealed', { 
+                    hintText: hintText, 
+                    newCount: room.hintCount,
+                    user: playerName
+                });
+            } else {
+                // Hakkı kalmadıysa isteği yapan kişiye hata dön (isteğe bağlı)
+            }
         }
     });
 
