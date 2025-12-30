@@ -73,20 +73,28 @@ io.on('connection', (socket) => {
         console.log(`👤 ${playerName} odaya katıldı: ${roomCode}`);
     });
 
-    // 3. Oyunu Başlatma
+    // 3. Oyunu Başlatma (GÜNCELLENDİ: 3 KİŞİ KURALI)
     socket.on('start_game', ({ roomCode, caseId, mode }) => {
         const room = rooms.get(roomCode);
+        
         if (room && room.host === socket.id) {
+            
+            // --- KURAL KONTROLÜ ---
+            if (mode === 'voting' && room.players.length < 3) {
+                socket.emit('error_message', '⚠️ Demokrasi (Oylama) modu için en az 3 dedektif gereklidir! Lütfen "Bireysel" modu seçin veya daha fazla oyuncu bekleyin.');
+                return; // Oyunu başlatma, fonksiyondan çık.
+            }
+
             room.gameState = 'playing';
             room.currentCase = caseId;
             room.mode = mode || 'individual';
             
             io.to(roomCode).emit('game_started', { caseId, mode: room.mode });
-            console.log(`🎬 Oyun başladı: ${roomCode}, Mod: ${room.mode}`);
+            console.log(`🎬 Oyun başladı: ${roomCode}, Mod: ${room.mode}, Oyuncular: ${room.players.length}`);
         }
     });
 
-    // 4. OY KULLANMA (DETAYLI VERSİYON)
+    // 4. OY KULLANMA
     socket.on('cast_vote', ({ roomCode, nextSceneId }) => {
         const room = rooms.get(roomCode);
         
@@ -95,8 +103,7 @@ io.on('connection', (socket) => {
         // Oyuncunun oyunu kaydet
         room.votes[socket.id] = nextSceneId;
         
-        // Detaylı Oylama Durum Listesi Oluştur
-        // Her oyuncunun oy verip vermediğini ve neye verdiğini hazırlar
+        // Detaylı Oylama Durum Listesi
         const voteStatus = room.players.map(player => ({
             name: player.name,
             id: player.id,
@@ -106,8 +113,6 @@ io.on('connection', (socket) => {
 
         const playerCount = room.players.length;
         const voteCount = Object.keys(room.votes).length;
-
-        console.log(`🗳️ Oy Durumu (${roomCode}): ${voteCount}/${playerCount}`);
 
         // Herkese listeyi gönder
         io.to(roomCode).emit('vote_update', { voteStatus, voteCount, total: playerCount });
@@ -127,17 +132,17 @@ io.on('connection', (socket) => {
                 }
             });
 
-            // 3 Saniye bekle (İnsanlar kimin ne dediğini görsün) sonra değiştir
+            // 3 Saniye bekle, sonucu görsünler
             setTimeout(() => {
-                room.votes = {}; // Oyları sıfırla
+                room.votes = {}; 
                 io.to(roomCode).emit('force_scene_change', winnerScene);
             }, 3000);
         }
     });
 
-    // Bağlantı Kopması
     socket.on('disconnect', () => {
         console.log(`❌ Ayrıldı: ${socket.id}`);
+        // Not: Gerçek uygulamada odadan düşen oyuncuyu silmek gerekir.
     });
 });
 
