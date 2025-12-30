@@ -1,0 +1,1610 @@
+{
+  "title": "Zihnin Labirenti",
+  "description": "Sisli Londra'nın karanlık sokaklarında, zeki ve metodik bir seri katil terör estiriyor. Her cinayet, kurbanın mesleği veya kişisel özellikleriyle bağlantılı, karmaşık bir sanatsal düzenleme ve geride bırakılan gizemli ipuçlarıyla dolu. Siz, genç ama yetenekli bir dedektif olarak, bu katilin ardındaki dehşet verici zekayı çözmeli, onun twisted oyunlarına girmeli ve bir sonraki adımını tahmin etmelisiniz. Sherlock Holmes'un keskin zekası ve detaycılığıyla, karakterlerin derinliklerine inin, aldatmacanın perdesini aralayın ve katilin kurbanlarına fısıldadığı son sözleri ortaya çıkarın. Her kararınızın bir sonucu olacak; yanlış bir adım, masumların hayatına mal olabilir ya da sizi katilin acımasız oyununda bir piyon haline getirebilir.",
+  "supheliler": [
+    {
+      "name": "Eliza Thorne",
+      "role": "Kurbanın Kızı / Ressam",
+      "physical": {"boy": "1.65 m", "kilo": "55 kg", "ayakkabi_numarasi": 37},
+      "background": "Babası Elias'ın saatçi dükkanının yönetimini devralmış, işine tutkuyla bağlı ancak ticari konularda babası kadar deneyimli değil. Son zamanlarda, dükkanın finansal sorunları nedeniyle babasıyla sık sık tartıştığı biliniyor. Babasına derinden bağlı olmasına rağmen, onun bazı iş sırlarını bilmediği anlaşılıyor. Gizlice resim eğitimi alıyor ve babasının sanata olan felsefi yaklaşımından derinden etkilenmiş. Aslında 'Sanatçı Katil'in gerçek ilham kaynağı ve devam ettiricisi.",
+      "alibi": "Cinayet sırasında kendi dairesinde yalnız olduğunu iddia ediyor. Yaşadığı şok ve üzüntü, ifadesini manipüle etmesini kolaylaştırıyor.",
+      "haftalik_aktiviteler": "Dükkanın muhasebesiyle uğraşır, müşterilerle ilgilenir. Çarşamba akşamları gizlice resim derslerine gider ve babasıyla sanatsal felsefeler üzerine tartışmalar yapar."
+    },
+    {
+      "name": "Bayan Higgins",
+      "role": "Karşı Komşu / Eski Öğretmen",
+      "physical": {"boy": "1.58 m", "kilo": "68 kg", "ayakkabi_numarasi": 39},
+      "background": "Eski bir öğretmen. Meraklı ama iyi niyetli, mahalledeki her şeyden haberdar olmaya çalışır. Yalnız yaşıyor ve Elias'ı uzaktan da olsa takdir ediyordu. Boş zamanlarında kuş gözlemciliği yapar ve çok detaycıdır. Kurbanın atölyesinden çıkan siluet hakkında önemli bir görgü tanığı.",
+      "alibi": "Cinayet sırasında evde penceresinden dışarıyı izlediğini iddia ediyor. Yağmur yağdığını ve Elias'ın atölyesinden tuhaf sesler geldiğini belirtiyor.",
+      "haftalik_aktiviteler": "Her sabah bahçesini sular, öğleden sonra penceresinden dışarıyı seyreder, akşamları kitap okur. Sürekli yeni şeyler gözlemler."
+    },
+    {
+      "name": "Bay Arthur Finch",
+      "role": "Sanat Tüccarı / Elias'ın Eski İş Ortağı",
+      "physical": {"boy": "1.80 m", "kilo": "75 kg", "ayakkabi_numarasi": 42},
+      "background": "Elias'ın 20 yıl önceki iş ortağı ve 'Zaman Kapsülü' projesinin kurucularından. Sanat dünyasında tanınmış ama tartışmalı bir figür. Yakın zamanda Elias ile büyük bir miras anlaşmazlığı yaşadığı biliniyor. Elias'ın son telefon kayıtlarında onunla sık sık ve hararetli tartıştığı görülüyor. Para hırsı olduğu düşünülüyor ve projeyi tek başına ele geçirme motivasyonu var.",
+      "alibi": "Cinayet sırasında kendi sanat galerisinde, yeni bir serginin düzenlemeleriyle meşgul olduğunu ve asistanının da buna şahit olduğunu iddia ediyor. Ancak asistanı telefonlara çıkmıyor ve alibisi zayıf.",
+      "haftalik_aktiviteler": "Pazartesi ve Cuma günleri galerisinde bulunur, Salı ve Perşembe günleri müzayedelere katılır, Çarşamba günleri ise özel koleksiyoncularla görüşür. 'Zaman Kapsülü' projesinin peşinde."
+    }
+  ],
+  "scenes": [
+    {
+      "scene_id": "giris",
+      "text": "Sisli Londra'nın boğucu atmosferinde, bir kez daha bir cinayet sahnesine çağrıldınız. Bu seferki kurban, ünlü bir saatçi olan Elias Thorne. Cesedi, atölyesinde, etrafı sökülmüş saat parçalarıyla çevrili bir şekilde bulunmuş. Ölüm nedeni, keskin bir aletle göğsüne indirilen tek bir darbe. Ancak bu cinayet, diğerlerinden farklı. Her yerde, tuhaf bir sanatsal düzenleme göze çarpıyor: Duvarlarda simetrik olarak dizilmiş dişliler, yerde duran bir cep saatinin ibreleri tam olarak 03:33'ü gösteriyor ve Elias'ın cansız elinde, ucu kurbanın kanına bulanmış, küçük, gümüş bir anahtar sıkışmış durumda. Polis, bu cinayetin, son aylarda Londra'yı kasıp kavuran 'Sanatçı Katil'in imzası olduğunu düşünüyor. Katil, her cinayetini bir 'eser' olarak görüyor ve kurbanının mesleğiyle ilgili semboller ve ipuçları bırakıyor.\n\nOlay yerindeki ilk izlenimleriniz size ne söylüyor?",
+      "choices": [
+        {
+          "text": "Suç mahalini detaylı bir şekilde inceleyin.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Masadaki düzenlemeler, anahtarın ne anlama geldiği, duvarlardaki dişlilerin simetrisi hakkında gözlemlerle başlayın. Her detay önemli olabilir."
+        },
+        {
+          "text": "Kurbanın ailesini sorgulayın.",
+          "next": "kurbanin_ailesini_sorgula",
+          "hint": "Aile içindeki gerginlikler, Elias'ın son günlerdeki ruh hali, olası düşmanlar hakkında bilgiler edinebilirsiniz."
+        },
+        {
+          "text": "Komşuları ve atölye çevresindeki esnafı sorgulayın.",
+          "next": "komsulari_sorgula",
+          "hint": "Son görülen kişiler, atölyeden gelen garip sesler, Elias'ın rutinleri hakkında dışarıdan bir bakış açısı edinin."
+        },
+        {
+          "text": "Polis raporunu okuyun ve ilk bulguları değerlendirin.",
+          "next": "polis_raporu_oku",
+          "hint": "Katilin geçmiş cinayetleriyle bağlantılar, olay yeri inceleme ekibinin ön bulguları, Elias'ın yakın zamanda kimlerle görüştüğü gibi resmi bilgileri gözden geçirin."
+        }
+      ]
+    },
+    {
+      "scene_id": "suc_mahalli_inceleme",
+      "text": "Elias Thorne'un atölyesini dikkatle inceliyorsunuz. Masada, sökülmüş saat parçaları belirli bir düzende dizilmiş, adeta bir mekanizmanın şematik çizimi gibi. Ancak bir parça eksik gibi duruyor ve bu boşluk, gizemli bir boşluğu çağrıştırıyor. Elias'ın cansız elindeki gümüş anahtar, sıradan bir anahtardan çok daha fazlası gibi. Üzerinde neredeyse silikleşmiş, minik, spiralli bir oyma var. Duvarlara asılı dişliler, büyüklüklerine ve konumlarına göre kusursuz bir simetriyle yerleştirilmişler. Aralarında bir bağlantı, bir desen mi var? Gözünüz, belirli bir köşedeki diğerlerinden farklı, hafifçe parlayan bir dişliye takılıyor.\n\nDuvarlardaki dişlileri incelediğinizde, belirli bir desen fark ediyorsunuz. İlk dişlide 3, ikincisinde 7, üçüncüsünde ise 15 diş var. Dördüncü dişli yerinden sökülmüş. 'Sanatçının Dizisi' başlıklı bir not buluyorsunuz. Eksik olan dişlinin kaç dişi olmalı?",
+      "choices": [
+        {
+          "text": "A) 29",
+          "next": "disli_basarisiz",
+          "hint": "Diş sayıları arasındaki artışa dikkat edin. Üstel bir ilişki olabilir mi?"
+        },
+        {
+          "text": "B) 31",
+          "next": "disli_basari",
+          "hint": "Her sayının 2'nin bir kuvvetinden 1 çıkarılmasıyla oluşup oluşmadığını kontrol edin. (2^n - 1)"
+        },
+        {
+          "text": "C) 33",
+          "next": "disli_basarisiz",
+          "hint": "Sayılar arasındaki farklara odaklanın, bir düzen var mı?"
+        },
+        {
+          "text": "Olay yerindeki diğer ipuçlarına bakın (Gümüş anahtar veya cep saati).",
+          "next": "suc_mahalli_diger_ipuclari",
+          "hint": "Bu bulmacayı çözemezseniz, belki başka bir ipucu size yol gösterebilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "disli_basari",
+      "text": "Doğru dişliyi zihninize yerleştirdiğinizde, duvarın arkasından hafif bir 'klik' sesi geliyor. Sanki bir mekanizma tetiklenmiş gibi. Bu dişli, katilin bir sonraki 'eserinin' ipucunu taşıyor olabilir. Dikkatli bir gözlemle, duvarın tam ortasındaki büyük dişlinin arkasında, zar zor fark edilen, küçük bir çizik olduğunu görüyorsunuz. Çizik, Londra'nın eski bir haritasının koordinatlarını anımsatıyor: '51.5074 N, 0.1278 W'.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Gümüş anahtarın peşine düşün.",
+          "next": "gumus_anahtar_sirri",
+          "hint": "Anahtar, sandık veya özel bir çekmece gibi kilitli bir şeyi açabilir."
+        },
+        {
+          "text": "Koordinatları takip edin.",
+          "next": "gizemli_harita_takip",
+          "hint": "Bu koordinatlar, katilin bir sonraki hamlesini veya bir gizli yeri işaret ediyor olabilir."
+        },
+        {
+          "text": "Başka bir şüpheliyi sorgulamaya gidin.",
+          "next": "supheli_sec",
+          "hint": "Belki de şüphelilerden biri, bu ipuçlarıyla ilgili bir bilgiye sahiptir."
+        },
+        {
+          "text": "Polis raporunu tekrar inceleyin.",
+          "next": "polis_raporu_oku",
+          "hint": "Yeni bulgularınızı, polis raporundaki bilgilerle karşılaştırın. Bir bağlantı olabilir mi?"
+        }
+      ]
+    },
+    {
+      "scene_id": "disli_basarisiz",
+      "text": "Yanlış bir tahminle dişliyi yerine oturtmaya çalıştığınızda, küçük bir alarm sesi duyuluyor ve etrafı kısa süreliğine karanlık basıyor. Bu, katilin bir tuzağı olabilir mi? Önemli bir ipucunu kaçırdınız.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Olay yerini tekrar incelemeye dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Acele etmeyin, desenin mantığını tekrar düşünün."
+        },
+        {
+          "text": "Başka bir şüpheliyi sorgulayın.",
+          "next": "supheli_sec",
+          "hint": "Belki de bir şüpheli, bu tür zihinsel bulmacalar hakkında ipuçları verebilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "suc_mahalli_diger_ipuclari",
+      "text": "Dişli bulmacasını çözemediğiniz için, suç mahallindeki diğer ipuçlarına yöneliyorsunuz. Elias'ın cansız elinde sıkıca tuttuğu küçük, gümüş anahtar ve yerde duran, ibreleri 03:33'ü gösteren cep saati dikkatinizi çekiyor. Ayrıca, masanın üzerinde eski bir ahşap kutu var. Üzerinde karmaşık bir kabartma: iç içe geçmiş bir daire ve bir üçgen. Yanında bir kağıt parçası duruyor ve üzerinde 'Desenlerin Dansı: Sıradaki Nerede Saklı?' yazıyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Gümüş anahtarın peşine düşün.",
+          "next": "gumus_anahtar_sirri",
+          "hint": "Anahtarın bir şeyi açması muhtemel. Nereye uyduğunu bulmalısınız."
+        },
+        {
+          "text": "Desenlerin Dansı bulmacasını çözmeye çalışın.",
+          "next": "desenlerin_dansi_bulmacasi_giris",
+          "hint": "Görsel bir desen, kutunun sırrını açabilir."
+        },
+        {
+          "text": "Cep saatini ve ibrelerin anlamını inceleyin.",
+          "next": "cep_saati_bulmaca_giris",
+          "hint": "Saatin gösterdiği zaman, cinayetle ilgili bir ipucu veya bir şifre olabilir."
+        },
+        {
+          "text": "Başka bir şüpheliyi sorgulamaya gidin.",
+          "next": "supheli_sec",
+          "hint": "Belki şüphelilerin ifadesinde bu ipuçlarıyla ilgili bir detay vardır."
+        }
+      ]
+    },
+    {
+      "scene_id": "gumus_anahtar_sirri",
+      "text": "Elias'ın elindeki gümüş anahtarı dikkatlice inceliyorsunuz. Üzerindeki spiralli oyma, size bir yerleri hatırlatıyor... Elias'ın çalışma odasının köşesindeki, kütüphanenin arkasında duran eski, işlemeli bir sandık. Yıllardır açılmamış gibi duruyor. Anahtar bu sandığa mı ait?\n\nSandığın üzerinde, toz tabakasının altında, küçük, altın renkli bir plaket fark ediyorsunuz. Üzerinde sadece 'OMNIUM' kelimesi ve altında üç boşluk var. Bu kelime, Latince 'her şeyin' anlamına geliyor. Sandığı açmak için doğru kodu girmeniz gerekiyor. Kod, Elias'ın en sevdiği bestecinin soyadındaki harflerin sayısal karşılıklarından oluşuyor. (A=1, B=2, C=3, ...)\n\nLütfen kodu sayı olarak girin (örneğin: 2-1-3-8).",
+      "input_type": "text",
+      "correct_answer": "2-1-3-8",
+      "success_next": "gumus_anahtar_basari",
+      "failure_next": "gumus_anahtar_basarisiz",
+      "hint": "Elias bir saatçiydi, hassasiyete ve düzenlemeye önem verirdi. En sevdiği bestecinin soyadı, bu kodu oluşturabilir. Ünlü Alman bestecilere odaklanın. (BACH)"
+    },
+    {
+      "scene_id": "gumus_anahtar_basari",
+      "text": "Doğru kodu girdiğinizde, sandık gıcırtılı bir sesle açılıyor ve içeriden eski, küflü bir kitap ve sararmış bir mektup çıkıyor. Kitap, Elias'ın 'Saat Mekanizmalarının Sanatı' adlı kendi el yazması. Mektup ise, Elias'ın 20 yıl önceki iş ortağı olan 'A. Finch' imzasını taşıyor. Mektupta, ortak oldukları bir projenin gizli bir bölümünden, bir 'Zaman Kapsülü'nden bahsediliyor: 'Elias, bu proje bizi zengin edecek. Zaman Kapsülü, dünyayı şaşırtacak. Kimse bilemez, değil mi? -A.F.'\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Mektubu detaylıca okuyun.",
+          "next": "zaman_kapsulu_detaylari",
+          "hint": "Mektup, Arthur Finch'in katılımını ve 'Zaman Kapsülü' projesinin önemini açıklayabilir."
+        },
+        {
+          "text": "Elias'ın el yazması kitabını inceleyin.",
+          "next": "saat_mekanizmalari_kitap",
+          "hint": "Kitap, katilin cinayetlerdeki 'sanatsal' düzenlemelerinin ardındaki mantığı açığa çıkarabilir."
+        },
+        {
+          "text": "Arthur Finch'i bu yeni bilgiyle yüzleştirin.",
+          "next": "arthur_sorgu_zaman_kapsulu",
+          "hint": "Finch'in 'Zaman Kapsülü' hakkındaki bilgisi, onu baş şüpheli yapabilir."
+        },
+        {
+          "text": "Suç mahalline geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Bu bilgiler ışığında, olay yerindeki diğer ipuçlarına farklı bir gözle bakabilirsiniz."
+        }
+      ]
+    },
+    {
+      "scene_id": "gumus_anahtar_basarisiz",
+      "text": "Yanlış kod! Sandık tıkırdayarak kapanıyor ve bir daha açılmayacak gibi görünüyor. Önemli bir sırrı kaçırdınız.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Suç mahalline geri dönün ve başka bir ipucu arayın.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Kaybettiğiniz zamanı telafi etmek için başka bir ipucuna odaklanın."
+        },
+        {
+          "text": "Bir şüpheliyi sorgulayın.",
+          "next": "supheli_sec",
+          "hint": "Şüpheliler, bilerek veya bilmeyerek, atladığınız bilgileri verebilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "zaman_kapsulu_detaylari",
+      "text": "Mektubu dikkatle okuyorsunuz. Arthur Finch, Elias'a 'Zaman Kapsülü' adını verdikleri, insanlığın tüm bilgi birikimini barındıran devasa bir saat mekanizması tasarladıklarını ve bunu kimseye haber vermeden gizlice inşa ettiklerini anlatıyor. Projenin finansmanında sorunlar olduğu ve Elias'ın bazı borçları olduğu ima ediliyor. Finch, 'Bu proje için her şeyi feda ettim, Elias. Eğer bu proje batarsa, hepimiz batarız. Sen de, ben de, bu proje hakkında bilen herkes.' diye yazmış. Mektubun sonuna eklenmiş, Elias'ın kaleminden olduğu anlaşılan ufak bir not var: 'Z.L. son zamanlarda çok garip davranıyor.' (Z.L. harfleri tanıdık geliyor ama kim olduğunu hatırlamıyorsunuz.)\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Arthur Finch'i bu mektupla yüzleştirin.",
+          "next": "arthur_sorgu_zaman_kapsulu",
+          "hint": "Bu mektup, Arthur Finch'in motive edici bir suçluluğu olabileceğini gösteriyor."
+        },
+        {
+          "text": "El yazması kitabı inceleyin.",
+          "next": "saat_mekanizmalari_kitap",
+          "hint": "Elias'ın kitabı, 'Zaman Kapsülü'nün teknik detaylarını veya 'Z.L.' hakkında ipuçları verebilir."
+        },
+        {
+          "text": "Suç mahalline geri dönün ve 'Z.L.' ile ilgili ipuçları arayın.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Z.L.'nin kim olduğunu bulmak, davanın anahtarını açabilir."
+        },
+        {
+          "text": "Şüpheli listesini gözden geçirin, Z.L. ile ilgili bir isim var mı?",
+          "next": "supheli_listesi_incele",
+          "hint": "Bazen en bariz ipuçları gözden kaçar."
+        }
+      ]
+    },
+    {
+      "scene_id": "saat_mekanizmalari_kitap",
+      "text": "Elias'ın 'Saat Mekanizmalarının Sanatı' adlı el yazması kitabını inceliyorsunuz. Kitap, Elias'ın saat yapımına olan tutkusunu ve mekanizmaların estetiğine olan derin ilgisini ortaya koyuyor. Özellikle, 'Karmaşık düzenlemeler, basit çözümlerin anahtarıdır' ve 'Her dişli bir hikaye anlatır, her yay bir nefes tutar' gibi felsefi notlar içeriyor. Bir sayfada, insan vücudunun saat mekanizmasıyla ilişkilendirildiği bir çizim var. Çizimin sağ alt köşesinde, küçücük bir not: 'Ö.T.' ve altında 'Gölgedeki Zeka' yazıyor. Bu not Elias'ın el yazısı değil.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Kitaptaki notun (Ö.T.) kiminle ilgili olabileceğini düşünün.",
+          "next": "ot_ipucu_incele",
+          "hint": "Bu harfler, daha önce karşılaştığınız bir şüphelinin baş harfleri olabilir mi?"
+        },
+        {
+          "text": "Arthur Finch'i sorgulayın.",
+          "next": "arthur_sorgu_zaman_kapsulu",
+          "hint": "Finch, Elias'ın eski ortağıydı ve onun projeleri hakkında daha fazla bilgiye sahip olabilir."
+        },
+        {
+          "text": "Suç mahalline geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Kitaptaki ipuçları, olay yerindeki 'sanatsal' düzenlemeleri daha iyi anlamanıza yardımcı olabilir."
+        },
+        {
+          "text": "Şüpheli listesini gözden geçirin, Ö.T. ile ilgili bir isim var mı?",
+          "next": "supheli_listesi_incele",
+          "hint": "Bazen en bariz ipuçları gözden kaçar."
+        }
+      ]
+    },
+    {
+      "scene_id": "ot_ipucu_incele",
+      "text": "Ö.T. harfleri, polis raporunda gördüğünüz bir isimle eşleşiyor: Eliza Thorne! Kurbanın kızı... Bu notun Elias'ın el yazısı olmaması da, Eliza'nın olayla bir bağlantısı olduğunu gösteriyor. 'Gölgedeki Zeka' ifadesi ise, Eliza'nın babasının gölgesinde kalmış ama aslında zeki biri olduğuna işaret ediyor. Eliza'yı bu yeni bilgiyle yüzleştirmelisiniz.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza Thorne'u bu notla yüzleştirin.",
+          "next": "eliza_sorgu_ot",
+          "hint": "Bu not, Eliza'nın gizemli bir yönünü ortaya çıkarabilir."
+        },
+        {
+          "text": "Diğer şüphelileri tekrar sorgulayın.",
+          "next": "supheli_sec",
+          "hint": "Belki de onlar da Eliza hakkında bilginiz olmayan bir şeylere sahiplerdir."
+        },
+        {
+          "text": "Suç mahalline geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Eliza'nın bu notu olay yerinde bırakmış olabileceği veya başka ipuçları olabileceği ihtimalini düşünün."
+        }
+      ]
+    },
+    {
+      "scene_id": "gizemli_harita_takip",
+      "text": "Koordinatları dikkatlice not alıyor ve elinizdeki Londra haritasında işaretliyorsunuz. Bu koordinatlar, şehrin eski ve gözden uzak bir bölgesindeki, terk edilmiş bir matbaayı gösteriyor. Harita üzerinde, matbaanın hemen yanında, Sanatçı Katil'in önceki cinayetlerinden birinde bıraktığı imzaya benzer, küçük, spiralli bir sembol çizilmiş.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Terk edilmiş matbaaya gidin.",
+          "next": "matbaada_arastirma",
+          "hint": "Matbaa, katilin üssü veya bir sonraki kurbanın ipuçlarını barındırıyor olabilir."
+        },
+        {
+          "text": "Bu bilgiyi polisle paylaşın.",
+          "next": "polis_bilgi_paylasma",
+          "hint": "Polisle işbirliği yapmak, davanın hızla çözülmesini sağlayabilir, ancak katili uyarabilir."
+        },
+        {
+          "text": "Başka bir şüpheliyi sorgulayın.",
+          "next": "supheli_sec",
+          "hint": "Belki de bir şüpheli, bu matbaa veya koordinatlarla ilgili bir şey biliyordur."
+        }
+      ]
+    },
+    {
+      "scene_id": "desenlerin_dansi_bulmacasi_giris",
+      "text": "Maktulün çalışma masasında, eski bir ahşap kutu buluyorsunuz. Üzerinde karmaşık bir kabartma: iç içe geçmiş bir daire ve bir üçgen. Yanında bir kağıt parçası duruyor ve üzerinde 'Desenlerin Dansı: Sıradaki Nerede Saklı?' yazıyor. Bu bir seri tamamlama bulmacası. Sıradaki şekil ne olmalı?\n\nŞekillerin mantığını düşünün.",
+      "choices": [
+        {
+          "text": "A) Kare",
+          "next": "desenlerin_dansi_basarisiz",
+          "hint": "Şekillerin köşe sayılarını veya geometrik özelliklerini düşünün."
+        },
+        {
+          "text": "B) Yıldız",
+          "next": "desenlerin_dansi_basarisiz",
+          "hint": "Bu seride sıra dışı bir şekil mi arıyorsunuz? Belki de daha basit bir çözüm vardır."
+        },
+        {
+          "text": "C) Elips",
+          "next": "desenlerin_dansi_basari",
+          "hint": "Daire ve üçgenin birleşimi ne anlama geliyor? Bir sonraki şekil bu birleşimin bir uzantısı olabilir."
+        },
+        {
+          "text": "Geri dön ve diğer ipuçlarını incele.",
+          "next": "suc_mahalli_diger_ipuclari",
+          "hint": "Bu bulmacayı çözemezseniz, belki başka bir ipucu size yol gösterebilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "desenlerin_dansi_basari",
+      "text": "Kutunun üzerindeki 'Elips' şeklini seçtiğinizde, kutunun kapağı hafifçe açılıyor. İçinde, Elias'ın çocukluğuna ait olduğu anlaşılan eski bir eskiz defteri var. Defterin son sayfasında, Elias'ın el yazısıyla karalanmış bir not: 'Eliza'nın dehası... ama bu karanlık eğilim beni korkutuyor. Nereye kadar gidecek? Bir sonraki hedefi... o sembolleri takip edin.' Notun altında, küçük bir çizim var: iç içe geçmiş bir daire, bir üçgen ve bir elips. Bu, Eliza'nın sanatsal dehasını ve potansiyel olarak tehlikeli eğilimlerini işaret ediyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza Thorne'u bu notla yüzleştirin.",
+          "next": "eliza_sorgu_eskiz_defteri",
+          "hint": "Eliza'nın 'karanlık eğilimi' ile ilgili bu not, onu baş şüpheli yapabilir."
+        },
+        {
+          "text": "Defterdeki 'sembolleri' takip edin.",
+          "next": "sembolleri_takip_et",
+          "hint": "Nottaki 'semboller', katilin bir sonraki hedefi hakkında ipuçları verebilir."
+        },
+        {
+          "text": "Suç mahalline geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Eskiz defterindeki ipuçları, olay yerindeki düzenlemelerle bağlantılı olabilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "desenlerin_dansi_basarisiz",
+      "text": "Kutunun kapağı kilitleniyor ve hafif bir 'tık' sesi duyuyorsunuz. Gecikmeniz yüzünden bir fırsatı kaçırmış olabilirsiniz. Kutuyu bir süre açamayacaksınız.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Suç mahallindeki diğer ipuçlarına bakın.",
+          "next": "suc_mahalli_diger_ipuclari",
+          "hint": "Bu bulmacada takıldınız, başka bir ipucuna yönelmeniz daha iyi olabilir."
+        },
+        {
+          "text": "Bir şüpheliyi sorgulayın.",
+          "next": "supheli_sec",
+          "hint": "Belki de bir şüpheli, bu tür sanatsal bulmacalar hakkında bilgi verebilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "supheli_sec",
+      "text": "Kimi sorgulamak istiyorsunuz? Seçiminiz, sorgu odasında onların ifadelerini ve tavırlarını değiştirebilir. Her şüphelinin size vereceği benzersiz bir bakış açısı var.",
+      "choices": [
+        {
+          "text": "Eliza Thorne'u sorgula.",
+          "next": "eliza_sorgu_giris",
+          "hint": "Kızının tepkileri ve sakladığı sırlar, davanın anahtarı olabilir."
+        },
+        {
+          "text": "Bayan Higgins'i sorgula.",
+          "next": "bayan_higgins_sorgu_giris",
+          "hint": "Görgü tanığı olarak Bayan Higgins, olay gecesiyle ilgili önemli detaylar görmüş olabilir."
+        },
+        {
+          "text": "Bay Arthur Finch'i sorgula.",
+          "next": "arthur_sorgu_giris",
+          "hint": "Elias'ın eski iş ortağı olarak Finch, cinayetle ilgili mali veya kişisel bir motive sahip olabilir."
+        },
+        {
+          "text": "Başka bir ipucu aramak için olay yerine dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Sorgulamalar size yeni bir bakış açısı kazandırabilir, bu da suç mahallindeki ipuçlarını farklı yorumlamanızı sağlayabilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "kurbanin_ailesini_sorgula",
+      "text": "Eliza Thorne'un evine gidiyorsunuz. Eliza, babasının ölümünün şokuyla yüzleşiyor, gözleri kırmızı ve şiş. Titrek bir sesle size kapıyı aralıyor. Koltukta kambur oturmuş, elleri sürekli önlüğünün cebinde bir şeyi sıkıyor gibi duruyor.\n\nSiz: 'Başınız sağ olsun Bayan Thorne. Babanızla ilgili herhangi bir sorun ya da tehdit biliyor muydunuz?'\n\nEliza: 'Teşekkür ederim dedektif. Babam... o her zaman titiz ve dikkatliydi. Son zamanlarda biraz... gergindi evet. Ama tehdit mi? Hayır, hiç duymadım.' (Gözlerini kaçırır, elini sıkıca cebindeki bir şeye götürür.)\n\nEliza'nın cebindeki objeye dikkat çekiyorsunuz. Yüzündeki ifade, bu objenin onun için önemli bir şey olduğunu gösteriyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza'nın cebindeki objeyi sormak.",
+          "next": "eliza_cebindeki_obje_sor",
+          "hint": "Gizlenen bir obje, genellikle gizlenen bir sırrı işaret eder."
+        },
+        {
+          "text": "Elias'ın eski ortağını sormak (Bayan Higgins'in dediği gibi).",
+          "next": "eliza_eski_ortagi_sor",
+          "hint": "Aile içindeki mali sorunlar, eski iş ortaklarıyla bağlantılı olabilir."
+        },
+        {
+          "text": "Eliza'nın alibisini sormak.",
+          "next": "eliza_alibi_sor",
+          "hint": "Her şüphelinin ilk alibisi önemlidir."
+        },
+        {
+          "text": "Sorguyu sonlandırıp olay yerine geri dönmek.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Belki de olay yerindeki ipuçları, Eliza'nın söyledikleriyle birleşince daha anlamlı hale gelir."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_cebindeki_obje_sor",
+      "text": "Siz: 'Bayan Thorne, cebinizde sıktığınız şey nedir? Belki de babanızla ilgili önemli bir ipucudur?'\n\nEliza'nın yüzü bembeyaz kesiliyor, bir an tereddüt ediyor. Ardından yavaşça elini cebine atıyor...\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza'nın objeyi göstermesini bekleyin.",
+          "next": "eliza_cebindeki_obje_goster",
+          "hint": "Onu zorlamak, daha az bilgi edinmenize neden olabilir. Sabırlı olun."
+        },
+        {
+          "text": "Objeyi zorla almaya çalışın.",
+          "next": "eliza_cebindeki_obje_reddet",
+          "hint": "Bu, Eliza'nın size güvenini kaybetmesine neden olabilir ve bilgi almayı zorlaştırır."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_cebindeki_obje_goster",
+      "text": "Eliza, cebinden, Elias'ın gençlik fotoğrafının olduğu, eski ve yıpranmış bir madalyon çıkarır. Madalyonun arkasında, küçük harflerle 'Her zaman kalbimdesin - A.T.' yazıyor. Eliza, gözleri dolarak, 'Babamın bana verdiği tek şey buydu... Annemin ölümünden sonra. O A.T. annemdi.' diye fısıldar, sesi titrer. 'Annemin adı Amelia Thorne'du.' Bu, A.T. imzasının farklı bir anlamı olabileceği fikrini veriyor ve oyuncuyu daha derin bir araştırmaya sevk ediyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Elias'ın annesi hakkında daha fazla bilgi edinmek.",
+          "next": "eliza_amelia_sor",
+          "hint": "Kurbanın geçmişindeki önemli kişiler, davanın gizemini aydınlatabilir."
+        },
+        {
+          "text": "Madalyonu detaylı incelemek.",
+          "next": "madalyon_detayli_inceleme",
+          "hint": "Madalyonun gizli bir bölmesi veya şifresi olabilir."
+        },
+        {
+          "text": "Sorguya devam etmek: Eski ortağı veya alibisi hakkında sorular sorun.",
+          "next": "eliza_sorgu_giris",
+          "hint": "Bu yeni bilgi ışığında, diğer sorular daha farklı bir anlam kazanabilir."
+        },
+        {
+          "text": "Olay yerine geri dönmek.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Belki de Elias'ın geçmişiyle ilgili ipuçları olay yerinde de vardır."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_cebindeki_obje_reddet",
+      "text": "Objeyi zorla almaya çalıştığınızda Eliza panik içinde geri çekiliyor. 'Dedektif, bu benim özelim! Lütfen beni rahat bırakın!' Eliza, sinirle objeyi daha da sıkıca kavrar ve sizden uzaklaşır. Bu tavır, onun bir şeyler sakladığını açıkça gösteriyor, ancak şimdilik ondan bir şey alamadınız. Size olan güveni sarsıldı.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Sorguya farklı bir soruyla devam edin (eski ortağı veya alibi).",
+          "next": "eliza_sorgu_giris",
+          "hint": "Güvenini kaybetmek, bilgi edinmeyi zorlaştırır. Daha nazik veya dolaylı bir yaklaşım deneyin."
+        },
+        {
+          "text": "Olay yerine geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Belki de başka bir ipucu size Eliza hakkında başka bir yol gösterebilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_amelia_sor",
+      "text": "Siz: 'Anneniz hakkında daha fazla bilgi verebilir misiniz, Bayan Thorne? Özellikle babanızla olan ilişkisi hakkında?'\n\nEliza'nın yüzünde hüzünlü bir gülümseme beliriyor. 'Annem... o bir sanatçıydı. Babamla tanıştıklarında ikisi de genç ve idealistti. Babam saat mekanizmalarındaki 'sanatı' annemden öğrendi. Ama annem erken yaşta vefat etti. Babam, ondan sonra hiç eskisi gibi olmadı. Onun sanatsal mirasını sürdürmeyi bir takıntı haline getirdi.' Eliza'nın yün ipliği kalıntısı olan yıpranmış elbisesi dikkat çekiyor; bu kumaş parçası, olay yerinde bulunan yün ipliğiyle benzerlik gösteriyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Madalyonu detaylı incelemeye geri dönün.",
+          "next": "madalyon_detayli_inceleme",
+          "hint": "Annesinin sanatsal yönü, madalyonun arkasındaki 'A.T.' ve spiralli oyma ile bağlantılı olabilir."
+        },
+        {
+          "text": "Eliza'yı giysisindeki yün ipliği hakkında sorgulayın.",
+          "next": "eliza_yuzlestirme_iplik",
+          "hint": "Bu iplik, onu cinayet mahalline bağlayan somut bir kanıt olabilir."
+        },
+        {
+          "text": "Sorguya devam edin: Eski ortağı veya alibisi hakkında sorular sorun.",
+          "next": "eliza_sorgu_giris",
+          "hint": "Eliza'nın annesi hakkındaki bilgiler, diğer şüphelilerle bağlantı kurmanızı sağlayabilir."
+        },
+        {
+          "text": "Olay yerine geri dönmek.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Elias'ın atölyesindeki sanatsal düzenlemeler, annesinin etkisiyle daha anlamlı hale gelebilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "madalyon_detayli_inceleme",
+      "text": "Madalyonu elinize alıp dikkatle inceliyorsunuz. Parlak ışık altında madalyonun kenarında zar zor görünen minik bir düğme fark ediyorsunuz. Bastığınızda madalyonun içi açılıyor ve içine gizlenmiş, ince bir parşömen kağıdı çıkıyor. Üzerinde Elias'ın el yazısıyla karalanmış bir sayı dizisi var: '5-8-13-21'. Altında 'Fibonacci'nin Dansı: Zihnin Döngüsü' yazıyor. Bu sayı dizisi, bir sonraki bulmacaya işaret ediyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Bu sayı dizisini kullanarak 'Zihnin Döngüsü' bulmacasını çözün.",
+          "next": "nokta_bulmaca_giris",
+          "hint": "Fibonacci dizisi, katilin imzası olan 'Zihnin Döngüsü' ile ilgili olabilir."
+        },
+        {
+          "text": "Eliza'yı madalyonun gizli bölmesi hakkında sorgulayın.",
+          "next": "eliza_sorgu_madalyon",
+          "hint": "Eliza'nın bu gizli bölmeden haberi var mıydı? Tepkisini gözlemleyin."
+        },
+        {
+          "text": "Sorguya devam edin: Eski ortağı veya alibisi hakkında sorular sorun.",
+          "next": "eliza_sorgu_giris",
+          "hint": "Bu yeni bilgi, diğer şüphelilerle olan bağlantıları açığa çıkarabilir."
+        },
+        {
+          "text": "Olay yerine geri dönmek.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Olay yerindeki 'Sanatçı Katil'in imzası olan 'Zihnin Döngüsü' ile ilgili ipuçlarını arayın."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_eski_ortagi_sor",
+      "text": "Siz: 'Babanızın Bay Arthur Finch ile yakın zamanda anlaşmazlık yaşadığını biliyor muydunuz?'\n\nEliza'nın yüzü geriliyor, gözlerini kaçırıyor. 'Bay Finch... evet. Babamın eski bir ortağıydı. Ama işleri çoktan ayırmışlardı. Son zamanlarda... babamın bazı projeleri yüzünden gerginlik yaşıyorlardı. Arthur, babamın en son projesine takıntılıydı. Sürekli babamı rahatsız ediyordu.' Eli yine cebindeki madalyona gidiyor ve sıkıca kavrıyor. 'Ama bu bir cinayet nedeni olamaz!' diye ekliyor, sesi yükseliyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Arthur Finch'in takıntılı olduğu projeyi sorgulayın.",
+          "next": "eliza_finch_projesi",
+          "hint": "Bu proje, Arthur Finch'in cinayet motifi olabilir."
+        },
+        {
+          "text": "Eliza'nın cebindeki madalyonu sormaya geri dönün.",
+          "next": "eliza_cebindeki_obje_sor",
+          "hint": "Eliza'nın tepkisi, madalyonun gizemini daha da artırıyor."
+        },
+        {
+          "text": "Eliza'nın alibisini sormak.",
+          "next": "eliza_alibi_sor",
+          "hint": "Gerginliği artarken alibisi daha da önemli hale gelir."
+        },
+        {
+          "text": "Sorguyu sonlandırıp Arthur Finch'i sorgulamaya gidin.",
+          "next": "arthur_sorgu_giris",
+          "hint": "Arthur Finch'in kendi tarafını dinlemek, bu projeyle ilgili daha fazla bilgi edinmenizi sağlayabilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_finch_projesi",
+      "text": "Eliza isteksizce anlatıyor: 'Babamın 'Zaman Kapsülü' adını verdiği bir projeydi. Çocukluğumdan beri üzerinde çalışıyordu. Bence o sadece babamın zihinsel bir sığınağıydı. Arthur ise onu ticari bir fırsat olarak görüyordu. Babamın bu projeden vazgeçmesini istiyordu.' Eliza, gözlerini deviriyor. 'Babamın tüm dehası o projeye akmıştı. O projeyi tamamlayana kadar kimseye satmayı reddetti.'\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Arthur Finch'i 'Zaman Kapsülü' projesi hakkında sorgulayın.",
+          "next": "arthur_sorgu_zaman_kapsulu",
+          "hint": "Arthur Finch'in bu projeye olan takıntısı, onu daha da şüpheli hale getirebilir."
+        },
+        {
+          "text": "Eliza'nın alibisini sormak.",
+          "next": "eliza_alibi_sor",
+          "hint": "Eliza'nın babasının projesine olan ilgisi, cinayetle ilgili motive olabilir."
+        },
+        {
+          "text": "Olay yerine geri dönün ve 'Zaman Kapsülü' ile ilgili ipuçları arayın.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Belki de olay yerinde bu projeyle ilgili fiziksel kanıtlar vardır."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_alibi_sor",
+      "text": "Siz: 'Cinayet sırasında neredeydiniz Bayan Thorne? Herhangi bir tanığınız var mıydı?'\n\nEliza'nın gözleri hızlıca odanın içinde geziniyor. 'O saatte... evdeydim. Yalnızdım. Babamın ölüm haberini bekliyordum... Bir türlü uyuyamadım.' Yüzünde acı bir ifade var. 'Pencereden dışarıya baktım. Yağmur yağıyordu.' Ancak olay yerine vardığınızda yağmur durmuştu ve yerde su birikintisi yoktu. Bu tutarsızlık size neyi düşündürüyor?\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Şüphelinin yalan söylediğini düşünüyorsunuz.",
+          "next": "eliza_alibi_yalan",
+          "hint": "Hava durumu, somut bir kanıttır. İfadesindeki çelişkiyi göz ardı etmeyin."
+        },
+        {
+          "text": "Şüphelinin o anı hatırlamıyor olabileceğini düşünüyorsunuz.",
+          "next": "eliza_alibi_hatirlamiyor",
+          "hint": "Bazen insanlar travma anında detayları hatırlayamayabilir."
+        },
+        {
+          "text": "Yağmurun daha yeni durduğunu ve su birikintisinin buharlaşmış olabileceğini düşünüyorsunuz.",
+          "next": "eliza_alibi_dogru",
+          "hint": "Olaya daha rasyonel bir açıklama bulmaya çalışın."
+        },
+        {
+          "text": "Eliza'yı giysisindeki yün ipliği hakkında sorgulayın.",
+          "next": "eliza_yuzlestirme_iplik",
+          "hint": "Alibisi zayıflarken, somut bir kanıtla yüzleşmek onu daha da sıkıştırabilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_alibi_yalan",
+      "text": "Eliza'nın yağmur yağdığına dair ifadesi, olay yerindeki durumla çelişiyor. Bu, onun yalan söylediğine dair güçlü bir işaret. Bu tutarsızlığı kafanıza not alıyor ve sorguya devam ediyorsunuz.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza'yı giysisindeki yün ipliği hakkında sorgulayın.",
+          "next": "eliza_yuzlestirme_iplik",
+          "hint": "Yalan söylediği ortaya çıkarken, başka somut kanıtlarla onu sıkıştırın."
+        },
+        {
+          "text": "Eliza'yı 'Ö.T.' notu hakkında sorgulayın.",
+          "next": "eliza_sorgu_ot",
+          "hint": "Zihinsel gücünü ve babasıyla olan karmaşık ilişkisini ortaya çıkarın."
+        },
+        {
+          "text": "Sorguyu sonlandırıp diğer şüphelilere yönelin.",
+          "next": "supheli_sec",
+          "hint": "Eliza'nın yalanı önemli bir ipucu, ancak diğer şüphelilerin de incelenmesi gerekiyor."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_alibi_hatirlamiyor",
+      "text": "Eliza'nın babasının ölümü nedeniyle travma yaşadığını ve bu nedenle detayları hatırlayamadığını düşünüyorsunuz. Bu, onu bir nebze aklamış olsa da, alibisini yine de sağlam kılmıyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza'yı giysisindeki yün ipliği hakkında sorgulayın.",
+          "next": "eliza_yuzlestirme_iplik",
+          "hint": "Duygusal durumu onu masum yapmaz, somut kanıtları gözden kaçırmayın."
+        },
+        {
+          "text": "Eliza'yı 'Ö.T.' notu hakkında sorgulayın.",
+          "next": "eliza_sorgu_ot",
+          "hint": "Babasıyla olan karmaşık ilişkisi, travmasının altında yatan gerçeği ortaya çıkarabilir."
+        },
+        {
+          "text": "Sorguyu sonlandırıp diğer şüphelilere yönelin.",
+          "next": "supheli_sec",
+          "hint": "Eliza'nın durumu hassas, ama diğer şüphelilerin de incelenmesi gerekiyor."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_alibi_dogru",
+      "text": "Eliza'nın ifadesini, yağmurun kısa süre önce durduğu ve su birikintilerinin henüz buharlaşmadığı gerçeğiyle bağdaştırıyorsunuz. Bu, Eliza'nın alibisini kısmen güçlendiriyor ve yalan söylemediği izlenimini veriyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza'yı giysisindeki yün ipliği hakkında sorgulayın.",
+          "next": "eliza_yuzlestirme_iplik",
+          "hint": "Alibisi doğru olsa bile, diğer kanıtlar onu suçlu çıkarabilir."
+        },
+        {
+          "text": "Eliza'yı 'Ö.T.' notu hakkında sorgulayın.",
+          "next": "eliza_sorgu_ot",
+          "hint": "Bu not, babasıyla olan sanatsal ilişkisi hakkında önemli bir ipucu olabilir."
+        },
+        {
+          "text": "Sorguyu sonlandırıp diğer şüphelilere yönelin.",
+          "next": "supheli_sec",
+          "hint": "Eliza'nın alibisi sağlamlaşsa da, diğer şüphelilerin de incelenmesi gerekiyor."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_yuzlestirme_iplik",
+      "text": "Siz: 'Olay yerinde, kurbanın tırnakları arasında giysinizdekiyle aynı renkte, mikroskopik bir yün ipliği parçası bulduk. Açıklamanız nedir Bayan Thorne?'\n\nEliza'nın gözleri irileşiyor, eli istemsizce elbisesine gidiyor. 'Bu... bu imkansız! Ben... Ben sadece dükkanda çalışıyordum. Belki babamın elbisesinden bulaşmıştır? Biliyorum, babamın da bu tür bir yün paltosu vardı.' Sesi titriyor, yüzünde panik ve inkar karışımı bir ifade var. Ama babasının paltosunda o renk yün ipliği olmadığını biliyorsunuz. Bu, Eliza'nın yalan söylediğine dair güçlü bir işaret.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza'yı yalan söylediği için sıkıştırın ve onu suçlayın.",
+          "next": "eliza_suclama_iplik",
+          "hint": "Bu somut kanıt, Eliza'yı baş şüpheli yapıyor. Ancak ters köşe ihtimalini unutmayın."
+        },
+        {
+          "text": "Eliza'yı 'Ö.T.' notu hakkında sorgulayın.",
+          "next": "eliza_sorgu_ot",
+          "hint": "Yalan söylediği ortaya çıkarken, zihinsel eğilimlerini de ortaya çıkarın."
+        },
+        {
+          "text": "Sorguyu sonlandırıp Arthur Finch'i sorgulayın.",
+          "next": "arthur_sorgu_giris",
+          "hint": "Belki de Eliza, Arthur'u kurban olarak göstermeye çalışıyordur."
+        },
+        {
+          "text": "Olay yerine geri dönün, yün ipliği ve diğer ipuçları arasındaki bağlantıyı arayın.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "İplik, olay yerinde başka ne gibi ipuçlarına yol açabilir?"
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_sorgu_ot",
+      "text": "Siz: 'Elias'ın el yazması kitabında, sayfa kenarında 'Ö.T.' yazan küçük bir not ve altında 'Gölgedeki Zeka' ibaresi bulduk. Bu harfler sizin baş harfleriniz, Bayan Thorne. Açıklamanız nedir?'\n\nEliza'nın yüzü anında solgunlaşıyor, gözleri büyüyor. 'O... O not... Babamın bir oyunu olmalı!' Sesi fısıltıya dönüşüyor, tüm kendine güveni kaybolmuş gibi. 'Babam bazen garip oyunlar oynardı. Ama o notun ne anlama geldiğini bilmiyorum. Ben... ben sadece onun kızıydım!' Yüzündeki ifade, derin bir korku ve panik karışımı. Sanki bir sırrı ifşa olmak üzereymiş gibi.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza'yı yalan söylediği için sıkıştırın ve onu suçlayın.",
+          "next": "eliza_suclama_ot",
+          "hint": "Bu not, onun gizli zekasına ve potansiyel suçluluğuna işaret ediyor. Onu köşeye sıkıştırın."
+        },
+        {
+          "text": "Eliza'nın giysisindeki yün ipliği hakkında sorgulayın.",
+          "next": "eliza_yuzlestirme_iplik",
+          "hint": "Zihinsel bir kanıtı fiziksel bir kanıtla destekleyin."
+        },
+        {
+          "text": "Sorguyu sonlandırıp Arthur Finch'i sorgulayın.",
+          "next": "arthur_sorgu_giris",
+          "hint": "Belki de Arthur'un bu notla ilgili bir bilgisi vardır, zira o da 'Zaman Kapsülü' projesinin içindeydi."
+        },
+        {
+          "text": "Olay yerine geri dönün, bu notla ilgili diğer ipuçlarını arayın.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Notun anlamını daha iyi anlamak için olay yerindeki 'Sanatçı Katil'in imzalarını inceleyin."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_sorgu_eskiz_defteri",
+      "text": "Siz: 'Elias'ın eskiz defterinde, sizin 'karanlık eğiliminizden' bahseden bir not bulduk. Bu ne anlama geliyor, Bayan Thorne?'\n\nEliza'nın yüzü kül gibi oluyor, eliyle ağzını kapatıyor. 'O defter... Babamın benim hakkımda yazdıkları... O beni asla anlamadı! Benim sanatsal vizyonumu asla kabul etmedi! Benim 'karanlık eğilimim' dediği şey, onun kendi korkularının yansımasıydı!' Sesi bir çığlığa dönüşüyor, gözlerinde kontrol edemediği bir öfke parlıyor. 'O not... o bir ifşaydı! O beni hedef gösteriyordu!'\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza'yı yalan söylediği için sıkıştırın ve onu suçlayın.",
+          "next": "eliza_suclama_defter",
+          "hint": "Bu not, onun motive edici bir suçluluğu olduğunu gösteriyor. Onu sıkıştırın."
+        },
+        {
+          "text": "Eliza'yı 'Ö.T.' notu hakkında sorgulayın.",
+          "next": "eliza_sorgu_ot",
+          "hint": "Bu notla birlikte eskiz defteri, Eliza'nın babasıyla olan sanatsal rekabetini ve potansiyel cinayet motivasyonunu güçlendiriyor."
+        },
+        {
+          "text": "Defterdeki 'sembolleri' takip edin.",
+          "next": "sembolleri_takip_et",
+          "hint": "Belki de notun altındaki semboller, katilin bir sonraki hamlesine dair ipuçları veriyordur."
+        },
+        {
+          "text": "Sorguyu sonlandırıp Arthur Finch'i sorgulayın.",
+          "next": "arthur_sorgu_giris",
+          "hint": "Arthur Finch'in de bu defter veya not hakkında bilgisi olabilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_sorgu_madalyon",
+      "text": "Siz: 'Madalyonun içindeki gizli bölmeden ve sayı dizisinden haberiniz var mıydı Bayan Thorne?'\n\nEliza donakalıyor, gözleri titriyor. 'Gizli bölme mi? Hayır... Ben... Ben bilmiyordum.' Sesi fısıltıya dönüşüyor, şok içinde. 'Babamın benden gizlediği sırlar mı vardı?' Yüzündeki saf şaşkınlık ve hayal kırıklığı gerçekçi görünüyor, ancak bu onu tamamen aklamaz.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza'yı yalan söylediği için sıkıştırın ve onu suçlayın.",
+          "next": "eliza_suclama_madalyon",
+          "hint": "Bilmemesi imkansız görünüyor. Onu zorlayın."
+        },
+        {
+          "text": "Sayı dizisini kullanarak 'Zihnin Döngüsü' bulmacasını çözün.",
+          "next": "nokta_bulmaca_giris",
+          "hint": "Madalyonun sırrı, Sanatçı Katil'in 'Zihnin Döngüsü' bulmacasıyla bağlantılı olabilir."
+        },
+        {
+          "text": "Sorguyu sonlandırıp Arthur Finch'i sorgulayın.",
+          "next": "arthur_sorgu_giris",
+          "hint": "Belki de Arthur Finch, Elias'ın gizli sırları hakkında bilgiye sahiptir."
+        }
+      ]
+    },
+    {
+      "scene_id": "komsulari_sorgula",
+      "text": "Bayan Higgins'in evine gidiyorsunuz. Bayan Higgins, 60'lı yaşlarında, toparlak bir kadın, beyaz saçları topuz yapılmış. Penceresinden her şeyi gören, mahallenin dedikoducusu. Gözleri sürekli hareket ediyor, sanki her an yeni bir şey keşfedecekmiş gibi. Elias'a karşı tuhaf bir hayranlık beslediği hissediliyor.\n\nSiz: 'Bayan Higgins, dün gece Elias Thorne'un atölyesinden garip bir şey fark ettiniz mi?'\n\nBayan Higgins: 'Ah, zavallı Elias! Kim yapabilir ki bunu? Dün gece... Evet, evet, hatırlıyorum! Gece yarısına doğru atölyeden tuhaf, metalik sesler geliyordu. Tıkırtılar... sanki bir şeyler kuruluyormuş gibiydi. Sonra birden sustu. Bir de... (Gözleri kısılır, sesini alçaltır.) Sabah erken saatlerde, Elias'ın atölyesinden çıkan, hızlı adımlarla uzaklaşan bir siluet gördüm. Kapüşonluydu, yüzü görünmüyordu ama boyu Elias'tan uzundu.'\n\nSiz: 'Siluet hakkında daha fazla detay verebilir misiniz? Kadın mı, erkek mi?'\n\nBayan Higgins: 'Karanlıktı, dedektif. Ama sanki... omuzları genişti. Erkek gibiydi. Üzerinde koyu, kalın bir palto vardı. Bir de garip bir şey vardı... Elias'ın atölyesinin önünde, küçük bir taş gördüm. Üzerinde bir sembol vardı. Bir an gözüme ilişti, sonra bir kedi gelip patisiyle itti ve çamura gömüldü.'\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Atölye çevresinde kayıp taşı aramak.",
+          "next": "kayip_tas_arama",
+          "hint": "Taş üzerindeki sembol, katilin bir sonraki hedefi veya kimliği hakkında ipucu verebilir."
+        },
+        {
+          "text": "Bölgedeki güvenlik kameralarını incelemek.",
+          "next": "guvenlik_kameralari_incele",
+          "hint": "Bayan Higgins'in bahsettiği silueti tespit etmek, katili yakalamanıza yardımcı olabilir."
+        },
+        {
+          "text": "Bayan Higgins'in alibisini sorgulamak.",
+          "next": "bayan_higgins_alibi_sor",
+          "hint": "Görgü tanığı olsa da, Bayan Higgins'in de bir motifi olabilir."
+        },
+        {
+          "text": "Sorguyu sonlandırıp olay yerine geri dönmek.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Yeni bilgiler ışığında, olay yerindeki diğer ipuçlarını tekrar gözden geçirin."
+        }
+      ]
+    },
+    {
+      "scene_id": "kayip_tas_arama",
+      "text": "Bayan Higgins'in gösterdiği yere gidiyorsunuz ve çamurlu toprağı dikkatle kazıyorsunuz. Kısa süre sonra küçük, pürüzsüz bir taş buluyorsunuz. Üzerinde Sanatçı Katil'in imzasına benzer, iç içe geçmiş bir 'S' ve 'K' harfleri olan spiralli bir sembol oyulmuş. Bu, katilin bir sonraki 'eserinin' veya kimliğinin bir ipucu olabilir.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Taş üzerindeki sembolün anlamını çözmeye çalışın.",
+          "next": "sk_sembol_anlam_coz",
+          "hint": "Harfler, bir ismin veya bir mekanın baş harfleri olabilir. Ayrıca Sanatçı Katil'in imzasına dikkat edin."
+        },
+        {
+          "text": "Bayan Higgins'i bu taş hakkında tekrar sorgulayın.",
+          "next": "bayan_higgins_tas_sor",
+          "hint": "Belki de Bayan Higgins, taşın anlamı veya katil hakkında daha fazla şey biliyordur."
+        },
+        {
+          "text": "Suç mahalline geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Taşın anlamını çözemezseniz, olay yerindeki diğer ipuçlarıyla bağlantı kurmaya çalışın."
+        }
+      ]
+    },
+    {
+      "scene_id": "guvenlik_kameralari_incele",
+      "text": "Bölgedeki güvenlik kameralarının kayıtlarını incelemek için polis merkezine gidiyorsunuz. Kayıtlarda, Bayan Higgins'in bahsettiği saatlerde Elias'ın atölyesinden çıkan, kapüşonlu, uzun boylu bir siluet görüyorsunuz. Siluetin elleri eldivenli, yüzü görünmüyor. Ancak bir karede, siluetin pantolonunun paçasında Elias'ın atölyesindeki saat parçalarından birinin küçük bir dişlisi takılı kaldığını fark ediyorsunuz. Bu dişli, daha önce gördüğünüz 'Sanatçının Dizisi' bulmacasındaki eksik dişliye benzemiyor, ancak Elias'ın atölyesinden geldiği açık. Siluetin yürüyüş tarzı, oldukça kendinden emin ve hatta biraz gururlu gibi duruyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Siluetin yürüyüş tarzını şüphelilerin yürüyüş tarzlarıyla karşılaştırın.",
+          "next": "siluet_yuruyus_analizi",
+          "hint": "Kişilerin yürüyüş tarzları, onların kimliğini ele verebilir."
+        },
+        {
+          "text": "Polis raporunu tekrar inceleyin. Katilin geçmiş cinayetlerinde benzer kamera kayıtları var mıydı?",
+          "next": "polis_raporu_oku",
+          "hint": "Seri katiller genellikle benzer davranış kalıpları sergilerler."
+        },
+        {
+          "text": "Suç mahalline geri dönün ve eksik dişliyi veya atölyedeki dişlileri tekrar inceleyin.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Dişli, katilin atölyeden aldığı bir hatıra mı, yoksa bir mesaj mı?"
+        },
+        {
+          "text": "Şüphelilerden birini bu dişli ve siluet hakkında sorgulayın.",
+          "next": "supheli_sec",
+          "hint": "Bu somut kanıtla yüzleşmek, şüphelilerin tepkisini gözlemlemenizi sağlayacaktır."
+        }
+      ]
+    },
+    {
+      "scene_id": "bayan_higgins_alibi_sor",
+      "text": "Siz: 'Bayan Higgins, dün gece boyunca evde yalnız mıydınız? Sizi gören ya da ifadenizi doğrulayacak biri var mıydı?'\n\nBayan Higgins, gözlerini kısarak size bakıyor. 'Elbette yalnızdım, dedektif. Benim gibi yaşlı bir kadın, gece dışarıda ne arayacak ki? Sadece kedim var, o da şahit sayılmaz, değil mi?' Hafifçe gülümsüyor, ama gözlerinde garip bir parıltı var. Bu, onu bir nebze aklamış olsa da, alibisi tamamen sağlam değil.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Bayan Higgins'in anlattığı taş hakkında sorular sorun.",
+          "next": "bayan_higgins_tas_sor",
+          "hint": "Alibisi zayıfsa, diğer gözlemleri daha da önemli hale gelir."
+        },
+        {
+          "text": "Sorguyu sonlandırıp diğer şüphelilere yönelin.",
+          "next": "supheli_sec",
+          "hint": "Bayan Higgins'in alibisi tam olarak sağlam değil, ancak diğer şüphelilerin de incelenmesi gerekiyor."
+        },
+        {
+          "text": "Suç mahalline geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Belki de Bayan Higgins'in anlattıklarıyla uyuşan başka bir kanıt vardır."
+        }
+      ]
+    },
+    {
+      "scene_id": "bayan_higgins_tas_sor",
+      "text": "Siz: 'Bayan Higgins, bahsettiğiniz taşın üzerinde ne tür bir sembol vardı? Hatırlayabildiğiniz bir detay var mı?'\n\nBayan Higgins, bir an düşünceli bir ifadeyle tavana bakıyor. 'Hmm... Tam olarak hatırlamıyorum, dedektif. Çok karmaşıktı. Sanki iç içe geçmiş harfler gibiydi... Belki bir 'S' ve bir 'K' harfi? Ya da sadece bir çizim miydi? Emin değilim. Ama çok sanatsal duruyordu.' Gözlerinde bir parıltı beliriyor, sanki bir şeyi kaçırdığını fark etmiş gibi.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Kaybolan taşı arama devam edin.",
+          "next": "kayip_tas_arama",
+          "hint": "Bayan Higgins'in açıklamaları, taşın önemini daha da artırıyor."
+        },
+        {
+          "text": "Taş üzerindeki sembolün anlamını çözmeye çalışın.",
+          "next": "sk_sembol_anlam_coz",
+          "hint": "SK harfleri, bir şüphelinin baş harfleri olabilir."
+        },
+        {
+          "text": "Sorguyu sonlandırıp diğer şüphelilere yönelin.",
+          "next": "supheli_sec",
+          "hint": "Bayan Higgins'in belirsiz cevapları, onu şüpheli yapmasa da ipucunu önemli kılıyor."
+        }
+      ]
+    },
+    {
+      "scene_id": "sk_sembol_anlam_coz",
+      "text": "Taş üzerindeki iç içe geçmiş 'S' ve 'K' harfleri, size Sanatçı Katil'in imzasına benzer spiralli bir sembolü anımsatıyor. Bu harfler, bir ismi veya bir yeri işaret ediyor olabilir. 'Sanatçı Katil'in' imzasında da sıkça görülen bu tür harf oyunları, onun zekasını ve kurbanlarıyla olan kişisel bağlantısını ortaya koyuyor. Şüphelilerin isimlerini ve geçmişlerini tekrar gözden geçiriyorsunuz.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Bu sembolü Elias'ın 'Saat Mekanizmalarının Sanatı' kitabındaki notla (Ö.T.) karşılaştırın.",
+          "next": "ot_sk_karsilastir",
+          "hint": "Elias'ın kitabındaki 'Gölgedeki Zeka' notu ve bu harfler arasında bir bağlantı olabilir."
+        },
+        {
+          "text": "Bu harflerle ilgili bir şüpheliyi sorgulayın.",
+          "next": "supheli_sec",
+          "hint": "Baş harfleri SK olan bir şüpheli var mıydı?"
+        },
+        {
+          "text": "Suç mahalline geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Belki de bu sembol, olay yerindeki diğer düzenlemelerle birleşince daha anlamlı hale gelir."
+        }
+      ]
+    },
+    {
+      "scene_id": "polis_raporu_oku",
+      "text": "Polis raporunu elinize alıyorsunuz. Raporda, 'Sanatçı Katil'in önceki üç kurbanı hakkında detaylar var: Bir mimar (ölüme terk edildiği binanın kolonlarına şifreli şekiller oyulmuş), bir müzisyen (vurulduğu piyanonun tuşları belirli bir melodiye göre dizilmiş) ve bir yazar (son yazdığı romanın bitmemiş sayfasında kanla bir kelime yazılmış). Her cinayette, kurbanının mesleğiyle ilgili sanatsal bir tema ve bir 'imza' bulunuyor. Elias Thorne'un ölümü de bu modele uyuyor.\n\nOlay yeri inceleme ekibinin ön bulgularında, Elias'a ait olmayan, ancak oldukça küçük ve zarif bir ayakkabı izi bulunmuş. Ayrıca, kurbanın tırnakları arasında mikroskopik bir yün ipliği parçası tespit edilmiş.\n\nElias Thorne'un son telefon kayıtları ve randevu defteri incelenmiş. Son günlerde bir 'sanat tüccarı' olan Bay Arthur Finch ile sık sık görüştüğü ve aralarında hararetli tartışmalar geçtiği kaydedilmiş.\n\nRaporda, katilin önceki cinayetlerinde bıraktığı notlardan birinin fotoğrafı var. Notta sadece şu harfler var: 'K-R-B-N-A-N'. Altında 'Sanatçının imzası, ölümün fısıltısı' yazıyor. Bu harfler size neyi fısıldıyor? Cevabı metin olarak girin.",
+      "input_type": "text",
+      "correct_answer": "KARAN",
+      "success_next": "karan_anagrami_basari",
+      "failure_next": "karan_anagrami_basarisiz",
+      "hint": "Harfler, bir kelimenin anagramı. Sanatçı Katil'in imzası, genellikle kurbanların kaderiyle ilgili bir ipucu verir."
+    },
+    {
+      "scene_id": "karan_anagrami_basari",
+      "text": "Doğru! 'Karan' kelimesi, katilin her 'eserinin' ardındaki karanlık amacı ve estetiği yansıtıyor. Bu kelime, kurbanların son anlarını da tanımlıyor olabilir. Bu ipucu, katilin zihniyetini anlamanıza yardımcı olacak. Ayrıca raporda, Elias'ın son günlerde Arthur Finch ile sık sık görüştüğü ve aralarında hararetli tartışmalar geçtiği belirtiliyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Elias'ın eski ortağını, Bay Arthur Finch'i araştırmak.",
+          "next": "arthur_sorgu_giris",
+          "hint": "Finch'in Elias ile olan geçmişi ve son tartışmaları, onu baş şüpheli yapabilir."
+        },
+        {
+          "text": "Ayakkabı izi ve yün ipliği üzerinde yoğunlaşmak.",
+          "next": "ayakkabi_iz_iplik_incele",
+          "hint": "Bu fiziksel kanıtlar, katilin kimliğine dair somut ipuçları sunabilir."
+        },
+        {
+          "text": "Matbaaya gitmek (Koordinatları takip edin).",
+          "next": "matbaada_arastirma",
+          "hint": "Dişli bulmacasından gelen koordinatlar, Sanatçı Katil'in bir sonraki hamlesini veya gizli bir yerini işaret ediyor olabilir."
+        },
+        {
+          "text": "Olay yerine geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Polis raporundaki bilgiler ışığında, olay yerindeki ipuçlarını tekrar inceleyin."
+        }
+      ]
+    },
+    {
+      "scene_id": "karan_anagrami_basarisiz",
+      "text": "Verdiğiniz cevap, katilin notuyla eşleşmiyor. Polis raporundaki diğer detayları gözden kaçırıyor olabilirsiniz. Daha dikkatli olun, her harfin bir anlamı olabilir.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Polis raporunu tekrar inceleyin.",
+          "next": "polis_raporu_oku",
+          "hint": "Anahtarı kaçırmış olabilirsiniz. Notu tekrar dikkatle okuyun."
+        },
+        {
+          "text": "Olay yerine geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Belki de katilin 'imzası' hakkında başka bir ipucu vardır."
+        }
+      ]
+    },
+    {
+      "scene_id": "ayakkabi_iz_iplik_incele",
+      "text": "Olay yerinde bulunan ayakkabı izini ve yün ipliği parçasını daha yakından inceliyorsunuz. Ayakkabı izi 37 numara, oldukça küçük ve zarif, kadın ayakkabısı olma ihtimali yüksek. Yün ipliği ise koyu yeşil renkte ve ince dokulu. Bu ipliğin, Elias'ın paltosundaki yün ipliğiyle aynı olmadığını fark ediyorsunuz.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza Thorne'u bu yün ipliği ve ayakkabı izi hakkında sorgulayın.",
+          "next": "eliza_yuzlestirme_iplik",
+          "hint": "Eliza'nın giysisindeki yün ipliği ve ayakkabı numarasıyla bu kanıtlar eşleşiyor olabilir."
+        },
+        {
+          "text": "Arthur Finch'i bu kanıtlar hakkında sorgulayın.",
+          "next": "arthur_sorgu_ayakkabi_iplik",
+          "hint": "Finch'in boyu ve ayakkabı numarası bu izle uyuşmuyor, ancak belki de bir açıklaması vardır."
+        },
+        {
+          "text": "Bayan Higgins'i bu kanıtlar hakkında sorgulayın.",
+          "next": "bayan_higgins_sorgu_iplik",
+          "hint": "Bayan Higgins'in gözlemci yapısı, bu kanıtlarla ilgili bir şeyler görmüş olabileceği anlamına gelebilir."
+        },
+        {
+          "text": "Suç mahalline geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Belki de olay yerinde bu kanıtlarla ilgili başka bir ipucu vardır."
+        }
+      ]
+    },
+    {
+      "scene_id": "cep_saati_bulmaca_giris",
+      "text": "Kurbanın cebinde, yıpranmış bir cep saati buluyorsunuz. İçini açtığınızda, mekanizmanın arkasına kazınmış bir sayı dizisi var: '23-15-09-03'. Altında 'Zamanın Kilidi' yazıyor. Elias'ın müzikle olan ilgisini hatırlıyorsunuz. Bu sayılar, alfabetik sıralamada bir kelimeye karşılık geliyor olabilir. (A=1, B=2, C=3, ...)\n\nŞifreyi metin olarak girin.",
+      "input_type": "text",
+      "correct_answer": "CODE",
+      "success_next": "cep_saati_basari",
+      "failure_next": "cep_saati_basarisiz",
+      "hint": "Her sayıya karşılık gelen harfi bulun. Ortaya çıkan kelime, katilin zihniyetini veya bir sonraki hamlesini açıklayabilir."
+    },
+    {
+      "scene_id": "cep_saati_basari",
+      "text": "Doğru şifreyi girdiniz: 'CODE'! Bu kelime, Elias'ın saatçilikteki uzmanlığını ve katilin cinayetlerini bir tür 'kodlama' olarak gördüğünü gösteriyor. Saatin mekanizmasından küçük, katlanmış bir parşömen kağıdı daha düşüyor. Üzerinde Sanatçı Katil'in imzasıyla 'KOD' kelimesi ve altında Londra'daki bir müzenin adresi yazıyor: 'British Museum, Great Russell St, Bloomsbury, London WC1B 3DG'.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "British Museum'a gidin.",
+          "next": "british_museum_arastirma",
+          "hint": "Katil, bir sonraki 'eserini' bu müzeye yerleştirmiş olabilir veya kurbanla ilgili bir ipucu oradadır."
+        },
+        {
+          "text": "Arthur Finch'i bu 'KOD' ve müze adresi hakkında sorgulayın.",
+          "next": "arthur_sorgu_kod_muze",
+          "hint": "Finch'in sanat dünyasındaki bağlantıları, bu ipucuyla ilgili bilgiye sahip olmasını sağlayabilir."
+        },
+        {
+          "text": "Eliza Thorne'u bu 'KOD' ve müze adresi hakkında sorgulayın.",
+          "next": "eliza_sorgu_kod_muze",
+          "hint": "Eliza'nın sanatsal eğilimleri, bu ipucuyla bağlantılı olabilir."
+        },
+        {
+          "text": "Olay yerine geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Yeni ipuçları ışığında, olay yerindeki diğer detaylara farklı bir gözle bakabilirsiniz."
+        }
+      ]
+    },
+    {
+      "scene_id": "cep_saati_basarisiz",
+      "text": "Yanlış şifre! Cep saatinin mekanizması tıkırdıyor ve kendini kilitliyor. Şimdilik bu ipucunu kullanamazsınız. Bir fırsatı kaçırdınız.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Suç mahalline geri dönün ve başka bir ipucu arayın.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Şifreyi çözemediyseniz, diğer ipuçlarına odaklanın."
+        },
+        {
+          "text": "Bir şüpheliyi sorgulayın.",
+          "next": "supheli_sec",
+          "hint": "Belki de bir şüpheli, bu tür şifrelemeler hakkında bilgiye sahiptir."
+        }
+      ]
+    },
+    {
+      "scene_id": "nokta_bulmaca_giris",
+      "text": "Madalyondan çıkan sayı dizisi (5-8-13-21), size 'Zihnin Döngüsü' adlı bir bulmacayı hatırlatıyor. Polis raporunda, katilin önceki cinayetlerinden birinde bıraktığı benzer bir nottan bahsedilmişti. Bir duvarda garip bir karalama fark ediyorsunuz. Birbirine bağlı iki şekil: ilkinde 5 nokta, ikincisinde 8 nokta var. Altında bir soru işareti ve 'Zihnin Döngüsü' yazıyor. Bu Fibonacci dizisi. Sıradaki kaç nokta olmalı?\n\nLütfen cevabı sayı olarak girin.",
+      "input_type": "text",
+      "correct_answer": "34",
+      "success_next": "nokta_bulmaca_basari",
+      "failure_next": "nokta_bulmaca_basarisiz",
+      "hint": "Fibonacci dizisinde her sayı, kendinden önceki iki sayının toplamıdır."
+    },
+    {
+      "scene_id": "nokta_bulmaca_basari",
+      "text": "Doğru! Cevap 34. Bu, Fibonacci dizisinin bir sonraki sayısı. Duvarın altındaki bir tuğla hafifçe içeri giriyor ve içinden küçük, zarif bir anahtar ve Elias'ın el yazısıyla yazılmış, sararmış bir not çıkıyor: 'Matbaanın sırrı... Zaman Kapsülü'nün kalbi. Sadece gerçek sanatçı anlayabilir. Z.L. anahtara sahip.' Bu, matbaanın ve 'Zaman Kapsülü'nün önemiyle ilgili yeni bir ipucu ve 'Z.L.'nin bu olaydaki kritik rolünü gösteriyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Anahtarı kullanarak matbaaya gidin.",
+          "next": "matbaada_arastirma",
+          "hint": "Bu anahtar, matbaanın gizemli kapılarını açabilir."
+        },
+        {
+          "text": "Eliza Thorne'u 'Z.L.' hakkında sorgulayın.",
+          "next": "eliza_sorgu_zl",
+          "hint": "Eliza'nın Elias'la olan sanatsal ilişkisi, 'Z.L.'nin kim olduğunu anlamanıza yardımcı olabilir."
+        },
+        {
+          "text": "Arthur Finch'i 'Zaman Kapsülü' ve bu anahtar hakkında sorgulayın.",
+          "next": "arthur_sorgu_zaman_kapsulu",
+          "hint": "Arthur'un projeye olan takıntısı, bu anahtarın önemini artırabilir."
+        },
+        {
+          "text": "Olay yerine geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Bu yeni bilgiler ışığında, olay yerindeki diğer ipuçlarını tekrar inceleyin."
+        }
+      ]
+    },
+    {
+      "scene_id": "nokta_bulmaca_basarisiz",
+      "text": "Yanlış cevap! Duvar titreşiyor ve üzerinizden küçük bir toz bulutu düşüyor. Başarısız oldunuz, bulmaca kilitlendi.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Suç mahallindeki diğer ipuçlarına bakın.",
+          "next": "suc_mahalli_diger_ipuclari",
+          "hint": "Bu bulmacayı çözemediyseniz, başka bir ipucuna yönelmeniz daha iyi olabilir."
+        },
+        {
+          "text": "Bir şüpheliyi sorgulayın.",
+          "next": "supheli_sec",
+          "hint": "Belki de bir şüpheli, Fibonacci dizisi veya Elias'ın gizli projeleri hakkında bilgiye sahiptir."
+        }
+      ]
+    },
+    {
+      "scene_id": "matbaada_arastirma",
+      "text": "Londra'nın ücra bir köşesindeki terk edilmiş matbaaya geliyorsunuz. Bina dışarıdan bakıldığında sessiz ve terk edilmiş görünüyor. İçeri girdiğinizde, eski baskı makinelerinin arasında gizlenmiş, metal bir kapı fark ediyorsunuz. Kapıda Elias'ın el yazması kitabında gördüğünüz 'Gölgedeki Zeka' notundaki spiralli sembol ve 'Z.L.' harfleri işlenmiş. Anahtar deliği, nokta bulmacasından gelen anahtara tam uyuyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Kapıyı açın ve içeri girin.",
+          "next": "zaman_kapsulu_odasi_giris",
+          "hint": "Bu kapı, davanın sırrını açabilir."
+        },
+        {
+          "text": "Matbaanın çevresini daha detaylı arayın.",
+          "next": "matbaa_cevre_arastirma",
+          "hint": "Belki de katilin oraya gelirken veya oradan ayrılırken bıraktığı bir ipucu vardır."
+        },
+        {
+          "text": "Eliza Thorne'u bu matbaa ve Z.L. hakkında sorgulayın.",
+          "next": "eliza_sorgu_zl_matbaa",
+          "hint": "Eliza'nın bu yerle veya 'Z.L.' ile bir bağlantısı olabilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "polis_bilgi_paylasma",
+      "text": "Koordinatları polisle paylaşıyorsunuz. Polis ekibi matbaaya baskın yapıyor, ancak vardıklarında matbaa boş bulunuyor. Katil kaçmış. Gecikmeniz veya bilginin erken yayılması nedeniyle katili kaçırdınız. Dava kapanıyor, ancak katil serbest.\n\nOyun Bitti.",
+      "choices": []
+    },
+    {
+      "scene_id": "british_museum_arastirma",
+      "text": "British Museum'a gidiyorsunuz. 'KOD' ve müze adresi arasındaki bağlantıyı anlamaya çalışıyorsunuz. Elias'ın müzeyle ilgili notlarını veya ziyaret kayıtlarını araştırıyorsunuz. Müzenin eski saat ve mekanizma sergisi dikkat çekiyor. Elias'ın bu sergiye sık sık geldiğini ve burada uzun saatler geçirdiğini öğreniyorsunuz. Sergi alanında, bir vitrinin arkasına gizlenmiş, Elias'ın el yazısıyla bir not buluyorsunuz: 'Gerçek deha, gölgelerde gizlenir. Her şeyin başlangıcı ve sonu, mekanizma. Eliza, benim küçük 'kodlayıcım'.'\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza Thorne'u bu notla yüzleştirin.",
+          "next": "eliza_sorgu_kodlayici",
+          "hint": "Bu not, Eliza'nın cinayetteki rolünü açıklayabilir."
+        },
+        {
+          "text": "Müzedeki diğer sergileri inceleyin.",
+          "next": "muze_diger_sergiler",
+          "hint": "Belki de katil, bu müzeyle bağlantılı başka bir sanatsal esere gönderme yapıyordur."
+        },
+        {
+          "text": "Suç mahalline geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Elias'ın bu notu neden buraya bıraktığını anlamaya çalışın."
+        }
+      ]
+    },
+    {
+      "scene_id": "siluet_yuruyus_analizi",
+      "text": "Siluetin yürüyüş tarzını, şüphelilerin kamera kayıtlarındaki yürüyüş tarzlarıyla karşılaştırıyorsunuz. Bay Arthur Finch'in kendinden emin, hızlı adımları ve hafifçe sallanan omuzları siluetin hareketlerine şaşırtıcı derecede benziyor. Bu, Finch'in alibisinin zayıf olduğunu ve olay yerinde olabileceğini gösteren güçlü bir kanıt.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Arthur Finch'i bu kanıtla yüzleştirin.",
+          "next": "arthur_yuzlestirme_yuruyus",
+          "hint": "Bu somut kanıtla yüzleşmek, Arthur'u köşeye sıkıştırabilir."
+        },
+        {
+          "text": "Diğer şüphelileri tekrar sorgulayın.",
+          "next": "supheli_sec",
+          "hint": "Belki de bu bir yanıltmacadır. Başka bir şüphelinin de benzer yürüyüş tarzı olabilir."
+        },
+        {
+          "text": "Suç mahalline geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Kamera kayıtlarındaki dişli ve bu yürüyüş tarzı arasındaki bağlantıyı arayın."
+        }
+      ]
+    },
+    {
+      "scene_id": "arthur_sorgu_giris",
+      "text": "Bay Arthur Finch'in sanat galerisine gidiyorsunuz. Arthur, 1.80 m boyunda, 75 kg ağırlığında, 42 numara ayakkabı giyiyor. Şık giyimli, kendine güvenli, hafif kaba bir tavrı olan, orta yaşlı bir adam. Gümüş rengi saçları geriye taranmış, keskin bakışlı gözleri var. Elias'ın ölümü hakkında konuşurken rahatsız edici derecede soğukkanlı görünüyor.\n\nSiz: 'Bay Finch, Elias Thorne'un cinayetiyle ilgili sorular sormak için buradayım. Kendisine yakın zamanda en son ne zaman görüştünüz?'\n\nArthur: 'Ah, zavallı Elias. Evet, kendisiyle sık sık görüşürdüm. İş ortaklığımız uzun zaman önce sona erdi ama bazı koleksiyonlar hakkında görüşmelerimiz oluyordu. En son cinayetten birkaç gün önce görüştük. Bazı projeler hakkında tartıştık.' Gözleri bir anlığına masadaki bir heykelde takılı kalıyor, sonra tekrar size dönüyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Tartıştıkları projeyi sorgulayın.",
+          "next": "arthur_sorgu_proje",
+          "hint": "Proje, Arthur'un cinayet motifi olabilir."
+        },
+        {
+          "text": "Arthur'un alibisini sorgulayın.",
+          "next": "arthur_alibi_sor",
+          "hint": "Güvenilir bir alibi, onu şüpheliler listesinden çıkarabilir."
+        },
+        {
+          "text": "Onu 'Zaman Kapsülü' mektubuyla yüzleştirin.",
+          "next": "arthur_sorgu_zaman_kapsulu",
+          "hint": "'Zaman Kapsülü' hakkındaki bilgisi, onun gizlediği şeyleri açığa çıkarabilir."
+        },
+        {
+          "text": "Sorguyu sonlandırıp olay yerine geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Arthur'un soğukkanlılığı şüpheli olsa da, diğer kanıtlar daha önemli olabilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "arthur_sorgu_proje",
+      "text": "Arthur iç çekiyor, sıkılmış gibi. 'Elias'ın o 'Zaman Kapsülü' projesi. Tamamen zaman kaybıydı! Yıllardır üzerinde çalışıyordu, ama bir türlü bitiremedi. Ben onu ticari bir fırsat olarak görüyordum, ama o satmayı reddetti. O projeyi satmak için çok ısrar ettim, ama o... o inatçıydı!' Sesi yükseliyor, yüzünde öfke beliriyor. 'Neredeyse bana mal oluyordu!'\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Arthur'u 'Zaman Kapsülü' mektubuyla yüzleştirin.",
+          "next": "arthur_sorgu_zaman_kapsulu",
+          "hint": "Bu proje, Arthur'un motivasyonunu daha da güçlendiriyor."
+        },
+        {
+          "text": "Arthur'un alibisini sorgulayın.",
+          "next": "arthur_alibi_sor",
+          "hint": "Motivasyon ne kadar güçlüyse, alibi o kadar şüpheli hale gelir."
+        },
+        {
+          "text": "Sorguyu sonlandırıp Elias'ın kızı Eliza'yı tekrar sorgulayın.",
+          "next": "eliza_sorgu_giris",
+          "hint": "Eliza'nın babasının projesi hakkındaki bilgileri, Arthur'un söyledikleriyle çelişebilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "arthur_alibi_sor",
+      "text": "Siz: 'Cinayet sırasında neredeydiniz Bay Finch? Herhangi bir tanığınız var mıydı?'\n\nArthur: 'Galerideydim. Yeni bir serginin düzenlemeleriyle meşguldüm. Asistanım da oradaydı. O saatlerde her şeyle ben ilgileniyordum.' Arthur, size bir randevu defteri gösteriyor. Ancak asistanına ulaşamıyorsunuz ve defterdeki kayıtlar da manipüle edilmiş gibi duruyor. Ayrıca, güvenlik kamerası kayıtlarındaki siluetin yürüyüş tarzı, Arthur'un yürüyüş tarzına benziyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Arthur'u yürüyüş tarzı ve güvenlik kamerası kayıtlarıyla yüzleştirin.",
+          "next": "arthur_yuzlestirme_yuruyus",
+          "hint": "Bu somut kanıt, Arthur'u köşeye sıkıştırabilir."
+        },
+        {
+          "text": "Arthur'u 'Zaman Kapsülü' mektubuyla yüzleştirin.",
+          "next": "arthur_sorgu_zaman_kapsulu",
+          "hint": "Alibisi zayıflarken, en büyük motivasyonuyla yüzleşmek onu paniğe sürükleyebilir."
+        },
+        {
+          "text": "Sorguyu sonlandırıp olay yerine geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Arthur'un alibisindeki boşluklar, başka ipuçlarını ortaya çıkarabilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "arthur_sorgu_zaman_kapsulu",
+      "text": "Arthur'a Elias'ın sandığından çıkan 'Zaman Kapsülü' mektubunu gösteriyorsunuz. Arthur'un yüzündeki rahat ifade anında kayboluyor, gözleri irileşiyor. 'Bu... bu imkansız! Bu mektup... nasıl buldunuz?' Sesi titriyor, elleri masaya vuruyor. 'Elias'la bu proje yüzünden tartışıyorduk evet! Borçları vardı, projeyi bitirmek için paraya ihtiyacı vardı. Ama ben ona yardım etmek istedim! Bunu ben yapmadım!' Paniklediği açıkça görülüyor, ama inkarı inandırıcı değil.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Arthur'u cinayetle suçlayın.",
+          "next": "arthur_suclama",
+          "hint": "Bu mektup ve paniği, onu baş şüpheli yapıyor. Ancak diğer kanıtları ve ters köşe olasılığını unutmayın."
+        },
+        {
+          "text": "Arthur'u yürüyüş tarzı ve güvenlik kamerası kayıtlarıyla yüzleştirin.",
+          "next": "arthur_yuzlestirme_yuruyus",
+          "hint": "Bu kadar somut bir kanıtla yüzleşmek, onu daha da sıkıştırabilir."
+        },
+        {
+          "text": "Sorguyu sonlandırıp Elias'ın kızı Eliza'yı tekrar sorgulayın.",
+          "next": "eliza_sorgu_giris",
+          "hint": "Eliza'nın babasının projesi hakkındaki bilgileri, Arthur'un söyledikleriyle çelişebilir ve size yeni bir yol gösterebilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "arthur_sorgu_ayakkabi_iplik",
+      "text": "Arthur'a olay yerindeki 37 numara ayakkabı izini ve yün ipliği parçasını gösteriyorsunuz. Arthur alaycı bir şekilde gülümsüyor. 'Bu iz benim olamaz, dedektif. Benim ayakkabı numaram 42. Ve ben yün ipliği taşıyan kıyafetler giymem.' Bu kanıt Arthur'la uyuşmuyor ve onu bu özel kanıtlardan aklıyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Arthur'u 'Zaman Kapsülü' mektubuyla yüzleştirin.",
+          "next": "arthur_sorgu_zaman_kapsulu",
+          "hint": "Ayakkabı izi onu aklasa da, 'Zaman Kapsülü' hala güçlü bir motif."
+        },
+        {
+          "text": "Sorguyu sonlandırıp Eliza Thorne'u tekrar sorgulayın.",
+          "next": "eliza_sorgu_giris",
+          "hint": "Ayakkabı izi Eliza'ya uyuyor olabilir. Onu bu kanıtlarla yüzleştirin."
+        },
+        {
+          "text": "Sorguyu sonlandırıp olay yerine geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Bu kanıtın Arthur ile ilgisi yoksa, başka bir şüpheliyi işaret ediyor olabilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "arthur_sorgu_kod_muze",
+      "text": "Arthur'a cep saatinden çıkan 'KOD' kelimesini ve British Museum adresini gösteriyorsunuz. Arthur şaşkınlıkla gözlerini kırpıştırıyor. 'Kod mu? Müze mi? Elias'ın sanatsal takıntıları vardı, evet. Ama bu... Bunlar benim alanım değil, dedektif. Ben ticari sanatla ilgilenirim.' Arthur'un bu bilgilere karşı tepkisi, onun bu tür 'sanatsal' ipuçlarıyla ilgisi olmadığını gösteriyor. Gerçekten de bu onun ilgi alanı değil.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Arthur'u 'Zaman Kapsülü' mektubuyla yüzleştirin.",
+          "next": "arthur_sorgu_zaman_kapsulu",
+          "hint": "Bu ipucu Arthur'u aklasa da, Zaman Kapsülü hala güçlü bir motif."
+        },
+        {
+          "text": "Sorguyu sonlandırıp Elias'ın kızı Eliza'yı tekrar sorgulayın.",
+          "next": "eliza_sorgu_giris",
+          "hint": "Eliza'nın sanatsal eğilimleri, bu ipucuyla bağlantılı olabilir."
+        },
+        {
+          "text": "Sorguyu sonlandırıp olay yerine geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Bu ipucunun Arthur ile ilgisi yoksa, başka bir şüpheliyi işaret ediyor olabilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "arthur_yuzlestirme_yuruyus",
+      "text": "Arthur'a güvenlik kamerası kayıtlarındaki siluetin yürüyüş tarzını gösteriyor ve kendi yürüyüş tarzıyla karşılaştırmasını istiyorsunuz. Arthur'un yüzü mosmor kesiliyor, kekeliyor. 'Bu... bu imkansız! Benim alibim vardı! Ben o saatlerde galerideydim! Bu bir tuzak! Biri beni tuzağa düşürüyor!' Gözleri panikle etrafta geziniyor. Siluetin pantolonundaki dişliyi de gösterdiğinizde Arthur daha da panikliyor. İfadesindeki çelişkiler ve paniği, onu güçlü bir şüpheli yapıyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Arthur'u cinayetle suçlayın.",
+          "next": "arthur_suclama",
+          "hint": "Kamera kayıtları ve yürüyüş tarzı, Arthur'u baş şüpheli yapıyor. Ama ters köşe ihtimalini unutmayın."
+        },
+        {
+          "text": "Sorguyu sonlandırıp Eliza Thorne'u tekrar sorgulayın.",
+          "next": "eliza_sorgu_giris",
+          "hint": "Eliza'nın babasıyla olan ilişkisi ve sanatsal yönü, Arthur'un 'tuzak' iddialarıyla bağlantılı olabilir."
+        },
+        {
+          "text": "Olay yerine geri dönün, katilin bırakmış olabileceği diğer ipuçlarını arayın.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Arthur'un iddiaları doğruysa, başka ipuçları bir tuzak olduğunu gösterebilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "arthur_suclama",
+      "text": "Arthur Finch'i suçluyorsunuz. İlk başta inkar ediyor, 'Beni tuzağa düşürdüler!' diye bağırıyor. Ancak elinizdeki 'Zaman Kapsülü' mektubu, yürüyüş analizi ve Elias ile olan tartışmaları gibi güçlü kanıtlar yeterli görünüyor. Polis onu tutukluyor. Ancak daha sonra yapılan derinlemesine soruşturmalar ve Elias'ın bir arkadaşına gönderdiği gizli bir mektup (Eliza'nın babasının 'Sanatçı Katil' olduğunu ve kendisinin de onun 'mirasını' devam ettireceğini söylediği bir mektup) ortaya çıkarıyor ki, Arthur Finch tuzağa düşürülmüş; gerçek katil olan Eliza Thorne kaçıyor. Yanlış kişiyi suçladınız. Oyun Bitti.",
+      "choices": []
+    },
+    {
+      "scene_id": "bayan_higgins_sorgu_giris",
+      "text": "Bayan Higgins'in evine gidiyorsunuz. Bayan Higgins, 60'lı yaşlarında, toparlak bir kadın. Gözleri sürekli hareket ediyor, sanki her an yeni bir şey keşfedecekmiş gibi. Elias'a karşı tuhaf bir hayranlık beslediği hissediliyor.\n\nSiz: 'Bayan Higgins, dün gece Elias Thorne'un atölyesinden garip bir şey fark ettiniz mi?'\n\nBayan Higgins: 'Ah, zavallı Elias! Kim yapabilir ki bunu? Dün gece... Evet, evet, hatırlıyorum! Gece yarısına doğru atölyeden tuhaf, metalik sesler geliyordu. Tıkırtılar... sanki bir şeyler kuruluyormuş gibiydi. Sonra birden sustu. Bir de... (Gözleri kısılır, sesini alçaltır.) Sabah erken saatlerde, Elias'ın atölyesinden çıkan, hızlı adımlarla uzaklaşan bir siluet gördüm. Kapüşonluydu, yüzü görünmüyordu ama boyu Elias'tan uzundu.'\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Siluet hakkında daha fazla detay isteyin.",
+          "next": "bayan_higgins_siluet_detay",
+          "hint": "Siluetin detayları, kimliğini belirlemek için kritik olabilir."
+        },
+        {
+          "text": "Bayan Higgins'in alibisini sorgulayın.",
+          "next": "bayan_higgins_alibi_sor",
+          "hint": "Görgü tanığı olsa da, onun da bir motifi olabilir."
+        },
+        {
+          "text": "Bayan Higgins'in bahsettiği taşı arayın.",
+          "next": "kayip_tas_arama",
+          "hint": "Taş üzerindeki sembol, önemli bir ipucu olabilir."
+        },
+        {
+          "text": "Sorguyu sonlandırıp güvenlik kameralarını inceleyin.",
+          "next": "guvenlik_kameralari_incele",
+          "hint": "Kamera kayıtları, Bayan Higgins'in ifadelerini doğrulayabilir veya çürütebilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "bayan_higgins_siluet_detay",
+      "text": "Siz: 'Bayan Higgins, siluet hakkında daha fazla detay verebilir misiniz? Kadın mı, erkek mi? Üzerinde ne vardı?'\n\nBayan Higgins: 'Karanlıktı, dedektif. Ama sanki... omuzları genişti. Erkek gibiydi. Üzerinde koyu, kalın bir palto vardı. Bir de garip bir şey vardı... Elias'ın atölyesinin önünde, küçük bir taş gördüm. Üzerinde bir sembol vardı. Bir an gözüme ilişti, sonra bir kedi gelip patisiyle itti ve çamura gömüldü.'\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Kaybolan taşı arayın.",
+          "next": "kayip_tas_arama",
+          "hint": "Taş üzerindeki sembol, katilin kimliği hakkında önemli ipucu olabilir."
+        },
+        {
+          "text": "Bölgedeki güvenlik kameralarını inceleyin.",
+          "next": "guvenlik_kameralari_incele",
+          "hint": "Kamera kayıtları, siluetin kim olduğunu belirlemenize yardımcı olabilir."
+        },
+        {
+          "text": "Bayan Higgins'in alibisini sorgulayın.",
+          "next": "bayan_higgins_alibi_sor",
+          "hint": "Bayan Higgins'in ifadeleri önemlidir, ama kendi alibisi de önemlidir."
+        }
+      ]
+    },
+    {
+      "scene_id": "bayan_higgins_sorgu_iplik",
+      "text": "Siz: 'Bayan Higgins, olay yerinde bulunan yün ipliği hakkında bir bilginiz var mı? Ya da kurbanın tırnakları arasında bulunan bu iplik sizin giysinizden düşmüş olabilir mi?'\n\nBayan Higgins, gözlerini kısarak size bakıyor. 'Yün ipliği mi? Hayır, dedektif. Ben yün giymem. Alerjim var. Ve Elias'ın paltosundan da düşmüş olamaz, o farklı bir kumaştı.' Kesin bir şekilde reddediyor. Bu kanıtın Bayan Higgins'le bir bağlantısı olmadığını gösteriyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Bayan Higgins'in anlattığı taş hakkında sorular sorun.",
+          "next": "bayan_higgins_tas_sor",
+          "hint": "İplik onu aklasa da, taş hala önemli bir ipucu."
+        },
+        {
+          "text": "Sorguyu sonlandırıp Eliza Thorne'u tekrar sorgulayın.",
+          "next": "eliza_sorgu_giris",
+          "hint": "Yün ipliği Eliza'ya ait olabilir."
+        },
+        {
+          "text": "Sorguyu sonlandırıp Arthur Finch'i sorgulayın.",
+          "next": "arthur_sorgu_giris",
+          "hint": "Belki de Arthur'un bu iplikle ilgili bir bilgisi vardır."
+        }
+      ]
+    },
+    {
+      "scene_id": "bayan_higgins_suclama",
+      "text": "Bayan Higgins'i suçluyorsunuz. Şok içinde, 'Ben mi? Asla! Ben sadece bir tanık olmaya çalıştım!' diye bağırıyor. Ancak alibisindeki boşluklar ve tuhaf gözlemleri onu şüpheli kılıyor. Polis onu tutukluyor. Ancak daha sonra yapılan derinlemesine soruşturmalar ve Elias'ın bir arkadaşına gönderdiği gizli bir mektup (Eliza'nın babasının 'Sanatçı Katil' olduğunu ve kendisinin de onun 'mirasını' devam ettireceğini söylediği bir mektup) ortaya çıkarıyor ki, Bayan Higgins tuzağa düşürülmüş; gerçek katil olan Eliza Thorne kaçıyor. Yanlış kişiyi suçladınız. Oyun Bitti.",
+      "choices": []
+    },
+    {
+      "scene_id": "eliza_suclama_iplik",
+      "text": "Eliza'yı giysisindeki yün ipliği ve alibisindeki tutarsızlıklar nedeniyle suçluyorsunuz. İlk başta inkar ediyor, 'Beni tuzağa düşürüyorlar!' diye bağırıyor. Ancak kanıtlar aleyhinde. Polis onu tutukluyor. Ancak daha sonra yapılan derinlemesine soruşturmalar ve Elias'ın bir arkadaşına gönderdiği gizli bir mektup (Eliza'nın babasının 'Sanatçı Katil' olduğunu ve kendisinin de onun 'mirasını' devam ettireceğini söylediği bir mektup) ortaya çıkarıyor ki, Eliza Thorne'un kendisi, babasının aslında 'Sanatçı Katil' olduğunu ve bu cinayetleri sürdürdüğünü itiraf ediyor. Yanlış kişiyi suçladınız, Eliza kaçıyor. Oyun Bitti.",
+      "choices": []
+    },
+    {
+      "scene_id": "eliza_suclama_ot",
+      "text": "Eliza'yı 'Ö.T.' notu ve zihinsel eğilimleri nedeniyle suçluyorsunuz. Eliza, 'Hayır! Ben yapmadım! Babam... Babamın mirası bu değildi!' diye bağırıyor. Ancak polis, bu kanıtları dikkate alıyor ve onu gözaltına alıyor. Daha sonra yapılan derinlemesine soruşturmalar ve Elias'ın bir arkadaşına gönderdiği gizli bir mektup (Eliza'nın babasının 'Sanatçı Katil' olduğunu ve kendisinin de onun 'mirasını' devam ettireceğini söylediği bir mektup) ortaya çıkarıyor ki, Eliza Thorne'un kendisi, babasının aslında 'Sanatçı Katil' olduğunu ve bu cinayetleri sürdürdüğünü itiraf ediyor. Yanlış kişiyi suçladınız, Eliza kaçıyor. Oyun Bitti.",
+      "choices": []
+    },
+    {
+      "scene_id": "eliza_suclama_defter",
+      "text": "Eliza'yı eskiz defterindeki not ve 'karanlık eğilimi' nedeniyle suçluyorsunuz. Eliza, bir an donakalıyor, sonra histerik bir şekilde gülmeye başlıyor. 'Karanlık eğilim mi? Babamın eserini devam ettirmek mi?' Ardından hızla kapıya koşuyor. Polis onu yakalıyor. Ancak daha sonra yapılan derinlemesine soruşturmalar ve Elias'ın bir arkadaşına gönderdiği gizli bir mektup (Eliza'nın babasının 'Sanatçı Katil' olduğunu ve kendisinin de onun 'mirasını' devam ettireceğini söylediği bir mektup) ortaya çıkarıyor ki, Eliza Thorne'un kendisi, babasının aslında 'Sanatçı Katil' olduğunu ve bu cinayetleri sürdürdüğünü itiraf ediyor. Yanlış kişiyi suçladınız, Eliza kaçıyor. Oyun Bitti.",
+      "choices": []
+    },
+    {
+      "scene_id": "eliza_suclama_madalyon",
+      "text": "Eliza'yı madalyonun gizli bölmesinden ve sayı dizisinden haberdar olmadığı için yalan söylediği gerekçesiyle suçluyorsunuz. Eliza, 'Bilmiyordum diyorum! Babamın sırları vardı!' diye bağırıyor. Polis onu gözaltına alıyor. Ancak daha sonra yapılan derinlemesine soruşturmalar ve Elias'ın bir arkadaşına gönderdiği gizli bir mektup (Eliza'nın babasının 'Sanatçı Katil' olduğunu ve kendisinin de onun 'mirasını' devam ettireceğini söylediği bir mektup) ortaya çıkarıyor ki, Eliza Thorne'un kendisi, babasının aslında 'Sanatçı Katil' olduğunu ve bu cinayetleri sürdürdüğünü itiraf ediyor. Yanlış kişiyi suçladınız, Eliza kaçıyor. Oyun Bitti.",
+      "choices": []
+    },
+    {
+      "scene_id": "zaman_kapsulu_odasi_giris",
+      "text": "Kapıyı açıp içeri giriyorsunuz. Büyük, karanlık bir oda. Ortada devasa, yarım kalmış bir saat mekanizması duruyor. Her yeri dişliler, yaylar ve kantalardan oluşuyor. Bu, Elias'ın 'Zaman Kapsülü' projesi. Mekanizmanın ortasında, küçük bir nota ve yanında kanla yazılmış 'Sanatçı Katil' imzası duruyor. Notta: 'Z.L. son darbeyi vurdu. Her şeyin kalbi... sonunda benim oldu.' Yazı Elias'ın değil. Mekanizmanın hemen altında, bir kan birikintisi ve etrafa saçılmış cam parçaları var. Cam parçaları, Elias'ın saati atölyesinde yere düşürdüğü vazodan değil, özel bir vitrinden geliyor. Vitrinin arkasında, kırık bir heykelin parçaları var. Heykel, genç bir kadının, kollarını havaya kaldırmış, adeta bir bestecinin orkestrayı yönetmesi gibi duruşunu yansıtıyor. Heykelin kaidesinde küçük bir isim yazıyor: 'Eliza'. Elias'ın kızı Eliza'nın heykelini paramparça eden kişinin Sanatçı Katil olduğu anlaşılıyor. Bu heykel, Eliza'nın Sanatçı Katil olduğunu kanıtlayan en büyük delil.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Tüm kanıtları bir araya getirerek Eliza Thorne'u suçlayın.",
+          "next": "eliza_final_teshis",
+          "hint": "Eliza'nın 'karanlık eğilimi', 'Ö.T.' notu, eskiz defteri, yün ipliği, madalyondaki kod, 'Z.L.' ve şimdi de kendi heykelini paramparça etmesi... Tüm parçalar yerine oturuyor."
+        },
+        {
+          "text": "Suç mahalline geri dönün ve diğer şüphelileri tekrar gözden geçirin.",
+          "next": "supheli_sec",
+          "hint": "Bu kadar somut kanıt varken bile, başka bir şüphelinin de bu olayla bağlantısı olabileceğini düşünüyorsunuz."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_final_teshis",
+      "text": "Tüm kanıtları bir araya getirerek Elias'ın kızı Eliza Thorne'u cinayetle suçluyorsunuz. Eliza, şaşkınlık ve öfke dolu bir ifadeyle size bakıyor. Gözleri yavaşça soğuk, zeki bir parıltıyla doluyor. 'Beni buldunuz, dedektif. Ama siz sadece oyunun sonunu gördünüz. Hikaye, babamla başladı.' Eliyle yavaşça, paramparça olmuş heykelinin kalıntılarından birini okşuyor. 'Babam, o bir saatçi değildi, o bir sanatçıydı. Zamanın her anını bir başyapıt olarak gören, mekanizmaların ruhunu anlayan bir sanatçı. O, cinayeti bir sanata dönüştüren ilk kişiydi. Ben sadece onun öğrencisiydim, onun mirasını devam ettiren...'\n\nEliza Thorne, zekice bir gülümsemeyle, size bir mektup uzatıyor. 'Bu benim son eserim. Okuyun. O zaman, zihnimin labirentini gerçekten anlayacaksınız.'\n\n**[UZUN İTİRAF MEKTUBU]**\n\nSevgili Dedektif,\n\nBu mektubu okuyorsanız, zihnimin labirentini başarıyla aştınız demektir. Beni buldunuz. Beklemiyordunuz, değil mi? Oysa tüm ipuçları gözünüzün önündeydi, sadece nasıl bakacağınızı bilmiyordunuz. Babam... o bir saatçi değildi, o bir sanatçıydı. Zamanın her anını bir başyapıt olarak gören, mekanizmaların ruhunu anlayan bir sanatçı. O, cinayeti bir sanata dönüştüren ilk kişiydi. Ben sadece onun öğrencisiydim, onun mirasını devam ettiren...\n\nO 'Zaman Kapsülü' aslında bir miras değildi, babamın en büyük eseriydi. İnsanlığın zamanla olan ilişkisini, her saniyenin bir resim, her dakikanın bir senfoni olduğunu anlatan bir mekanizma. Arthur Finch onu çalmak istedi. Babam buna izin vermedi. Babamı kaybetmemizin acısıyla, onun eserini koruma dürtüsüyle yanıp tutuşurken, babamın 'yaratıcı sürecini' uygulamaya karar verdim.\n\nDişliler, saatler, kelimeler... Hepsi babamın bana öğrettikleriydi. Her bir kurban, babamın eserinin bir parçasıydı, zamanın farklı bir yönünü temsil ediyordu. Mimar, mekanın zaman içindeki değişimi; müzisyen, sesin zaman içindeki yankısı; yazar, kelimelerin zaman içindeki ölümsüzlüğü. Ve Elias... o, her şeyin başlangıcıydı, zamanın kendisiydi. Onun ölümü, benim ilk 'eserimdi', kendi babamın başyapıtını taklit edişimdi. Evet, o da bir Sanatçı Katildi. Bana bu sanatı o öğretti.\n\nBelki de beni deli bulacaksınız. Ama ben sadece babamın sanatsal mirasını devam ettirdim. Ve şimdi, bu mektupla, size son eserimi sunuyorum: gerçeğin çıplaklığı. Benim zihnimin labirenti, sizin de zihninizde yankılanmaya devam edecek.\n\nSaygılarımla, ve belki de biraz hayranlıkla,\nEliza Thorne\n\nEliza Thorne polis tarafından tutuklanıyor. Dava çözüldü. Sherlock Holmes'un bile hayran kalacağı bir zekayla katili yakaladınız. TEBRİKLER!\n\nOyun Bitti.",
+      "choices": []
+    },
+    {
+      "scene_id": "sembolleri_takip_et",
+      "text": "Eskiz defterindeki sembolleri dikkatle inceliyorsunuz. Notun altında çizilmiş olan iç içe geçmiş daire, üçgen ve elips şekilleri, size Sanatçı Katil'in cinayetlerde kullandığı geometrik düzenlemeleri anımsatıyor. Bu semboller bir ipucu olmalı...\n\nBu semboller size neyi çağrıştırıyor?",
+      "choices": [
+        {
+          "text": "Müzedeki bir sergi.",
+          "next": "british_museum_arastirma",
+          "hint": "British Museum'daki saat ve mekanizma sergisini hatırlayın. Sanatçı Katil'in 'sanatsal' felsefesiyle bağlantılı olabilir."
+        },
+        {
+          "text": "Matbaadaki kapıdaki semboller.",
+          "next": "matbaada_arastirma",
+          "hint": "Matbaanın metal kapısındaki sembolleri hatırlayın. Orada da benzer geometrik şekiller olabilir."
+        },
+        {
+          "text": "Hiçbir şey.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Belki de ipucu başka bir yerde veya sembollere yanlış bakıyorsunuz."
+        }
+      ]
+    },
+    {
+      "scene_id": "muze_diger_sergiler",
+      "text": "Müzedeki diğer sergileri inceliyorsunuz. Eski Mısır eserleri, Roma heykelleri, Orta Çağ zırhları... Her biri büyüleyici, ancak hiçbiri Elias'ın cinayetiyle doğrudan bağlantılı gibi görünmüyor. Zaman kaybediyorsunuz.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Tekrar Elias'ın müzedeki notuna bakın.",
+          "next": "british_museum_arastirma",
+          "hint": "İpucu, Elias'ın doğrudan bıraktığı nottaydı, diğer sergilerde değil."
+        },
+        {
+          "text": "Diğer şüphelileri sorgulayın.",
+          "next": "supheli_sec",
+          "hint": "Belki de bu müzeyle ilgili bilgiye sahip bir şüpheli vardır."
+        }
+      ]
+    },
+    {
+      "scene_id": "matbaa_cevre_arastirma",
+      "text": "Matbaanın çevresini dikkatle arıyorsunuz. Eski, paslı araç gereçler, tozlu kasalar... Hiçbir şey özel gibi görünmüyor. Ancak matbaanın arka tarafında, ıslak toprağın üzerinde, taze bir ayakkabı izi fark ediyorsunuz. Elias'ın atölyesinde bulunan ayakkabı iziyle aynı boyutta (37 numara) ve aynı zarif desene sahip. Bu iz, katilin yakın zamanda burada olduğunu gösteriyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Matbaanın içindeki kapıya geri dönün.",
+          "next": "matbaada_arastirma",
+          "hint": "Ayakkabı izi, içeride önemli bir şey olduğunu işaret ediyor."
+        },
+        {
+          "text": "Ayakkabı izini polisle paylaşın.",
+          "next": "polis_bilgi_paylasma",
+          "hint": "Polisle işbirliği yapmak önemlidir, ancak bu bilgiyi hemen paylaşmak katili uyarabilir."
+        },
+        {
+          "text": "Eliza Thorne'u bu ayakkabı iziyle yüzleştirin.",
+          "next": "eliza_yuzlestirme_iplik",
+          "hint": "37 numara ayakkabı izi Eliza'yı işaret ediyor olabilir. Onu bu kanıtla yüzleştirin."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_sorgu_giris",
+      "text": "Eliza Thorne'u sorgu odasına alıyorsunuz. Elias'ın ölümünden dolayı hala şok ve üzüntü içinde, ancak gözlerinde babasına karşı karmaşık duygular gizli. Elias'ın defterindeki 'karanlık eğilimi' notunu hatırlıyorsunuz. Elbisesindeki yün ipliği dikkat çekiyor.\n\nSiz: 'Bayan Thorne, babanızın ölümüyle ilgili bazı sorularım var.'\n\nEliza: 'Buyurun dedektif. Ne sormak istiyorsanız.' (Sesi kısık, gözlerini sizden kaçırıyor.)\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza'nın alibisini sorgulayın.",
+          "next": "eliza_alibi_sor",
+          "hint": "Alibisi doğruysa, şüpheliler listesinden çıkarabiliriz."
+        },
+        {
+          "text": "Eliza'nın cebindeki madalyonu sorun.",
+          "next": "eliza_cebindeki_obje_sor",
+          "hint": "Gizli bir obje, genellikle gizlenen bir sırrı işaret eder."
+        },
+        {
+          "text": "Giysisindeki yün ipliği hakkında sorgulayın.",
+          "next": "eliza_yuzlestirme_iplik",
+          "hint": "Olay yerinde bulunan iplikle eşleşiyor olabilir."
+        },
+        {
+          "text": "Elias'ın eski iş ortağı Arthur Finch hakkında sorun.",
+          "next": "eliza_eski_ortagi_sor",
+          "hint": "Arthur Finch'in Elias ile sorunları vardı, Eliza'nın bu konuda bilgisi olabilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_sorgu_kodlayici",
+      "text": "Siz: 'Elias'ın British Museum'da bıraktığı bir notta, sizin için 'küçük kodlayıcım' ifadesini kullandığını gördük. Bu ne anlama geliyor, Bayan Thorne?'\n\nEliza'nın yüzü geriliyor, gözlerinde bir anlık öfke parlıyor, sonra hızla soluyor. 'Kodlayıcı mı? Babamın bana taktığı aptalca bir lakaptı! Ben onun sanatsal 'kodlarını' anlamaya çalışırdım, o kadar! Ama ben bir katil değilim!' Sesi titriyor, ama inkarda kararlı. Ancak yüzündeki gerginlik, size bir şeyler sakladığını fısıldıyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza'yı yalan söylediği için sıkıştırın ve onu suçlayın.",
+          "next": "eliza_suclama_kodlayici",
+          "hint": "'Küçük kodlayıcım' ifadesi ve tepkisi, onu daha da şüpheli hale getiriyor."
+        },
+        {
+          "text": "Eliza'nın giysisindeki yün ipliği hakkında sorgulayın.",
+          "next": "eliza_yuzlestirme_iplik",
+          "hint": "Fiziksel kanıtlarla onu sıkıştırın."
+        },
+        {
+          "text": "Sorguyu sonlandırıp Arthur Finch'i sorgulayın.",
+          "next": "arthur_sorgu_giris",
+          "hint": "Belki de Eliza, suçu Arthur'un üzerine atmaya çalışıyordur."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_sorgu_zl",
+      "text": "Siz: 'Elias'ın sandığında bulunan bir notta 'Z.L. son zamanlarda çok garip davranıyor.' yazıyordu. Ayrıca matbaadaki metal kapının üzerinde de 'Z.L.' harfleri işlenmiş. Bu 'Z.L.' harfleri size neyi ifade ediyor, Bayan Thorne?'\n\nEliza'nın gözleri faltaşı gibi açılıyor, rengi soluyor. 'Z.L. mi? Bu da ne demek? Ben... Ben bu harflerden bir şey anlamıyorum!' Sesi panik içinde yükseliyor. Ancak titreyen elleri ve gözlerini kaçırması, size bir şeyler bildiğini düşündürüyor. 'Z.L.'nin kendi baş harfleri olduğunu biliyorsunuz (Zihnin Labirenti - Eliza Thorne).\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza'yı yalan söylediği için sıkıştırın ve onu suçlayın.",
+          "next": "eliza_suclama_zl",
+          "hint": "Z.L.'nin kendi baş harfleri olması ve paniği, onu baş şüpheli yapıyor."
+        },
+        {
+          "text": "Eliza'nın giysisindeki yün ipliği hakkında sorgulayın.",
+          "next": "eliza_yuzlestirme_iplik",
+          "hint": "Zihinsel kanıtları fiziksel kanıtlarla destekleyin."
+        },
+        {
+          "text": "Sorguyu sonlandırıp Arthur Finch'i sorgulayın.",
+          "next": "arthur_sorgu_giris",
+          "hint": "Belki de Arthur, 'Z.L.' hakkında bilgi sahibidir."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_sorgu_zl_matbaa",
+      "text": "Siz: 'Eliza, matbaadaki metal kapının üzerinde 'Z.L.' harfleri işlenmiş. Elias'ın notunda da 'Z.L. anahtara sahip' yazıyordu. Bu yerle ve bu harflerle bir bağlantınız var mı?'\n\nEliza'nın yüzü bembeyaz kesiliyor, bir an nefesi kesiliyor gibi. 'Matbaa mı? Hayır, benim matbaayla bir işim olmaz! Ve Z.L. de ne demek? Ben... ben hiçbir şey bilmiyorum!' Gözleri dehşetle etrafta geziniyor. Vücudu titriyor, sanki bir sırrı saklamak için büyük bir çaba sarf ediyormuş gibi.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza'yı yalan söylediği için sıkıştırın ve onu suçlayın.",
+          "next": "eliza_suclama_zl_matbaa",
+          "hint": "Z.L.'nin kendi baş harfleri olması ve matbaa ile olan bariz bağlantı, onu köşeye sıkıştırıyor."
+        },
+        {
+          "text": "Eliza'nın giysisindeki yün ipliği hakkında sorgulayın.",
+          "next": "eliza_yuzlestirme_iplik",
+          "hint": "Fiziksel kanıtlarla onu daha da köşeye sıkıştırın."
+        },
+        {
+          "text": "Sorguyu sonlandırıp Arthur Finch'i sorgulayın.",
+          "next": "arthur_sorgu_giris",
+          "hint": "Belki de Arthur, matbaa ve 'Zaman Kapsülü' projesi hakkında daha fazla bilgiye sahiptir."
+        }
+      ]
+    },
+    {
+      "scene_id": "supheli_listesi_incele",
+      "text": "Şüpheli listesini tekrar inceliyorsunuz. Elias'ın defterindeki 'Ö.T.' notu Eliza Thorne'un baş harfleriyle eşleşiyor. Aynı zamanda Eliza, babasının 'sanatsal dehasından' ve kendi 'karanlık eğiliminden' bahseden notlarla bağlantılı. Ayrıca 'Z.L.' harfleri de Eliza Thorne'a işaret ediyor. Tüm bunlar, Eliza'yı güçlü bir şüpheli yapıyor.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza Thorne'u bu yeni bilgilerle yüzleştirin.",
+          "next": "eliza_sorgu_giris",
+          "hint": "Eliza'nın tüm bu ipuçlarına vereceği tepkiyi gözlemleyin."
+        },
+        {
+          "text": "Olay yerine geri dönün ve ipuçlarını tekrar gözden geçirin.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Belki de bu bilgiler ışığında başka bir ipucu anlam kazanır."
+        }
+      ]
+    },
+    {
+      "scene_id": "ot_sk_karsilastir",
+      "text": "Elias'ın kitabındaki 'Ö.T.' notu (Eliza Thorne'u işaret eden) ile matbaanın yakınında bulunan taş üzerindeki 'S.K.' sembolünü karşılaştırıyorsunuz. Bu iki sembol arasında doğrudan bir bağlantı kuramıyorsunuz. Ancak her ikisi de Sanatçı Katil'in 'imzasının' bir parçası gibi duruyor, ancak farklı katmanlarda.\n\nŞimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Eliza Thorne'u 'Ö.T.' notuyla yüzleştirin.",
+          "next": "eliza_sorgu_ot",
+          "hint": "Eliza'nın bu notla ilgili tepkisi, davanın seyrini değiştirebilir."
+        },
+        {
+          "text": "Kaybolan taşı tekrar inceleyin (eğer kaybolmadıysa).",
+          "next": "kayip_tas_arama",
+          "hint": "Taşın üzerindeki sembolün daha derin bir anlamı olabilir."
+        },
+        {
+          "text": "Suç mahalline geri dönün.",
+          "next": "suc_mahalli_inceleme",
+          "hint": "Belki de bu semboller, olay yerindeki diğer ipuçlarıyla birleşince daha anlamlı hale gelir."
+        }
+      ]
+    },
+    {
+      "scene_id": "eliza_suclama_kodlayici",
+      "text": "Eliza'yı 'küçük kodlayıcım' notuyla yüzleştiriyor ve onu suçluyorsunuz. Eliza, yüzünde şaşkınlık ve öfke dolu bir ifadeyle size bakıyor. 'Beni suçluyorsunuz çünkü babam bana bir lakap taktı mı?' diye bağırıyor. Ancak, elinizdeki kanıtlar ve Eliza'nın panik tepkileri sizi şüphelendiriyor. Polis onu tutukluyor. Daha sonra yapılan derinlemesine soruşturmalar ve Elias'ın bir arkadaşına gönderdiği gizli bir mektup (Eliza'nın babasının 'Sanatçı Katil' olduğunu ve kendisinin de onun 'mirasını' devam ettireceğini söylediği bir mektup) ortaya çıkarıyor ki, Eliza Thorne'un kendisi, babasının aslında 'Sanatçı Katil' olduğunu ve bu cinayetleri sürdürdüğünü itiraf ediyor. Yanlış kişiyi suçladınız, Eliza kaçıyor. Oyun Bitti.",
+      "choices": []
+    },
+    {
+      "scene_id": "eliza_suclama_zl",
+      "text": "Eliza'yı 'Z.L.' harfleriyle yüzleştiriyor ve onu suçluyorsunuz. Eliza, yüzü bembeyaz kesilerek titremeye başlıyor. 'Hayır... Bu... Bu imkansız!' diye fısıldıyor. Ancak, elinizdeki kanıtlar ve Eliza'nın paniği onu ele veriyor. Polis onu tutukluyor. Daha sonra yapılan derinlemesine soruşturmalar ve Elias'ın bir arkadaşına gönderdiği gizli bir mektup (Eliza'nın babasının 'Sanatçı Katil' olduğunu ve kendisinin de onun 'mirasını' devam ettireceğini söylediği bir mektup) ortaya çıkarıyor ki, Eliza Thorne'un kendisi, babasının aslında 'Sanatçı Katil' olduğunu ve bu cinayetleri sürdürdüğünü itiraf ediyor. Yanlış kişiyi suçladınız, Eliza kaçıyor. Oyun Bitti.",
+      "choices": []
+    },
+    {
+      "scene_id": "eliza_suclama_zl_matbaa",
+      "text": "Eliza'yı matbaadaki 'Z.L.' harfleri ve Elias'ın notundaki 'Z.L. anahtara sahip' ifadesiyle yüzleştiriyor ve onu suçluyorsunuz. Eliza'nın tüm inkarları bir anda çöker, gözlerinde biriken yaşlarla yere yığılır. 'Beni buldunuz...' diye fısıldar. Polis onu tutukluyor. Daha sonra yapılan derinlemesine soruşturmalar ve Elias'ın bir arkadaşına gönderdiği gizli bir mektup (Eliza'nın babasının 'Sanatçı Katil' olduğunu ve kendisinin de onun 'mirasını' devam ettireceğini söylediği bir mektup) ortaya çıkarıyor ki, Eliza Thorne'un kendisi, babasının aslında 'Sanatçı Katil' olduğunu ve bu cinayetleri sürdürdüğünü itiraf ediyor. Yanlış kişiyi suçladınız, Eliza kaçıyor. Oyun Bitti.",
+      "choices": []
+    }
+  ]
+}

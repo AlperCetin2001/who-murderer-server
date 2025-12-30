@@ -1,0 +1,490 @@
+{
+  "title": "Yansımaların Gölgesi",
+  "description": "Yağmurlu bir akşam, sanat koleksiyoncusu Victor Moreau’nun malikanesinde cinayet işlendi. Victor, çalışma odasında hançerlenmiş, değerli tablosu 'Yansımalar' çalınmış. Genç dedektif olarak katili bulmalısınız. Her kararınız gerçeğe yaklaştırır ya da tuzaklara düşürür.",
+  "suspects": [
+    {
+      "name": "Isabelle Dubois",
+      "role": "Victor’un Protejesi",
+      "background": "Victor’un öğrencisi, sanatını çaldığını düşünüyor. Cinayet gecesi malikanede."
+    },
+    {
+      "name": "Arthur Finch",
+      "role": "Borçlu İş Ortağı",
+      "background": "Victor’a borçlu, malikanenin satışından pay istiyordu. Alibisi zayıf."
+    },
+    {
+      "name": "Elara Vance",
+      "role": "Rakip Sanatçı",
+      "background": "Victor’u tablosunu çalmakla suçluyor. Olay yerinde sigara izmariti bulundu."
+    },
+    {
+      "name": "Dr. Leonard Voss",
+      "role": "Sanat Tarihçisi",
+      "background": "Gizemli ‘Aynalar Loncası’ ile bağlantılı, Victor’un sırlarını biliyor."
+    }
+  ],
+  "scenes": [
+    {
+      "scene_id": "giris",
+      "text": "Yağmurlu bir akşam, Victor Moreau’nun malikanesinin önündesiniz. Victor, çalışma odasında hançerlenmiş, ‘Yansımalar’ tablosu çalınmış. Polis soygun diyor, ama siz komplo şüpheleniyorsunuz. Nereden başlarsınız?",
+      "choices": [
+        {
+          "text": "Victor’un ofisini incele.",
+          "next": "office",
+          "hint": "Ofis, Victor’un sırlarını ve cinayet ipuçlarını saklıyor olabilir."
+        },
+        {
+          "text": "Şüphelilerle konuş.",
+          "next": "interrogation_intro",
+          "hint": "Şüphelilerin ifadeleri, motifleri ve yalanları ortaya çıkarabilir."
+        },
+        {
+          "text": "Malikanenin girişini incele.",
+          "next": "entrance",
+          "hint": "Giriş, katilin bıraktığı izleri taşıyabilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "office",
+      "text": "Victor’un ofisinde boş bir çerçeve, karalanmış bir ajanda ve kilitli bir kutu var. Çerçevenin kenarında kızıl saç teli dikkat çekiyor. Ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Ajandayı incele.",
+          "next": "office_agenda",
+          "hint": "Ajanda, Victor’un son konuşmalarını veya düşmanlarını gösterebilir."
+        },
+        {
+          "text": "Kilitli kutuyu incele.",
+          "next": "office_box_puzzle",
+          "hint": "Kutu, gizli sırlar veya önemli belgeler içerebilir."
+        },
+        {
+          "text": "Kızıl saç telini incele.",
+          "next": "hair_clue",
+          "hint": "Saç teli, olay yerinde kimin olduğuna işaret edebilir."
+        },
+        {
+          "text": "Geri dön.",
+          "next": "giris",
+          "hint": "Başka bir başlangıç noktası deneyin."
+        }
+      ]
+    },
+    {
+      "scene_id": "office_agenda",
+      "text": "Ajandada ‘Hayır! Sanatım benimdir!’ yazan bir not var, Isabelle’e ait gibi görünüyor. Ayrıca Victor’un mirasını Isabelle’e bıraktığı belirtiliyor. Bu ne anlama geliyor?",
+      "choices": [
+        {
+          "text": "Isabelle ile not hakkında konuş.",
+          "next": "isabelle_talk",
+          "hint": "Not, Isabelle’in Victor’a öfkesini gösterebilir."
+        },
+        {
+          "text": "Kutuyu incele.",
+          "next": "office_box_puzzle",
+          "hint": "Not önemli, ama kutuda daha fazla sır olabilir."
+        },
+        {
+          "text": "Ofise geri dön.",
+          "next": "office",
+          "hint": "Başka ipuçları için ofisi tekrar incele."
+        }
+      ]
+    },
+    {
+      "scene_id": "office_box_puzzle",
+      "text": "Kilitli kutuda şekiller var: daire, kare, üçgen, dikdörtgen. Sıradaki şekli girin (örneğin: beşgen).",
+      "input_type": "text",
+      "question": "Sıradaki şeklin adını yazın:",
+      "answer": "BEŞGEN",
+      "on_success": "secret_letter",
+      "on_failure": "locked_box",
+      "hint": "Şekillerin kenar sayılarını inceleyin: Daire (0), Kare (4), Üçgen (3), Dikdörtgen (4). Örüntü, kenar sayılarında olabilir."
+    },
+    {
+      "scene_id": "secret_letter",
+      "text": "Kutu açılıyor! İçinde Victor’un mektubu: mirasını Isabelle’e bırakıyor, Arthur’a borçları var ve ‘Yansımalar’ tablosu ‘Aynalar Loncası’nın sırrını saklıyor. Kan lekesi dikkat çekiyor. Ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Isabelle ile miras hakkında konuş.",
+          "next": "isabelle_confront_inheritance",
+          "hint": "Miras, Isabelle’in motifini zayıflatabilir mi?"
+        },
+        {
+          "text": "Arthur ile borçlar hakkında konuş.",
+          "next": "arthur_talk",
+          "hint": "Borçlar, Arthur’u şüpheli kılıyor."
+        },
+        {
+          "text": "Elara ile tablo hakkında konuş.",
+          "next": "elara_talk",
+          "hint": "Tablo, Elara’nın intikam motivasyonunu gösterebilir."
+        },
+        {
+          "text": "Voss ile lonca hakkında konuş.",
+          "next": "voss_talk",
+          "hint": "Lonca, Voss’un suçluluğunu açığa çıkarabilir."
+        },
+        {
+          "text": "Katili suçla.",
+          "next": "final_accusation",
+          "hint": "Yeterli kanıt topladınız mı? Katili şimdi suçlayabilirsiniz."
+        }
+      ]
+    },
+    {
+      "scene_id": "locked_box",
+      "text": "Yanlış cevap! Kutu kilitli kalıyor. Başka ne yapabilirsiniz?",
+      "choices": [
+        {
+          "text": "Ofise geri dön.",
+          "next": "office",
+          "hint": "Başka ipuçları için ofisi tekrar incele."
+        },
+        {
+          "text": "Girişe git.",
+          "next": "entrance",
+          "hint": "Kutu açılmadı, başka ipuçları arayın."
+        }
+      ]
+    },
+    {
+      "scene_id": "hair_clue",
+      "text": "Kızıl saç teli, Elara Vance’ın saçıyla eşleşiyor. Ayrıca çerçevenin kenarında fosforlu boya kalıntısı var, Elara’nın kullandığı pigmentlere benziyor. Ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Elara ile saç ve boya hakkında konuş.",
+          "next": "elara_talk",
+          "hint": "Bu kanıtlar, Elara’yı olay yerine bağlayabilir."
+        },
+        {
+          "text": "Ofise geri dön.",
+          "next": "office",
+          "hint": "Başka ipuçları için ofisi tekrar incele."
+        }
+      ]
+    },
+    {
+      "scene_id": "entrance",
+      "text": "Malikanenin girişinde kırık bir vazo ve lavanta kalıntıları var. Kapının dışında ‘Camel Pure’ sigara izmariti bulunuyor. İzmarit kime ait?",
+      "input_type": "multiple_choice",
+      "question": "Sigara izmariti kime ait?",
+      "options": ["Isabelle", "Arthur", "Elara", "Voss"],
+      "answer": "Elara",
+      "on_success": "elara_presence",
+      "on_failure": "wrong_smoke",
+      "hint": "Elara’nın ‘Camel Pure’ sigara içtiği biliniyor."
+    },
+    {
+      "scene_id": "elara_presence",
+      "text": "Doğru! İzmarit Elara’ya ait. Kameralar da onu malikanenin yakınında gösteriyor. Lavanta kalıntıları Isabelle’i işaret ediyor. Ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Elara ile izmarit hakkında konuş.",
+          "next": "elara_talk",
+          "hint": "İzmarit, Elara’yı olay yerine bağlar."
+        },
+        {
+          "text": "Isabelle ile lavanta hakkında konuş.",
+          "next": "isabelle_talk",
+          "hint": "Lavanta, Isabelle’in olay yerinde olduğunu gösterebilir."
+        },
+        {
+          "text": "Girişe geri dön.",
+          "next": "entrance",
+          "hint": "Başka ipuçları için girişi tekrar incele."
+        },
+        {
+          "text": "Katili suçla.",
+          "next": "final_accusation",
+          "hint": "Yeterli kanıt topladınız mı? Katili şimdi suçlayabilirsiniz."
+        }
+      ]
+    },
+    {
+      "scene_id": "wrong_smoke",
+      "text": "Yanlış cevap! İzmaritin sahibi bulunamadı. Başka ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Girişe geri dön.",
+          "next": "entrance",
+          "hint": "Başka ipuçları için girişi tekrar incele."
+        },
+        {
+          "text": "Şüphelilerle konuş.",
+          "next": "interrogation_intro",
+          "hint": "Şüphelilerin alışkanlıkları ipucu verebilir."
+        }
+      ]
+    },
+    {
+      "scene_id": "interrogation_intro",
+      "text": "Karakolda şüphelilerle konuşmaya hazırsınız. Kimi sorgulayacaksınız?",
+      "choices": [
+        {
+          "text": "Isabelle Dubois",
+          "next": "isabelle_talk",
+          "hint": "Isabelle’in Victor ile gerginliği ve lavanta kalıntıları şüpheli."
+        },
+        {
+          "text": "Arthur Finch",
+          "next": "arthur_talk",
+          "hint": "Arthur’un borçları ve kamera silueti onu şüpheli kılıyor."
+        },
+        {
+          "text": "Elara Vance",
+          "next": "elara_talk",
+          "hint": "Elara’nın sigara izmariti ve saç teli olay yerinde bulundu."
+        },
+        {
+          "text": "Dr. Leonard Voss",
+          "next": "voss_talk",
+          "hint": "Voss’un lonca bağlantısı cinayetin anahtarı olabilir."
+        },
+        {
+          "text": "Katili suçla.",
+          "next": "final_accusation",
+          "hint": "Yeterli kanıt topladınız mı? Katili şimdi suçlayabilirsiniz."
+        }
+      ]
+    },
+    {
+      "scene_id": "isabelle_talk",
+      "text": "Isabelle gergin, gözleri kaçamak. ‘Victor beni destekliyordu, ama sanatımı kendi adıyla satmak istedi!’ diyor. Lavanta kalıntıları ve ajandadaki not onu şüpheli kılıyor. Ne sorarsınız?",
+      "choices": [
+        {
+          "text": "Lavanta kalıntıları hakkında yüzleş.",
+          "next": "isabelle_confront_lavender",
+          "hint": "Lavanta, Isabelle’i olay yerine bağlayabilir."
+        },
+        {
+          "text": "Miras mektubu hakkında konuş.",
+          "next": "isabelle_confront_inheritance",
+          "hint": "Miras, Isabelle’in motifini açıklayabilir."
+        },
+        {
+          "text": "Geri dön.",
+          "next": "interrogation_intro",
+          "hint": "Diğer şüphelileri sorgula."
+        }
+      ]
+    },
+    {
+      "scene_id": "isabelle_confront_lavender",
+      "text": "Siz: ‘Girişteki vazoda lavanta kalıntıları bulduk, sizin atölyenizden. Orada mıydınız?’ Isabelle panikliyor: ‘Lavanta mı? Victor almıştır, ben orada değildim!’ Tepkisi şüpheli. Ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Daha fazla kanıt topla.",
+          "next": "interrogation_intro",
+          "hint": "Lavanta şüpheli, ama suçlama için daha fazla kanıt gerekli."
+        },
+        {
+          "text": "Ofisi tekrar incele.",
+          "next": "office",
+          "hint": "Başka ipuçları için ofise dön."
+        }
+      ]
+    },
+    {
+      "scene_id": "isabelle_confront_inheritance",
+      "text": "Siz: ‘Victor mirasını size bırakmış.’ Isabelle şaşırıyor: ‘Haberim yoktu! Victor bana inanıyordu!’ Masum görünüyor. Ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Daha fazla kanıt topla.",
+          "next": "interrogation_intro",
+          "hint": "Miras masumiyetini gösteriyor, ama başka kanıtlar gerekli."
+        },
+        {
+          "text": "Girişi incele.",
+          "next": "entrance",
+          "hint": "Başka ipuçları için girişe git."
+        }
+      ]
+    },
+    {
+      "scene_id": "arthur_talk",
+      "text": "Arthur küstah: ‘Victor bana borçluydu, ama cinayet mi? Asla! O gece galerideydim.’ Kamera silueti ona uyuyor. Ne sorarsınız?",
+      "choices": [
+        {
+          "text": "Borçlar ve miras mektubu hakkında yüzleş.",
+          "next": "arthur_confront_inheritance",
+          "hint": "Borçlar, Arthur’un motifini güçlendiriyor."
+        },
+        {
+          "text": "Kamera siluetini sorgula.",
+          "next": "arthur_alibi_challenge",
+          "hint": "Siluet, Arthur’u olay yerine bağlayabilir."
+        },
+        {
+          "text": "Geri dön.",
+          "next": "interrogation_intro",
+          "hint": "Diğer şüphelileri sorgula."
+        }
+      ]
+    },
+    {
+      "scene_id": "arthur_confront_inheritance",
+      "text": "Siz: ‘Victor borçlarınızı ödemek için tabloyu satacaktı, ama mirası Isabelle’e bıraktı.’ Arthur öfkeleniyor: ‘Beni mi kandırdı?’ Tepkisi şüpheli. Ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Daha fazla kanıt topla.",
+          "next": "interrogation_intro",
+          "hint": "Borçlar güçlü motif, ama suçlama için daha fazla kanıt gerekli."
+        },
+        {
+          "text": "Ofisi tekrar incele.",
+          "next": "office",
+          "hint": "Başka ipuçları için ofise dön."
+        }
+      ]
+    },
+    {
+      "scene_id": "arthur_alibi_challenge",
+      "text": "Siz: ‘Kamera silueti size uyuyor, alibiniz zayıf.’ Arthur panikliyor: ‘Beni tuzağa düşürüyorlar!’ Ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Daha fazla kanıt topla.",
+          "next": "interrogation_intro",
+          "hint": "Siluet şüpheli, ama suçlama için daha fazla kanıt gerekli."
+        },
+        {
+          "text": "Girişi incele.",
+          "next": "entrance",
+          "hint": "Başka ipuçları için girişe git."
+        }
+      ]
+    },
+    {
+      "scene_id": "elara_talk",
+      "text": "Elara öfkeli: ‘Victor tablomuzu çaldı! O gece malikanenin önünden geçtim, içeri girmedim.’ Saç teli ve izmarit onu yalanlıyor. Ne sorarsınız?",
+      "choices": [
+        {
+          "text": "Saç teli ve boya hakkında yüzleş.",
+          "next": "elara_confront_hair",
+          "hint": "Saç ve boya, Elara’yı olay yerine bağlar."
+        },
+        {
+          "text": "Sigara izmariti hakkında yüzleş.",
+          "next": "elara_confront_cigarette",
+          "hint": "İzmarit, Elara’nın yalanını ortaya çıkarabilir."
+        },
+        {
+          "text": "Geri dön.",
+          "next": "interrogation_intro",
+          "hint": "Diğer şüphelileri sorgula."
+        }
+      ]
+    },
+    {
+      "scene_id": "elara_confront_hair",
+      "text": "Siz: ‘Ofiste kızıl saç teli ve fosforlu boya bulduk, size ait.’ Elara panikliyor: ‘Tablo benim, ama cinayet işlemedim!’ Ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Daha fazla kanıt topla.",
+          "next": "interrogation_intro",
+          "hint": "Saç ve boya güçlü kanıt, ama suçlama için daha fazla bilgi gerekli."
+        },
+        {
+          "text": "Ofisi tekrar incele.",
+          "next": "office",
+          "hint": "Başka ipuçları için ofise dön."
+        }
+      ]
+    },
+    {
+      "scene_id": "elara_confront_cigarette",
+      "text": "Siz: ‘Girişte ‘Camel Pure’ izmariti bulduk, sizin markanız.’ Elara kekeliyor: ‘Evet, oradaydım, ama içeri girmedim!’ Ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Daha fazla kanıt topla.",
+          "next": "interrogation_intro",
+          "hint": "İzmarit güçlü kanıt, ama suçlama için daha fazla bilgi gerekli."
+        },
+        {
+          "text": "Girişi incele.",
+          "next": "entrance",
+          "hint": "Başka ipuçları için girişe git."
+        }
+      ]
+    },
+    {
+      "scene_id": "voss_talk",
+      "text": "Voss sakin: ‘Victor’un lonca sırlarını ifşa edeceğini biliyordum, ama cinayet? Asla.’ Alibisi zayıf. Ne sorarsınız?",
+      "choices": [
+        {
+          "text": "Lonca bağlantısını sorgula.",
+          "next": "voss_lonca_sorgu",
+          "hint": "Lonca, Voss’un motifini açıklayabilir."
+        },
+        {
+          "text": "Geri dön.",
+          "next": "interrogation_intro",
+          "hint": "Diğer şüphelileri sorgula."
+        }
+      ]
+    },
+    {
+      "scene_id": "voss_lonca_sorgu",
+      "text": "Siz: ‘Lonca, Victor’u susturmak istedi, değil mi?’ Voss gülümsüyor: ‘Lonca sırlarını korur, ama ben katil değilim.’ Ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Daha fazla kanıt topla.",
+          "next": "interrogation_intro",
+          "hint": "Lonca bağlantısı şüpheli, ama suçlama için daha fazla kanıt gerekli."
+        },
+        {
+          "text": "Ofisi tekrar incele.",
+          "next": "office",
+          "hint": "Başka ipuçları için ofise dön."
+        }
+      ]
+    },
+    {
+      "scene_id": "final_accusation",
+      "text": "Tüm kanıtları topladınız. Katili suçlama zamanı. Kimi suçlayacaksınız?",
+      "choices": [
+        {
+          "text": "Isabelle Dubois",
+          "next": "isabelle_ending",
+          "hint": "Lavanta ve not şüpheli, ama miras masumiyetini gösteriyor."
+        },
+        {
+          "text": "Arthur Finch",
+          "next": "arthur_ending",
+          "hint": "Borçlar ve siluet güçlü, ama fiziksel kanıtlar eksik."
+        },
+        {
+          "text": "Elara Vance",
+          "next": "elara_ending",
+          "hint": "Saç, izmarit ve boya Elara’yı işaret ediyor."
+        },
+        {
+          "text": "Dr. Leonard Voss",
+          "next": "voss_ending",
+          "hint": "Lonca bağlantısı şüpheli, ama kanıtlar zayıf."
+        }
+      ]
+    },
+    {
+      "scene_id": "isabelle_ending",
+      "text": "Isabelle’i suçluyorsunuz. ‘Victor’u öldürmedim!’ diye bağırıyor. Lavanta ve not aleyhinde, ama DNA analizleri Elara’yı işaret ediyor. Yanlış suçlama, Elara kaçtı. Oyun Bitti.",
+      "choices": []
+    },
+    {
+      "scene_id": "arthur_ending",
+      "text": "Arthur’u suçluyorsunuz. ‘Beni tuzağa düşürdüler!’ diye bağırıyor. Borçlar ve siluet aleyhinde, ama DNA Elara’yı gösteriyor. Yanlış suçlama, Elara kaçtı. Oyun Bitti.",
+      "choices": []
+    },
+    {
+      "scene_id": "elara_ending",
+      "text": "Elara’yı suçluyorsunuz. ‘Evet, Victor’u ben öldürdüm. Sanatımı çaldı!’ diyor. Kanlı mektup açacağı ve fırça ucu onu ele veriyor. Polis Elara’yı tutukluyor. Dava çözüldü! TEBRİKLER!",
+      "choices": []
+    },
+    {
+      "scene_id": "voss_ending",
+      "text": "Voss’u suçluyorsunuz. ‘Katil değilim,’ diyor. Lonca bağlantısı şüpheli, ama fiziksel kanıtlar Elara’yı işaret ediyor. Yanlış suçlama, Elara kaçtı. Oyun Bitti.",
+      "choices": []
+    }
+  ]
+}
