@@ -125,7 +125,12 @@ io.on('connection', (socket) => {
             io.to(roomCode).emit('clear_chat');
             io.to(roomCode).emit('chat_message', { sender: 'Sistem', text: '--- YENİ DAVA BAŞLADI ---', type: 'system' });
 
-            io.to(roomCode).emit('game_started', { caseId, mode: room.mode, currentHintCount: 3 });
+            // GÜNCEL İPUCU SAYISINI GÖNDERİYORUZ
+            io.to(roomCode).emit('game_started', { 
+                caseId, 
+                mode: room.mode, 
+                currentHintCount: 3 
+            });
             io.emit('room_list_update', getPublicRoomList());
         }
     });
@@ -162,11 +167,13 @@ io.on('connection', (socket) => {
         }
     });
 
+    // İPUCU İSTEĞİ (DÜZELTİLDİ)
     socket.on('request_hint', ({ roomCode, hintText, playerName }) => {
         const room = rooms.get(roomCode);
         if (room && room.mode === 'voting') {
             if (room.hintCount > 0) {
-                room.hintCount--; 
+                room.hintCount--; // Sunucuda azalt
+                // HERKESE GÖNDER
                 io.to(roomCode).emit('hint_revealed', { hintText, newCount: room.hintCount, user: playerName });
             }
         }
