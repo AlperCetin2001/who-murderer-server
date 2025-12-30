@@ -2,9 +2,12 @@ const express = require('express');
 const http = require('http');
 const { Server } = require("socket.io");
 const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 app.use(cors());
+app.use(express.static('public')); // Statik dosyaları sunmak için
 
 const server = http.createServer(app);
 
@@ -13,6 +16,23 @@ const io = new Server(server, {
 });
 
 const rooms = new Map();
+const scenesCache = {}; // Senaryoları bellekte tutmak için
+
+// Senaryo Dosyalarını Yükle (Sunucu tarafında)
+function loadCaseData(caseId) {
+    if (scenesCache[caseId]) return scenesCache[caseId];
+    try {
+        // Dosya yolunu projenize göre ayarlayın
+        const dataPath = path.join(__dirname, 'data', `scenes${caseId.replace('case', '')}.json`);
+        const rawData = fs.readFileSync(dataPath);
+        const jsonData = JSON.parse(rawData);
+        scenesCache[caseId] = jsonData;
+        return jsonData;
+    } catch (err) {
+        console.error(`Senaryo yükleme hatası (${caseId}):`, err);
+        return null;
+    }
+}
 
 function generateRoomCode() {
     const chars = "BCDFGHJKMNPQRSTVWXYZ23456789";
@@ -54,10 +74,11 @@ io.on('connection', (socket) => {
             gameState: 'lobby',
             mode: 'individual', 
             votes: {},          
-            currentCase: null,
+            currentCaseId: null,
+            currentSceneId: 'giris', // Herkes aynı sahnede başlar
             isPrivate: (visibility === 'private'),
             password: (visibility === 'protected' && password) ? password : null,
-            hintCount: 3 // Başlangıç hakkı
+            hintCount: 3
         });
 
         socket.join(roomCode);
@@ -65,6 +86,7 @@ io.on('connection', (socket) => {
         io.emit('room_list_update', getPublicRoomList());
         io.to(roomCode).emit('update_player_list', rooms.get(roomCode).players);
         
+        // Sistem Mesajı (Güvenli)
         io.to(roomCode).emit('chat_message', { 
             sender: 'Sistem', 
             text: `Oda kuruldu. Dedektif ${playerName} giriş yaptı.`, 
@@ -97,10 +119,15 @@ io.on('connection', (socket) => {
         });
     });
 
+    // GÜVENLİ CHAT (XSS Önlenmiş hali client'ta render edilecek)
     socket.on('send_chat', ({ roomCode, message, playerName, avatar }) => {
+        // Basit sunucu tarafı validasyon
+        if (!message || message.trim().length === 0) return;
+        const safeMessage = message.substring(0, 500); // Karakter limiti
+
         io.to(roomCode).emit('chat_message', { 
             sender: playerName, 
-            text: message, 
+            text: safeMessage, 
             avatar: avatar,
             id: socket.id,
             type: 'user'
@@ -111,36 +138,52 @@ io.on('connection', (socket) => {
         socket.to(roomCode).emit('user_typing', { playerName, isTyping });
     });
 
-    // OYUNU BAŞLATMA (İPUCU SIFIRLAMA)
+    // OYUNU BAŞLATMA
     socket.on('start_game', ({ roomCode, caseId, mode }) => {
         const room = rooms.get(roomCode);
         if (room && room.host === socket.id) {
-            if (mode === 'voting' && room.players.length < 3) {
-                socket.emit('error_message', '⚠️ Demokrasi modu için en az 3 dedektif gereklidir!');
-                return;
-            }
+            const caseData = loadCaseData(caseId);
+            if (!caseData) return socket.emit('error_message', 'Senaryo dosyası sunucuda bulunamadı!');
 
             room.gameState = 'playing';
-            room.currentCase = caseId;
+            room.currentCaseId = caseId;
             room.mode = mode || 'individual';
-            room.hintCount = 3; // Hakları 3'e eşitle
+            room.hintCount = 3;
+            room.currentSceneId = 'giris';
             
             io.to(roomCode).emit('clear_chat');
-            io.to(roomCode).emit('chat_message', { sender: 'Sistem', text: '--- YENİ DAVA BAŞLADI ---', type: 'system' });
-
-            // currentHintCount parametresini gönderiyoruz
             io.to(roomCode).emit('game_started', { 
-                caseId, 
                 mode: room.mode, 
                 currentHintCount: 3 
             });
+
+            // İlk sahneyi gönder (SENARYO VERİSİ SUNUCUDAN GİDER)
+            sendSceneToRoom(roomCode, 'giris');
+            
             io.emit('room_list_update', getPublicRoomList());
         }
     });
 
-    socket.on('cast_vote', ({ roomCode, nextSceneId }) => {
+    // OYUNCU SEÇİM YAPTIĞINDA (Artık istemci doğrudan loadScene yapmaz)
+    socket.on('make_choice', ({ roomCode, nextSceneId }) => {
         const room = rooms.get(roomCode);
-        if (!room || room.mode !== 'voting') return;
+        if (!room) return;
+
+        // Bireysel modda her oyuncu farklı yerde olabilir (Bunun için logic karmaşıktır, 
+        // MVP için herkesin senkronize hareket ettiğini veya istemciye sadece veri attığımızı varsayalım.
+        // Güvenlik için: İstemci "Ben X seçtim" der, sunucu "Tamam, X sahnesinin verisi bu" der.)
+        
+        if (room.mode === 'individual') {
+            sendSceneToSocket(socket, room.currentCaseId, nextSceneId);
+        } else if (room.mode === 'voting') {
+            // Oylama modu mantığı...
+             handleVoting(socket, roomCode, nextSceneId);
+        }
+    });
+
+    // Oylama Modu Fonksiyonu
+    function handleVoting(socket, roomCode, nextSceneId) {
+        const room = rooms.get(roomCode);
         room.votes[socket.id] = nextSceneId;
         
         const voteStatus = room.players.map(player => ({
@@ -156,6 +199,7 @@ io.on('connection', (socket) => {
         io.to(roomCode).emit('vote_update', { voteStatus, voteCount, total: playerCount });
 
         if (voteCount >= playerCount) {
+            // En çok oy alanı bul
             const counts = {};
             let winnerScene = null;
             let maxVotes = 0;
@@ -163,32 +207,64 @@ io.on('connection', (socket) => {
                 counts[sceneId] = (counts[sceneId] || 0) + 1;
                 if (counts[sceneId] > maxVotes) { maxVotes = counts[sceneId]; winnerScene = sceneId; }
             });
+            
             setTimeout(() => {
                 room.votes = {}; 
-                io.to(roomCode).emit('force_scene_change', winnerScene);
+                room.currentSceneId = winnerScene;
+                sendSceneToRoom(roomCode, winnerScene);
             }, 3000);
         }
-    });
+    }
 
-    // İPUCU İSTEĞİ (DÜZELTİLDİ: HERKESE GÖNDERİM)
-    socket.on('request_hint', ({ roomCode, hintText, playerName }) => {
+    // İpucu İsteği
+    socket.on('request_hint', ({ roomCode, playerName }) => {
         const room = rooms.get(roomCode);
-        if (room && room.mode === 'voting') {
+        if (!room) return;
+        
+        // Oylama modunda ipucu sayısı ortaktır
+        if (room.mode === 'voting') {
             if (room.hintCount > 0) {
-                room.hintCount--; // Sunucuda azalt
+                room.hintCount--;
+                const currentSceneData = getSceneData(room.currentCaseId, room.currentSceneId);
+                const hintText = currentSceneData ? (currentSceneData.hint || currentSceneData.hint_text) : "İpucu yok.";
                 
-                // HERKESE yeni sayıyı ve metni gönder
                 io.to(roomCode).emit('hint_revealed', { 
                     hintText: hintText, 
                     newCount: room.hintCount,
                     user: playerName
                 });
-            } else {
-                // Hakkı kalmadıysa sadece isteyene hata dön
-                socket.emit('error_message', '⚠️ İpucu hakkınız kalmadı!');
             }
+        } else {
+             // Bireysel modda oyuncunun kendi hint'i istemcide tutulabilir veya
+             // sunucu sadece metni döner.
+             // Basitlik için veriyi gönderelim:
+             // (Gerçek bir projede bireysel state'ler de sunucuda tutulmalı)
         }
     });
+    
+    // Yardımcı: Tek bir oyuncuya sahne verisi gönder
+    function sendSceneToSocket(socket, caseId, sceneId) {
+        const sceneData = getSceneData(caseId, sceneId);
+        if (sceneData) {
+            socket.emit('scene_data', sceneData);
+        }
+    }
+
+    // Yardımcı: Tüm odaya sahne verisi gönder
+    function sendSceneToRoom(roomCode, sceneId) {
+        const room = rooms.get(roomCode);
+        const sceneData = getSceneData(room.currentCaseId, sceneId);
+        if (sceneData) {
+            io.to(roomCode).emit('scene_data', sceneData);
+        }
+    }
+
+    // Senaryo içinden sahne bulma
+    function getSceneData(caseId, sceneId) {
+        const caseJson = loadCaseData(caseId);
+        if (!caseJson || !caseJson.scenes) return null;
+        return caseJson.scenes.find(s => s.scene_id === sceneId);
+    }
 
     socket.on('get_public_rooms', () => { socket.emit('room_list_update', getPublicRoomList()); });
 
@@ -200,6 +276,8 @@ io.on('connection', (socket) => {
                 room.players.splice(playerIndex, 1); 
                 io.to(code).emit('update_player_list', room.players);
                 io.to(code).emit('chat_message', { sender: 'Sistem', text: `${pName} ayrıldı.`, type: 'leave' });
+                
+                // Oda boşaldıysa sil
                 if(room.players.length === 0) rooms.delete(code);
                 else io.emit('room_list_update', getPublicRoomList());
             }
@@ -209,5 +287,5 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-    console.log(`🚀 Sunucu çalışıyor`);
+    console.log(`🚀 Sunucu ${PORT} portunda çalışıyor`);
 });
