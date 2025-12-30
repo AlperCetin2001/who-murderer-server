@@ -43,6 +43,7 @@ io.on('connection', (socket) => {
     console.log(`🔌 Yeni bağlantı: ${socket.id}`);
     socket.emit('room_list_update', getPublicRoomList());
 
+    // ODA OLUŞTURMA
     socket.on('create_room', ({ playerName, visibility, password, avatar }) => {
         let roomCode = generateRoomCode();
         while(rooms.has(roomCode)) { roomCode = generateRoomCode(); }
@@ -56,7 +57,7 @@ io.on('connection', (socket) => {
             currentCase: null,
             isPrivate: (visibility === 'private'),
             password: (visibility === 'protected' && password) ? password : null,
-            hintCount: 3
+            hintCount: 3 // Başlangıç hakkı
         });
 
         socket.join(roomCode);
@@ -71,6 +72,7 @@ io.on('connection', (socket) => {
         });
     });
 
+    // ODAYA KATILMA
     socket.on('join_room', ({ roomCode, playerName, password, avatar }) => {
         const room = rooms.get(roomCode);
 
@@ -109,6 +111,7 @@ io.on('connection', (socket) => {
         socket.to(roomCode).emit('user_typing', { playerName, isTyping });
     });
 
+    // OYUNU BAŞLATMA (İPUCU SIFIRLAMA)
     socket.on('start_game', ({ roomCode, caseId, mode }) => {
         const room = rooms.get(roomCode);
         if (room && room.host === socket.id) {
@@ -120,12 +123,12 @@ io.on('connection', (socket) => {
             room.gameState = 'playing';
             room.currentCase = caseId;
             room.mode = mode || 'individual';
-            room.hintCount = 3; 
+            room.hintCount = 3; // Hakları 3'e eşitle
             
             io.to(roomCode).emit('clear_chat');
             io.to(roomCode).emit('chat_message', { sender: 'Sistem', text: '--- YENİ DAVA BAŞLADI ---', type: 'system' });
 
-            // GÜNCEL İPUCU SAYISINI GÖNDERİYORUZ
+            // currentHintCount parametresini gönderiyoruz
             io.to(roomCode).emit('game_started', { 
                 caseId, 
                 mode: room.mode, 
@@ -167,14 +170,22 @@ io.on('connection', (socket) => {
         }
     });
 
-    // İPUCU İSTEĞİ (DÜZELTİLDİ)
+    // İPUCU İSTEĞİ (DÜZELTİLDİ: HERKESE GÖNDERİM)
     socket.on('request_hint', ({ roomCode, hintText, playerName }) => {
         const room = rooms.get(roomCode);
         if (room && room.mode === 'voting') {
             if (room.hintCount > 0) {
                 room.hintCount--; // Sunucuda azalt
-                // HERKESE GÖNDER
-                io.to(roomCode).emit('hint_revealed', { hintText, newCount: room.hintCount, user: playerName });
+                
+                // HERKESE yeni sayıyı ve metni gönder
+                io.to(roomCode).emit('hint_revealed', { 
+                    hintText: hintText, 
+                    newCount: room.hintCount,
+                    user: playerName
+                });
+            } else {
+                // Hakkı kalmadıysa sadece isteyene hata dön
+                socket.emit('error_message', '⚠️ İpucu hakkınız kalmadı!');
             }
         }
     });
