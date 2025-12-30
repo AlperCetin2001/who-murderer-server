@@ -1,4 +1,5 @@
-const fs = require('fs'); // Dosya sistemi modülü eklendi
+const fs = require('fs');
+const path = require('path');
 const express = require('express');
 const http = require('http');
 const { Server } = require("socket.io");
@@ -15,25 +16,32 @@ const io = new Server(server, {
 
 const rooms = new Map();
 
-// --- SENARYO YÜKLEME SİSTEMİ BAŞLANGIÇ ---
+// --- SENARYO YÜKLEME SİSTEMİ ---
 const loadedScenarios = {};
 
 function loadAllScenarios() {
-    // 3 adet vaka dosyamız olduğunu varsayıyoruz (scenes1.json, scenes2.json...)
+    // data klasörünün tam yolunu oluştur (Render/Linux uyumlu)
+    const dataFolderPath = path.join(__dirname, 'data');
+    console.log("📂 Hedef Data Yolu:", dataFolderPath);
+
+    if (!fs.existsSync(dataFolderPath)) {
+        console.error("❌ HATA: 'data' klasörü bulunamadı!");
+        return;
+    }
+
     ['case1', 'case2', 'case3'].forEach(caseId => {
         try {
-            // Dosya yolunu ./data/scenes1.json olacak şekilde ayarlıyoruz
             const fileName = `scenes${caseId.replace('case', '')}.json`;
-            const rawData = fs.readFileSync(`./data/${fileName}`);
+            const filePath = path.join(dataFolderPath, fileName);
+            const rawData = fs.readFileSync(filePath, 'utf8');
             loadedScenarios[caseId] = JSON.parse(rawData);
-            console.log(`✅ ${caseId} (${fileName}) başarıyla yüklendi.`);
+            console.log(`✅ ${caseId} (${fileName}) yüklendi.`);
         } catch (error) {
-            console.error(`❌ ${caseId} yüklenemedi. ./data/ klasöründe dosya var mı?:`, error.message);
+            console.error(`❌ ${caseId} yüklenemedi:`, error.message);
         }
     });
 }
-loadAllScenarios(); // Sunucu başlarken çalıştır
-// --- SENARYO YÜKLEME SİSTEMİ BİTİŞ ---
+loadAllScenarios();
 
 function generateRoomCode() {
     const chars = "BCDFGHJKMNPQRSTVWXYZ23456789";
@@ -64,32 +72,69 @@ io.on('connection', (socket) => {
     console.log(`🔌 Yeni bağlantı: ${socket.id}`);
     socket.emit('room_list_update', getPublicRoomList());
 
-    // --- YENİ EKLENEN KISIM: SAHNE VERİSİ İSTEĞİ (Anti-Spoiler) ---
+    // --- SAHNE VERİSİ VE KANIT YÖNETİMİ ---
     socket.on('request_scene_data', ({ roomCode, sceneId }) => {
         const room = rooms.get(roomCode);
         
-        // Güvenlik kontrolleri
         if (!room) return;
-        if (!room.players.find(p => p.id === socket.id)) return; // Oyuncu odada mı?
+        if (!room.players.find(p => p.id === socket.id)) return;
         
-        // Odadaki aktif davayı bul
         const caseData = loadedScenarios[room.currentCase]; 
         if (!caseData || !caseData.scenes) return;
 
-        // İstenen sahneyi hafızadan bul
         const sceneData = caseData.scenes.find(s => s.scene_id === sceneId);
         
         if (sceneData) {
-            // Veriyi sadece isteyene gönder (Güvenlik için)
+            // 1. Sahne verisini isteyene gönder
             socket.emit('scene_data_update', sceneData);
-        } else {
-            // Sahne bulunamazsa hata veya log
-            console.log(`Sahne bulunamadı: ${sceneId}`);
+
+            // 2. KANIT KONTROLÜ: Bu sahnede resim var mı?
+            if (sceneData.image) {
+                // Bu resim zaten ekli mi?
+                const exists = room.evidenceList.find(e => e.src === sceneData.image);
+                if (!exists) {
+                    // Yoksa listeye ekle
+                    const newEvidence = {
+                        id: 'ev_' + Date.now() + Math.floor(Math.random()*100),
+                        src: sceneData.image,
+                        x: Math.random() * 200 + 50, 
+                        y: Math.random() * 200 + 50
+                    };
+                    room.evidenceList.push(newEvidence);
+                    
+                    // Herkese güncelleme at
+                    io.to(roomCode).emit('update_evidence_board', room.evidenceList);
+                    io.to(roomCode).emit('chat_message', { 
+                        sender: 'Sistem', 
+                        text: '📷 Pano\'ya yeni bir kanıt eklendi!', 
+                        type: 'system' 
+                    });
+                }
+            }
         }
     });
-    // -------------------------------------------------------------
 
-    // ODA OLUŞTURMA
+    // KANIT HAREKETİ
+    socket.on('move_evidence', ({ roomCode, id, x, y }) => {
+        const room = rooms.get(roomCode);
+        if (!room) return;
+        
+        const item = room.evidenceList.find(e => e.id === id);
+        if (item) {
+            item.x = x;
+            item.y = y;
+            io.to(roomCode).emit('evidence_moved', { id, x, y });
+        }
+    });
+
+    socket.on('get_board_state', ({ roomCode }) => {
+        const room = rooms.get(roomCode);
+        if(room) {
+             socket.emit('update_evidence_board', room.evidenceList);
+        }
+    });
+    // ----------------------------------------
+
     socket.on('create_room', ({ playerName, visibility, password, avatar }) => {
         let roomCode = generateRoomCode();
         while(rooms.has(roomCode)) { roomCode = generateRoomCode(); }
@@ -103,7 +148,8 @@ io.on('connection', (socket) => {
             currentCase: null,
             isPrivate: (visibility === 'private'),
             password: (visibility === 'protected' && password) ? password : null,
-            hintCount: 3 // Başlangıç hakkı
+            hintCount: 3,
+            evidenceList: [] // Kanıt listesi
         });
 
         socket.join(roomCode);
@@ -118,10 +164,8 @@ io.on('connection', (socket) => {
         });
     });
 
-    // ODAYA KATILMA
     socket.on('join_room', ({ roomCode, playerName, password, avatar }) => {
         const room = rooms.get(roomCode);
-
         if (!room) return socket.emit('error_message', '❌ Böyle bir oda bulunamadı!');
         if (room.gameState !== 'lobby') return socket.emit('error_message', '⚠️ Oyun çoktan başladı!');
         if (room.password && room.password !== password) return socket.emit('error_message', '🔒 Yanlış Şifre!');
@@ -145,11 +189,7 @@ io.on('connection', (socket) => {
 
     socket.on('send_chat', ({ roomCode, message, playerName, avatar }) => {
         io.to(roomCode).emit('chat_message', { 
-            sender: playerName, 
-            text: message, 
-            avatar: avatar,
-            id: socket.id,
-            type: 'user'
+            sender: playerName, text: message, avatar: avatar, id: socket.id, type: 'user'
         });
     });
 
@@ -157,7 +197,6 @@ io.on('connection', (socket) => {
         socket.to(roomCode).emit('user_typing', { playerName, isTyping });
     });
 
-    // OYUNU BAŞLATMA (İPUCU SIFIRLAMA)
     socket.on('start_game', ({ roomCode, caseId, mode }) => {
         const room = rooms.get(roomCode);
         if (room && room.host === socket.id) {
@@ -165,21 +204,15 @@ io.on('connection', (socket) => {
                 socket.emit('error_message', '⚠️ Demokrasi modu için en az 3 dedektif gereklidir!');
                 return;
             }
-
             room.gameState = 'playing';
             room.currentCase = caseId;
             room.mode = mode || 'individual';
-            room.hintCount = 3; // Hakları 3'e eşitle
+            room.hintCount = 3;
+            room.evidenceList = []; // Yeni oyunda panoyu temizle
             
             io.to(roomCode).emit('clear_chat');
             io.to(roomCode).emit('chat_message', { sender: 'Sistem', text: '--- YENİ DAVA BAŞLADI ---', type: 'system' });
-
-            // currentHintCount parametresini gönderiyoruz
-            io.to(roomCode).emit('game_started', { 
-                caseId, 
-                mode: room.mode, 
-                currentHintCount: 3 
-            });
+            io.to(roomCode).emit('game_started', { caseId, mode: room.mode, currentHintCount: 3 });
             io.emit('room_list_update', getPublicRoomList());
         }
     });
@@ -190,10 +223,7 @@ io.on('connection', (socket) => {
         room.votes[socket.id] = nextSceneId;
         
         const voteStatus = room.players.map(player => ({
-            name: player.name,
-            id: player.id,
-            hasVoted: room.votes.hasOwnProperty(player.id),
-            votedForId: room.votes[player.id] || null 
+            name: player.name, id: player.id, hasVoted: room.votes.hasOwnProperty(player.id), votedForId: room.votes[player.id] || null 
         }));
 
         const playerCount = room.players.length;
@@ -216,21 +246,13 @@ io.on('connection', (socket) => {
         }
     });
 
-    // İPUCU İSTEĞİ
     socket.on('request_hint', ({ roomCode, hintText, playerName }) => {
         const room = rooms.get(roomCode);
         if (room && room.mode === 'voting') {
             if (room.hintCount > 0) {
-                room.hintCount--; // Sunucuda azalt
-                
-                // HERKESE yeni sayıyı ve metni gönder
-                io.to(roomCode).emit('hint_revealed', { 
-                    hintText: hintText, 
-                    newCount: room.hintCount,
-                    user: playerName
-                });
+                room.hintCount--;
+                io.to(roomCode).emit('hint_revealed', { hintText: hintText, newCount: room.hintCount, user: playerName });
             } else {
-                // Hakkı kalmadıysa sadece isteyene hata dön
                 socket.emit('error_message', '⚠️ İpucu hakkınız kalmadı!');
             }
         }
