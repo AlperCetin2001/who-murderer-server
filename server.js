@@ -42,8 +42,8 @@ io.on('connection', (socket) => {
             host: socket.id,
             players: [{ id: socket.id, name: playerName, score: 0 }],
             gameState: 'lobby',
-            mode: 'individual', // Varsayılan mod
-            votes: {},          // Oyları tutacak
+            mode: 'individual', 
+            votes: {},          
             currentCase: null
         });
 
@@ -73,21 +73,20 @@ io.on('connection', (socket) => {
         console.log(`👤 ${playerName} odaya katıldı: ${roomCode}`);
     });
 
-    // 3. Oyunu Başlatma (Host Mod Seçer)
+    // 3. Oyunu Başlatma
     socket.on('start_game', ({ roomCode, caseId, mode }) => {
         const room = rooms.get(roomCode);
         if (room && room.host === socket.id) {
             room.gameState = 'playing';
             room.currentCase = caseId;
-            room.mode = mode || 'individual'; // individual veya voting
+            room.mode = mode || 'individual';
             
-            // Herkese oyunu başlat sinyali (Mod bilgisiyle)
             io.to(roomCode).emit('game_started', { caseId, mode: room.mode });
             console.log(`🎬 Oyun başladı: ${roomCode}, Mod: ${room.mode}`);
         }
     });
 
-// 4. OY KULLANMA (GÜNCELLENDİ)
+    // 4. OY KULLANMA (DETAYLI VERSİYON)
     socket.on('cast_vote', ({ roomCode, nextSceneId }) => {
         const room = rooms.get(roomCode);
         
@@ -97,11 +96,12 @@ io.on('connection', (socket) => {
         room.votes[socket.id] = nextSceneId;
         
         // Detaylı Oylama Durum Listesi Oluştur
+        // Her oyuncunun oy verip vermediğini ve neye verdiğini hazırlar
         const voteStatus = room.players.map(player => ({
             name: player.name,
             id: player.id,
             hasVoted: room.votes.hasOwnProperty(player.id),
-            votedForId: room.votes[player.id] || null // Seçtiği sahne ID'si
+            votedForId: room.votes[player.id] || null 
         }));
 
         const playerCount = room.players.length;
@@ -127,28 +127,17 @@ io.on('connection', (socket) => {
                 }
             });
 
-            // 2 Saniye bekle (insanlar sonucu görsün) sonra değiştir
+            // 3 Saniye bekle (İnsanlar kimin ne dediğini görsün) sonra değiştir
             setTimeout(() => {
-                room.votes = {};
+                room.votes = {}; // Oyları sıfırla
                 io.to(roomCode).emit('force_scene_change', winnerScene);
-            }, 2000);
-        }
-    });
-
-            // Oyları sıfırla
-            room.votes = {};
-            
-            // Herkesi kazanan sahneye zorla götür
-            io.to(roomCode).emit('force_scene_change', winnerScene);
-            console.log(`✅ Oylama bitti. Kazanan sahne: ${winnerScene}`);
+            }, 3000);
         }
     });
 
     // Bağlantı Kopması
     socket.on('disconnect', () => {
         console.log(`❌ Ayrıldı: ${socket.id}`);
-        // Not: Gerçek bir uygulamada odadan oyuncuyu silmek gerekir.
-        // Şimdilik basit tutuyoruz.
     });
 });
 
