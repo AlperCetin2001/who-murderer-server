@@ -7,23 +7,57 @@ const path = require('path');
 
 const app = express();
 app.use(cors());
-app.use(express.static('public')); // Statik dosyaları sunmak için
+app.use(express.json());
+
+// -----------------------------------------------------------
+// 1. DEĞİŞİKLİK: 'public' yerine 'htdocs' yapıldı
+// -----------------------------------------------------------
+app.use(express.static(path.join(__dirname, 'htdocs')));
+
+// ÇEVİRİ PROXY (Aynı kalıyor - Ücretsiz ve Engelsiz)
+app.post('/api/translate', async (req, res) => {
+    const { text, targetLang } = req.body;
+    if (!text) return res.status(400).json({ error: 'Metin yok' });
+    if (targetLang === 'tr') return res.json({ translatedText: text });
+
+    try {
+        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=tr&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data && data[0]) {
+            const translatedText = data[0].map(segment => segment[0]).join('');
+            return res.json({ translatedText });
+        }
+        res.json({ translatedText: text });
+    } catch (error) {
+        console.error('Çeviri hatası:', error);
+        res.json({ translatedText: text });
+    }
+});
 
 const server = http.createServer(app);
-
 const io = new Server(server, {
     cors: { origin: "*", methods: ["GET", "POST"] }
 });
 
 const rooms = new Map();
-const scenesCache = {}; // Senaryoları bellekte tutmak için
+const scenesCache = {}; 
 
-// Senaryo Dosyalarını Yükle (Sunucu tarafında)
+// -----------------------------------------------------------
+// 2. DEĞİŞİKLİK: Senaryo yükleme yolu 'htdocs/data' yapıldı
+// -----------------------------------------------------------
 function loadCaseData(caseId) {
     if (scenesCache[caseId]) return scenesCache[caseId];
     try {
-        // Dosya yolunu projenize göre ayarlayın
-        const dataPath = path.join(__dirname, 'data', `scenes${caseId.replace('case', '')}.json`);
+        // BURASI DEĞİŞTİ: public -> htdocs
+        const dataPath = path.join(__dirname, 'htdocs', 'data', `scenes${caseId.replace('case', '')}.json`);
+        
+        if (!fs.existsSync(dataPath)) {
+            console.error(`Dosya bulunamadı: ${dataPath}`);
+            return null;
+        }
+
         const rawData = fs.readFileSync(dataPath);
         const jsonData = JSON.parse(rawData);
         scenesCache[caseId] = jsonData;
@@ -33,6 +67,8 @@ function loadCaseData(caseId) {
         return null;
     }
 }
+
+// ... STANDART SOCKET KODLARI (Aynı Kalıyor) ...
 
 function generateRoomCode() {
     const chars = "BCDFGHJKMNPQRSTVWXYZ23456789";
@@ -63,7 +99,6 @@ io.on('connection', (socket) => {
     console.log(`🔌 Yeni bağlantı: ${socket.id}`);
     socket.emit('room_list_update', getPublicRoomList());
 
-    // ODA OLUŞTURMA
     socket.on('create_room', ({ playerName, visibility, password, avatar }) => {
         let roomCode = generateRoomCode();
         while(rooms.has(roomCode)) { roomCode = generateRoomCode(); }
@@ -75,7 +110,7 @@ io.on('connection', (socket) => {
             mode: 'individual', 
             votes: {},          
             currentCaseId: null,
-            currentSceneId: 'giris', // Herkes aynı sahnede başlar
+            currentSceneId: 'giris',
             isPrivate: (visibility === 'private'),
             password: (visibility === 'protected' && password) ? password : null,
             hintCount: 3
@@ -86,7 +121,6 @@ io.on('connection', (socket) => {
         io.emit('room_list_update', getPublicRoomList());
         io.to(roomCode).emit('update_player_list', rooms.get(roomCode).players);
         
-        // Sistem Mesajı (Güvenli)
         io.to(roomCode).emit('chat_message', { 
             sender: 'Sistem', 
             text: `Oda kuruldu. Dedektif ${playerName} giriş yaptı.`, 
@@ -94,10 +128,8 @@ io.on('connection', (socket) => {
         });
     });
 
-    // ODAYA KATILMA
     socket.on('join_room', ({ roomCode, playerName, password, avatar }) => {
         const room = rooms.get(roomCode);
-
         if (!room) return socket.emit('error_message', '❌ Böyle bir oda bulunamadı!');
         if (room.gameState !== 'lobby') return socket.emit('error_message', '⚠️ Oyun çoktan başladı!');
         if (room.password && room.password !== password) return socket.emit('error_message', '🔒 Yanlış Şifre!');
@@ -119,12 +151,9 @@ io.on('connection', (socket) => {
         });
     });
 
-    // GÜVENLİ CHAT (XSS Önlenmiş hali client'ta render edilecek)
     socket.on('send_chat', ({ roomCode, message, playerName, avatar }) => {
-        // Basit sunucu tarafı validasyon
         if (!message || message.trim().length === 0) return;
-        const safeMessage = message.substring(0, 500); // Karakter limiti
-
+        const safeMessage = message.substring(0, 500); 
         io.to(roomCode).emit('chat_message', { 
             sender: playerName, 
             text: safeMessage, 
@@ -134,16 +163,16 @@ io.on('connection', (socket) => {
         });
     });
 
-    socket.on('typing', ({ roomCode, playerName, isTyping }) => {
-        socket.to(roomCode).emit('user_typing', { playerName, isTyping });
-    });
-
-    // OYUNU BAŞLATMA
     socket.on('start_game', ({ roomCode, caseId, mode }) => {
         const room = rooms.get(roomCode);
         if (room && room.host === socket.id) {
             const caseData = loadCaseData(caseId);
-            if (!caseData) return socket.emit('error_message', 'Senaryo dosyası sunucuda bulunamadı!');
+            
+            if (!caseData) {
+                // Eğer dosya bulunamazsa host'a hata ver
+                socket.emit('error_message', 'Senaryo dosyası (htdocs/data içinde) bulunamadı!');
+                return;
+            }
 
             room.gameState = 'playing';
             room.currentCaseId = caseId;
@@ -157,31 +186,22 @@ io.on('connection', (socket) => {
                 currentHintCount: 3 
             });
 
-            // İlk sahneyi gönder (SENARYO VERİSİ SUNUCUDAN GİDER)
             sendSceneToRoom(roomCode, 'giris');
-            
             io.emit('room_list_update', getPublicRoomList());
         }
     });
 
-    // OYUNCU SEÇİM YAPTIĞINDA (Artık istemci doğrudan loadScene yapmaz)
     socket.on('make_choice', ({ roomCode, nextSceneId }) => {
         const room = rooms.get(roomCode);
         if (!room) return;
-
-        // Bireysel modda her oyuncu farklı yerde olabilir (Bunun için logic karmaşıktır, 
-        // MVP için herkesin senkronize hareket ettiğini veya istemciye sadece veri attığımızı varsayalım.
-        // Güvenlik için: İstemci "Ben X seçtim" der, sunucu "Tamam, X sahnesinin verisi bu" der.)
         
         if (room.mode === 'individual') {
             sendSceneToSocket(socket, room.currentCaseId, nextSceneId);
         } else if (room.mode === 'voting') {
-            // Oylama modu mantığı...
              handleVoting(socket, roomCode, nextSceneId);
         }
     });
 
-    // Oylama Modu Fonksiyonu
     function handleVoting(socket, roomCode, nextSceneId) {
         const room = rooms.get(roomCode);
         room.votes[socket.id] = nextSceneId;
@@ -190,7 +210,6 @@ io.on('connection', (socket) => {
             name: player.name,
             id: player.id,
             hasVoted: room.votes.hasOwnProperty(player.id),
-            votedForId: room.votes[player.id] || null 
         }));
 
         const playerCount = room.players.length;
@@ -199,7 +218,6 @@ io.on('connection', (socket) => {
         io.to(roomCode).emit('vote_update', { voteStatus, voteCount, total: playerCount });
 
         if (voteCount >= playerCount) {
-            // En çok oy alanı bul
             const counts = {};
             let winnerScene = null;
             let maxVotes = 0;
@@ -216,12 +234,10 @@ io.on('connection', (socket) => {
         }
     }
 
-    // İpucu İsteği
     socket.on('request_hint', ({ roomCode, playerName }) => {
         const room = rooms.get(roomCode);
         if (!room) return;
         
-        // Oylama modunda ipucu sayısı ortaktır
         if (room.mode === 'voting') {
             if (room.hintCount > 0) {
                 room.hintCount--;
@@ -235,49 +251,35 @@ io.on('connection', (socket) => {
                 });
             }
         } else {
-             // Bireysel modda oyuncunun kendi hint'i istemcide tutulabilir veya
-             // sunucu sadece metni döner.
-             // Basitlik için veriyi gönderelim:
-             // (Gerçek bir projede bireysel state'ler de sunucuda tutulmalı)
+             const currentSceneData = getSceneData(room.currentCaseId, 'giris');
         }
     });
-    
-    // Yardımcı: Tek bir oyuncuya sahne verisi gönder
+
     function sendSceneToSocket(socket, caseId, sceneId) {
         const sceneData = getSceneData(caseId, sceneId);
-        if (sceneData) {
-            socket.emit('scene_data', sceneData);
-        }
+        if (sceneData) socket.emit('scene_data', sceneData);
     }
 
-    // Yardımcı: Tüm odaya sahne verisi gönder
     function sendSceneToRoom(roomCode, sceneId) {
         const room = rooms.get(roomCode);
         const sceneData = getSceneData(room.currentCaseId, sceneId);
-        if (sceneData) {
-            io.to(roomCode).emit('scene_data', sceneData);
-        }
+        if (sceneData) io.to(roomCode).emit('scene_data', sceneData);
     }
 
-    // Senaryo içinden sahne bulma
     function getSceneData(caseId, sceneId) {
         const caseJson = loadCaseData(caseId);
         if (!caseJson || !caseJson.scenes) return null;
         return caseJson.scenes.find(s => s.scene_id === sceneId);
     }
-
-    socket.on('get_public_rooms', () => { socket.emit('room_list_update', getPublicRoomList()); });
-
+    
     socket.on('disconnect', () => {
-        rooms.forEach((room, code) => {
+         rooms.forEach((room, code) => {
             const playerIndex = room.players.findIndex(p => p.id === socket.id);
             if (playerIndex !== -1) {
                 const pName = room.players[playerIndex].name;
                 room.players.splice(playerIndex, 1); 
                 io.to(code).emit('update_player_list', room.players);
                 io.to(code).emit('chat_message', { sender: 'Sistem', text: `${pName} ayrıldı.`, type: 'leave' });
-                
-                // Oda boşaldıysa sil
                 if(room.players.length === 0) rooms.delete(code);
                 else io.emit('room_list_update', getPublicRoomList());
             }
