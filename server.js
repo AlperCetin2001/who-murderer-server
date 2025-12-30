@@ -23,15 +23,13 @@ function generateRoomCode() {
     return code;
 }
 
-// Açık odaları listele
 function getPublicRoomList() {
     const publicRooms = [];
     rooms.forEach((room, code) => {
-        // Sadece 'lobby' aşamasındaki ve 'private' olmayanları göster
         if (room.gameState === 'lobby' && !room.isPrivate) {
             publicRooms.push({
                 code: code,
-                host: room.players[0].name, // İlk oyuncu hosttur
+                host: room.players[0].name,
                 count: room.players.length,
                 isLocked: !!room.password, 
                 mode: room.mode
@@ -44,7 +42,6 @@ function getPublicRoomList() {
 io.on('connection', (socket) => {
     console.log(`🔌 Yeni bağlantı: ${socket.id}`);
 
-    // Bağlanana listeyi gönder
     socket.emit('room_list_update', getPublicRoomList());
 
     // 1. ODA OLUŞTURMA
@@ -63,18 +60,13 @@ io.on('connection', (socket) => {
             votes: {},          
             currentCase: null,
             isPrivate: isPrivate,
-            password: roomPassword
+            password: roomPassword,
+            hintCount: 3 // Başlangıç ipucu sayısı
         });
 
         socket.join(roomCode);
-        
-        // Host'a özel başarı mesajı
         socket.emit('room_created', { roomCode, isHost: true });
-        
-        // Listeyi güncelle
         io.emit('room_list_update', getPublicRoomList());
-        
-        // Oyuncu listesini güncelle
         io.to(roomCode).emit('update_player_list', rooms.get(roomCode).players);
     });
 
@@ -86,20 +78,14 @@ io.on('connection', (socket) => {
         if (room.gameState !== 'lobby') return socket.emit('error_message', '⚠️ Oyun çoktan başladı!');
         if (room.password && room.password !== password) return socket.emit('error_message', '🔒 Yanlış Şifre!');
 
-        // İsim kontrolü
         const nameExists = room.players.some(p => p.name === playerName);
         if (nameExists) return socket.emit('error_message', '⚠️ Bu isim zaten odada var!');
 
         room.players.push({ id: socket.id, name: playerName, score: 0 });
         socket.join(roomCode);
 
-        // Katılan kişiye "Başarılı" sinyali (BU ÇOK ÖNEMLİ)
         socket.emit('join_success', { roomCode, isHost: false });
-
-        // Odadakilere güncel listeyi at
         io.to(roomCode).emit('update_player_list', room.players);
-        
-        // Genel listeyi güncelle (sayı arttı)
         io.emit('room_list_update', getPublicRoomList());
     });
 
@@ -108,8 +94,6 @@ io.on('connection', (socket) => {
         const room = rooms.get(roomCode);
         
         if (room && room.host === socket.id) {
-            
-            // 3 Kişi Kuralı
             if (mode === 'voting' && room.players.length < 3) {
                 socket.emit('error_message', '⚠️ Demokrasi modu için en az 3 kişi gereklidir!');
                 return;
@@ -118,11 +102,9 @@ io.on('connection', (socket) => {
             room.gameState = 'playing';
             room.currentCase = caseId;
             room.mode = mode || 'individual';
+            room.hintCount = 3; // Oyuna başlarken ipuçlarını sıfırla
             
-            // Herkese başlat sinyali
             io.to(roomCode).emit('game_started', { caseId, mode: room.mode });
-            
-            // Oyun başladı, listeden kaldır
             io.emit('room_list_update', getPublicRoomList());
         }
     });
@@ -166,14 +148,26 @@ io.on('connection', (socket) => {
         }
     });
 
-    // Manuel liste yenileme isteği
+    // 5. İPUCU İSTEĞİ (YENİ)
+    socket.on('request_hint', ({ roomCode, hintText, playerName }) => {
+        const room = rooms.get(roomCode);
+        if (room && room.hintCount > 0) {
+            room.hintCount--; // Sunucudaki sayıyı düşür
+            
+            // Tüm odaya ipucunu ve yeni sayıyı gönder
+            io.to(roomCode).emit('hint_revealed', { 
+                hintText: hintText, 
+                newCount: room.hintCount,
+                user: playerName
+            });
+        }
+    });
+
     socket.on('get_public_rooms', () => {
         socket.emit('room_list_update', getPublicRoomList());
     });
 
     socket.on('disconnect', () => {
-        // Basitlik adına oyuncu düşürme eklemiyoruz,
-        // çünkü array yönetimi karmaşıklaşabilir.
         console.log(`❌ Ayrıldı: ${socket.id}`);
     });
 });
