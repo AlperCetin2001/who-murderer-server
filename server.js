@@ -41,10 +41,9 @@ function getPublicRoomList() {
 
 io.on('connection', (socket) => {
     console.log(`🔌 Yeni bağlantı: ${socket.id}`);
-
     socket.emit('room_list_update', getPublicRoomList());
 
-    // 1. ODA OLUŞTURMA
+    // ODA OLUŞTURMA
     socket.on('create_room', ({ playerName, visibility, password }) => {
         let roomCode = generateRoomCode();
         while(rooms.has(roomCode)) { roomCode = generateRoomCode(); }
@@ -61,7 +60,7 @@ io.on('connection', (socket) => {
             currentCase: null,
             isPrivate: isPrivate,
             password: roomPassword,
-            hintCount: 3 // Sunucu tarafı ipucu takibi
+            hintCount: 3 // Başlangıç ipucu sayısı
         });
 
         socket.join(roomCode);
@@ -70,7 +69,7 @@ io.on('connection', (socket) => {
         io.to(roomCode).emit('update_player_list', rooms.get(roomCode).players);
     });
 
-    // 2. ODAYA KATILMA
+    // ODAYA KATILMA
     socket.on('join_room', ({ roomCode, playerName, password }) => {
         const room = rooms.get(roomCode);
 
@@ -89,11 +88,11 @@ io.on('connection', (socket) => {
         io.emit('room_list_update', getPublicRoomList());
     });
 
-    // 3. OYUNU BAŞLATMA
+    // OYUNU BAŞLATMA
     socket.on('start_game', ({ roomCode, caseId, mode }) => {
         const room = rooms.get(roomCode);
-        
         if (room && room.host === socket.id) {
+            
             if (mode === 'voting' && room.players.length < 3) {
                 socket.emit('error_message', '⚠️ Demokrasi modu için en az 3 dedektif gereklidir!');
                 return;
@@ -102,14 +101,14 @@ io.on('connection', (socket) => {
             room.gameState = 'playing';
             room.currentCase = caseId;
             room.mode = mode || 'individual';
-            room.hintCount = 3; // Oyuna başlarken ipuçlarını sıfırla
+            room.hintCount = 3; // İpuçlarını sıfırla
             
             io.to(roomCode).emit('game_started', { caseId, mode: room.mode });
             io.emit('room_list_update', getPublicRoomList());
         }
     });
 
-    // 4. OY KULLANMA
+    // OY KULLANMA
     socket.on('cast_vote', ({ roomCode, nextSceneId }) => {
         const room = rooms.get(roomCode);
         if (!room || room.mode !== 'voting') return;
@@ -148,15 +147,11 @@ io.on('connection', (socket) => {
         }
     });
 
-    // 5. İPUCU İSTEĞİ (DÜZELTİLDİ)
+    // İPUCU İSTEĞİ (DÜZELTİLDİ)
     socket.on('request_hint', ({ roomCode, hintText, playerName }) => {
         const room = rooms.get(roomCode);
-        
-        // Sadece demokrasi modunda ve hak varsa
         if (room && room.mode === 'voting' && room.hintCount > 0) {
-            room.hintCount--; // Sunucudaki sayıyı düşür
-            
-            // Tüm odaya ipucunu ve yeni sayıyı gönder
+            room.hintCount--; 
             io.to(roomCode).emit('hint_revealed', { 
                 hintText: hintText, 
                 newCount: room.hintCount,
