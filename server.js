@@ -87,23 +87,30 @@ io.on('connection', (socket) => {
         }
     });
 
-    // 4. OY KULLANMA (Demokrasi Modu İçin)
+// 4. OY KULLANMA (GÜNCELLENDİ)
     socket.on('cast_vote', ({ roomCode, nextSceneId }) => {
         const room = rooms.get(roomCode);
         
-        // Güvenlik kontrolleri
         if (!room || room.mode !== 'voting') return;
         
-        // Oyuncunun oyunu kaydet (Önceki oyunu ezer)
+        // Oyuncunun oyunu kaydet
         room.votes[socket.id] = nextSceneId;
         
+        // Detaylı Oylama Durum Listesi Oluştur
+        const voteStatus = room.players.map(player => ({
+            name: player.name,
+            id: player.id,
+            hasVoted: room.votes.hasOwnProperty(player.id),
+            votedForId: room.votes[player.id] || null // Seçtiği sahne ID'si
+        }));
+
         const playerCount = room.players.length;
         const voteCount = Object.keys(room.votes).length;
 
-        console.log(`🗳️ Oy kullanıldı (${roomCode}): ${voteCount}/${playerCount}`);
+        console.log(`🗳️ Oy Durumu (${roomCode}): ${voteCount}/${playerCount}`);
 
-        // Herkese "Biri oy kullandı" bilgisini gönder
-        io.to(roomCode).emit('vote_update', { voteCount, total: playerCount });
+        // Herkese listeyi gönder
+        io.to(roomCode).emit('vote_update', { voteStatus, voteCount, total: playerCount });
 
         // HERKES OY VERDİ Mİ?
         if (voteCount >= playerCount) {
@@ -119,6 +126,14 @@ io.on('connection', (socket) => {
                     winnerScene = sceneId;
                 }
             });
+
+            // 2 Saniye bekle (insanlar sonucu görsün) sonra değiştir
+            setTimeout(() => {
+                room.votes = {};
+                io.to(roomCode).emit('force_scene_change', winnerScene);
+            }, 2000);
+        }
+    });
 
             // Oyları sıfırla
             room.votes = {};
