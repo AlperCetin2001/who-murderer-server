@@ -61,7 +61,7 @@ io.on('connection', (socket) => {
             currentCase: null,
             isPrivate: isPrivate,
             password: roomPassword,
-            hintCount: 3 // Başlangıç ipucu sayısı
+            hintCount: 3 // Sunucu tarafı ipucu takibi
         });
 
         socket.join(roomCode);
@@ -95,7 +95,7 @@ io.on('connection', (socket) => {
         
         if (room && room.host === socket.id) {
             if (mode === 'voting' && room.players.length < 3) {
-                socket.emit('error_message', '⚠️ Demokrasi modu için en az 3 kişi gereklidir!');
+                socket.emit('error_message', '⚠️ Demokrasi modu için en az 3 dedektif gereklidir!');
                 return;
             }
 
@@ -148,10 +148,12 @@ io.on('connection', (socket) => {
         }
     });
 
-    // 5. İPUCU İSTEĞİ (YENİ)
+    // 5. İPUCU İSTEĞİ (DÜZELTİLDİ)
     socket.on('request_hint', ({ roomCode, hintText, playerName }) => {
         const room = rooms.get(roomCode);
-        if (room && room.hintCount > 0) {
+        
+        // Sadece demokrasi modunda ve hak varsa
+        if (room && room.mode === 'voting' && room.hintCount > 0) {
             room.hintCount--; // Sunucudaki sayıyı düşür
             
             // Tüm odaya ipucunu ve yeni sayıyı gönder
