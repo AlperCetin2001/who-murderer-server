@@ -2,204 +2,246 @@
   "scenes": [
     {
       "scene_id": "giris",
-      "text": "Karadeniz'in hırçın dalgalarının dövdüğü kayalıkların tepesinde, Baron Vigor'un malikanesi 'Kartal Yuvası'na vardığında gök gürültüsü kulaklarını sağır ediyordu. Baron, bu gece paha biçilemez 'Lanetli Ayna' koleksiyonunu sergilemek için seni ve diğer seçkin misafirleri davet etti. Ancak içeri girdiğinde hissettiğin şey hayranlık değil, saf bir gerilimdi. Elektrikler kesik, malikane sadece şamdanlarla aydınlanıyor.",
-      "image": "./img/mansion_storm.jpg",
+      "text": "Antarktika'nın derinliklerinde, haritalarda bile görünmeyen 'Kutup Yıldızı' araştırma istasyonundasınız. Dışarıda -60 derecelik bir fırtına var. İletişim koptu. İstasyonun Baş Araştırmacısı Prof. Hakan, sabah sayımına gelmedi. Ekip olarak onun odasına gittiğinizde kapı kilitliydi. Kapıyı kırdınız ve... Prof. Hakan yerde, donmuş bir şekilde yatıyor. Odanın ısıtma sistemi 'maksimum'da olmasına rağmen ceset buz tutmuş. Bir cinayet... ya da daha kötüsü.",
+      "image": "./img/polar_dis.jpg",
       "choices": [
-        { "text": "Salona geç ve misafirleri tanı.", "next": "salon" },
-        { "text": "Uşak Alfred ile konuş.", "next": "alfred_giris" }
+        { "text": "Cesede yaklaş ve ilk incelemeyi yap.", "next": "ceset_ilk_bakis" },
+        { "text": "Odadaki diğer detaylara (masaya, pencerelere) bak.", "next": "oda_arastirma" },
+        { "text": "Ekipteki diğerlerinin tepkilerini ölç.", "next": "ekip_tepki" }
       ]
     },
     {
-      "scene_id": "alfred_giris",
-      "text": "Yaşlı uşak Alfred, titreyen elleriyle sana bir kadeh şarap uzatıyor. 'Efendim bu gece çok gergin. O ayna... o aynanın bu eve girmemesi gerekirdi' diyor. Gözleri sürekli merdivenlerin başındaki çalışma odasına kayıyor.",
-      "image": "./img/butler.jpg",
-      "hint": "Alfred bir şeylerden korkuyor ama Baron'dan değil, nesneden.",
+      "scene_id": "ceset_ilk_bakis",
+      "text": "Prof. Hakan'ın yüzünde saf bir dehşet ifadesi var. Tuhaf olan şu: Vücudunda darp izi yok ama elinde sıkıca tuttuğu bir şey var. Ayrıca ceketinin cebinden bir kağıt parçası sarkıyor. Odanın sıcaklığı 25 derece ama adamın kirpikleri bile buzlu.",
+      "image": "./img/polar_ceset.jpg",
+      "hint": "Isı normal ama ceset donmuş. Bu fizik kurallarına aykırı. Kimyasal bir madde olabilir mi?",
       "choices": [
-        { "text": "Salona geç.", "next": "salon" }
+        { "text": "Elindeki nesneyi zorla al.", "next": "ipucu_tablet" },
+        { "text": "Cebindeki kağıdı alıp oku.", "next": "ipucu_not" },
+        { "text": "Cesedi bırak ve odayı aramaya devam et.", "next": "oda_arastirma" }
       ]
     },
     {
-      "scene_id": "salon",
-      "text": "Yemek salonunda üç kişi var. Baron Vigor'un genç ve soğuk eşi Lady Isabella. Baron'un ticari rakibi, kaba tavırlarıyla dikkat çeken Rus koleksiyoner Viktor. Ve eserlerin restorasyonunu yapan, sessiz sanat tarihçisi Elena. Baron Vigor kadehinı kaldırıyor: 'Bu gece, tarih yazacağız!' Tam o sırada büyük bir gürültüyle şimşek çakıyor ve mumlar sönüyor. Zifiri karanlık.",
-      "image": "./img/dining_room.jpg",
+      "scene_id": "oda_arastirma",
+      "text": "Oda dağınık. Sanki bir boğuşma yaşanmış ama devrilen eşyalar rastgele değil, sanki bir şey aranmış gibi. Duvardaki havalandırma ızgarası gevşemiş. Masanın üzerinde yarım kalmış bir kahve ve açık bir laptop var. Laptop ekranında 'VERİ YÜKLENİYOR... %99' yazısı donmuş.",
+      "image": "./img/polar_lab.jpg",
       "choices": [
-        { "text": "Sakin olun diye bağır!", "next": "cinayet" },
-        { "text": "Telefonunun ışığını aç.", "next": "cinayet" }
+        { "text": "Laptopu incele (Şifre isteyebilir).", "next": "ipucu_laptop" },
+        { "text": "Havalandırma ızgarasına bak.", "next": "ipucu_havalandirma" },
+        { "text": "Masadaki kahve kupasını kokla.", "next": "ipucu_kahve" }
       ]
     },
     {
-      "scene_id": "cinayet",
-      "text": "Bir çığlık sesi... Bir cam kırılma sesi... Ve sessizlik. Alfred titreyen elleriyle yedek mumları yaktığında manzara korkunç. Baron Vigor yerde yatıyor. Göğsüne saplanmış bir şey yok ama yerde kan gölü var. Ve odanın köşesindeki o meşhur 'Lanetli Ayna' paramparça olmuş.",
-      "image": "./img/body_scene.jpg",
+      "scene_id": "ekip_tepki",
+      "text": "Odadaki üç kişi sana bakıyor. 1. Dr. Stone (Biyolog): Soğukkanlı, hemen nabzı kontrol etmek istiyor. 2. Eva (Mühendis): Titriyor, sürekli kapıya bakıyor, kaçmak istiyor. 3. Binbaşı (Güvenlik): Silahı elinde, herkese potansiyel suçlu gibi bakıyor. Birinden şüphelenmeye başlamalısın.",
+      "image": "./img/polar_koridor.jpg",
+      "hint": "Binbaşı fazla agresif, Eva fazla korkak. Dr. Stone ise fazla sakin. Hangisi normal değil?",
       "choices": [
-        { "text": "Cesedi incele.", "next": "ceset_inceleme" },
-        { "text": "Aynayı incele.", "next": "ayna_inceleme" },
-        { "text": "Odadakilerin üstünü ara.", "next": "ust_arama_red" }
+        { "text": "Dr. Stone ile konuş: 'Neden bu kadar sakinsin?'", "next": "sorgu_stone" },
+        { "text": "Eva'yı sakinleştir ve ne bildiğini sor.", "next": "sorgu_eva" },
+        { "text": "Binbaşı'ya silahını indirmesini söyle.", "next": "sorgu_binbasi" }
       ]
     },
     {
-      "scene_id": "ust_arama_red",
-      "text": "Viktor öfkeyle üzerine yürüyor: 'Sen kimsin de beni arıyorsun dedektif bozuntusu!'. Lady Isabella ise tiksinerek bakıyor. Şu an fiziksel bir arama yapman imkansız. Gözlem ve sorguyla ilerlemelisin.",
-      "image": "./img/viktor.jpg",
+      "scene_id": "ipucu_tablet",
+      "text": "Cesedin elinden zorla aldığın şey, ekranı çatlamış bir dijital kayıt cihazı. Son kaydı oynatıyorsun: 'Hata yaptık... O şeyi buzun altından çıkarmamalıydık... Stone beni uyardı ama dinlemedim. Şimdi sesleri duyuyorum. İçeri girdiler.' Ses kaydı çığlıklarla bitiyor.",
+      "image": "./img/item_tablet.jpg",
       "choices": [
-        { "text": "Cesede odaklan.", "next": "ceset_inceleme" }
+        { "text": "Bu 'Stone' biyolog olan mı? Ona hesap sor.", "next": "sorgu_stone_sert" },
+        { "text": "Kaydı diğerlerine dinlet.", "next": "kayit_dinletme" },
+        { "text": "Cihazı cebine at, kimse görmesin.", "next": "ceset_ilk_bakis" }
       ]
     },
     {
-      "scene_id": "ceset_inceleme",
-      "text": "Baron'un boğazında derin bir kesik var. Şah damarı kesilmiş. Ancak etrafta bıçak veya silah yok. Sadece kırık ayna parçaları var. Baron'un avucunda sıkıca tuttuğu bir kağıt parçası dikkatini çekiyor.",
-      "image": "./img/body_scene.jpg",
+      "scene_id": "ipucu_not",
+      "text": "Kağıtta titrek bir el yazısıyla şunlar yazılmış: 'Protokol 0. Kimseye güvenme. Şifre, kızımın doğum günü değil, onun öldüğü gün. 19-??'. Son iki rakam kanla lekelenmiş okunmuyor.",
+      "image": "./img/item_tablet.jpg",
+      "hint": "Laptop şifresi için bir tarih lazım. 19 ile başlıyor.",
       "choices": [
-        { "text": "Kağıdı al ve oku.", "next": "kagit_ipucu" },
-        { "text": "Şüphelileri sorguya başla.", "next": "sorgu_secimi" }
+        { "text": "Bu şifreyi laptopta dene.", "next": "ipucu_laptop" },
+        { "text": "Binbaşı'ya 'Protokol 0'ın ne olduğunu sor.", "next": "sorgu_binbasi_protokol" },
+        { "text": "Notu panoya as (Kanıt Panosu).", "next": "oda_arastirma" }
       ]
     },
     {
-      "scene_id": "ayna_inceleme",
-      "text": "Ayna içeriden dışarıya doğru değil, dışarıdan bir darbeyle kırılmış gibi. Büyük parçalardan biri eksik. Çerçevenin arkasında gizli bir bölme var gibi görünüyor ama boş. Biri cinayetten önce veya o kaos anında oradan bir şey almış olabilir mi?",
-      "image": "./img/broken_mirror.jpg",
-      "hint": "Eksik parça cinayet silahı olabilir mi?",
-      "choices": [
-        { "text": "Cesede dön.", "next": "ceset_inceleme" }
-      ]
-    },
-    {
-      "scene_id": "kagit_ipucu",
-      "text": "Kağıtta el yazısıyla şu rakamlar yazılı: '18 - 05'. Bu bir tarih mi yoksa bir şifre mi? Baron bunu ölmeden hemen önce cebinden çıkarmış olmalı.",
-      "image": "./img/note.jpg",
-      "choices": [
-        { "text": "Bu bir kasa şifresi olabilir. Çalışma odasına git.", "next": "calisma_odasi" },
-        { "text": "Sorguya başla.", "next": "sorgu_secimi" }
-      ]
-    },
-    {
-      "scene_id": "sorgu_secimi",
-      "text": "Herkes şokta. Kimi sorgulamak istersin?",
-      "image": "./img/dining_room.jpg",
-      "choices": [
-        { "text": "Eşi Isabella'yı sorgula.", "next": "sorgu_isabella" },
-        { "text": "Rakip Viktor'u sorgula.", "next": "sorgu_viktor" },
-        { "text": "Sanatçı Elena'yı sorgula.", "next": "sorgu_elena" }
-      ]
-    },
-    {
-      "scene_id": "sorgu_isabella",
-      "text": "Isabella sigarasını yakıyor. Elleri hiç titremiyor. 'Onu sevmezdim, bunu herkes bilir. Ama o benim bankamdı. Ölmesi işime gelmez, boşanma davasında zaten her şeyin yarısını alacaktım. Şimdi veraset işlemleriyle uğraş dur...'",
-      "image": "./img/isabella.jpg",
-      "hint": "Isabella paragöz ama mantıklı konuşuyor. Cinayet ona para kaybettirebilir.",
-      "choices": [
-        { "text": "Diğerlerini sorgula.", "next": "sorgu_secimi" },
-        { "text": "Çalışma odasını araştır.", "next": "calisma_odasi" }
-      ]
-    },
-    {
-      "scene_id": "sorgu_viktor",
-      "text": "Viktor gergince votkasından bir yudum alıyor. 'O aynayı bana satmayacaktı! Benimle dalga geçti. Ama onu öldürmedim. Ben bir iş adamıyım, katil değil. Ayrıca karanlıkta hiçbir şey görmedim, sadece Alfred'in çığlığını duydum.'",
-      "image": "./img/viktor.jpg",
-      "hint": "Viktor'un ayakkabısında cam kırığı var mı diye bakmak isterdin.",
-      "choices": [
-        { "text": "Diğerlerini sorgula.", "next": "sorgu_secimi" },
-        { "text": "Çalışma odasını araştır.", "next": "calisma_odasi" }
-      ]
-    },
-    {
-      "scene_id": "sorgu_elena",
-      "text": "Elena bir köşeye sinmiş ağlıyor. Gözlüklerini siliyor. 'Ben sadece restorasyon için buradaydım. Baron bey çok iyi biriydi... Yani sanata değer verirdi.' Elena'nın sağ elindeki dantel eldivende çok silik, kırmızımsı bir leke var. Şarap mı? Kan mı?",
-      "image": "./img/elena.jpg",
-      "hint": "Elena'nın eldivenine dikkat et. Neden içeride eldiven takıyor?",
-      "choices": [
-        { "text": "Eldivenini çıkarmasını iste.", "next": "elena_eldiven" },
-        { "text": "Diğerlerini sorgula.", "next": "sorgu_secimi" }
-      ]
-    },
-    {
-      "scene_id": "elena_eldiven",
-      "text": "Elena irkiliyor ve elini arkasına saklıyor. 'Egzamam var, ellerim yara içinde. Lütfen, çok utanıyorum' diyor. Sesi samimi geliyor ama gözlerini kaçırıyor.",
-      "image": "./img/elena.jpg",
-      "choices": [
-        { "text": "Üsteleme.", "next": "sorgu_secimi" },
-        { "text": "Çalışma odasına git.", "next": "calisma_odasi" }
-      ]
-    },
-    {
-      "scene_id": "calisma_odasi",
-      "text": "Çalışma odası dağınık. Duvarda Baron'un büyük bir tablosu var. Tablonun arkasında bir kasa olduğunu fark ediyorsun. Kasayı açmak için 4 haneli bir şifre lazım. Baron'un elindeki kağıdı hatırla.",
-      "image": "./img/safe.jpg",
+      "scene_id": "ipucu_laptop",
+      "text": "Laptop ekranı donmuş olsa da klavye çalışıyor. Sistem bir şifre istiyor. İpucu: 'YILDIZIN SÖNDÜĞÜ GÜN'. Kağıtta 19 ile başlayan bir tarih görmüştün.",
+      "image": "./img/polar_server.jpg",
       "puzzle": {
-        "question": "Kasa şifresi ne olabilir? (Kağıttaki ipucu: 18 - 05)",
-        "answer": "1805",
-        "on_success": "kasa_acildi",
-        "on_failure": "kasa_hata",
+        "question": "Şifreyi girin (4 hane, Yıl):",
+        "answer": "1999",
+        "on_success": "laptop_acildi",
+        "on_failure": "laptop_kilitlendi",
         "options": []
       },
-      "input_type": "text"
-    },
-    {
-      "scene_id": "kasa_hata",
-      "text": "Kasa açılmadı. Alarm ötmek üzereyken vazgeçtin. Başka bir ipucu bulmalısın veya tekrar denemelisin.",
+      "input_type": "text",
       "choices": [
-        { "text": "Tekrar dene.", "next": "calisma_odasi" },
-        { "text": "Salona dön.", "next": "sorgu_secimi" }
+        { "text": "Şifreyi girmeyi dene.", "next": "null" },
+        { "text": "Vazgeç ve odayı aramaya dön.", "next": "oda_arastirma" },
+        { "text": "Eva'dan şifreyi kırmasını iste (Mühendis yeteneği).", "next": "eva_hack" }
       ]
     },
     {
-      "scene_id": "kasa_acildi",
-      "text": "Kasa tık diye açıldı! İçinde para yok. Sadece eski, yıpranmış bir mektup var. Mektup 'E.V.' imzalı. Okuduğunda kanın donuyor: 'Babamın eserlerini çalıp kendi adınla sattın. O ayna benim aileme aitti. Geri alacağım Vigor. Bedeli ne olursa olsun.' Mektubun tarihi 1 hafta öncesine ait.",
-      "image": "./img/letter.jpg",
-      "hint": "E.V. kim olabilir? Elena Vance? Viktor?",
+      "scene_id": "laptop_acildi",
+      "text": "Erişim sağlandı! E-postalarda Dr. Stone ile Profesör arasında geçen bir tartışma var. Stone: 'Deneyi durdurmalıyız! Virüs mutasyon geçiriyor. Sadece insanları öldürmüyor, onları... değiştiriyor.' Profesör ise 'Binbaşı onay verdi, devam edeceğiz' demiş.",
+      "image": "./img/polar_server.jpg",
+      "hint": "Dr. Stone haklıymış gibi görünüyor ama cinayeti o işlemiş olabilir mi?",
       "choices": [
-        { "text": "Bu kanıt her şeyi açıklıyor! Salona dön ve yüzleş.", "next": "final_yuzlesme" }
+        { "text": "Bu bilgiyi herkesle paylaş.", "next": "yuzlesme_baslangic" },
+        { "text": "Sessiz kal ve Dr. Stone'u izle.", "next": "merkez_hol" },
+        { "text": "Dosyaları USB'ye kopyala.", "next": "merkez_hol" }
       ]
     },
     {
-      "scene_id": "final_yuzlesme",
-      "text": "Salona döndüğünde herkes sana bakıyor. Elindeki mektup en büyük kanıtın. Ama katilin kim olduğunu ve cinayeti nasıl işlediğini tam olarak birleştirmen gerek. Yanlış kişiyi suçlarsan, bu evden sağ çıkamayabilirsin.",
-      "image": "./img/dining_room.jpg",
+      "scene_id": "laptop_kilitlendi",
+      "text": "Hatalı şifre! Sistem kendini kilitledi ve yüksek sesle alarm vermeye başladı. Binbaşı silahını sana doğrulttu: 'Ne karıştırıyorsun sen orada! Çekil o bilgisayardan!'",
+      "image": "./img/char_major.jpg",
       "choices": [
-        { "text": "Suçlu Isabella!", "next": "suclama_isabella" },
-        { "text": "Suçlu Viktor!", "next": "suclama_viktor" },
-        { "text": "Suçlu Elena!", "next": "suclama_elena" },
-        { "text": "Suçlu Alfred!", "next": "suclama_alfred" }
+        { "text": "Ellerini kaldır ve geri çekil.", "next": "oda_arastirma" },
+        { "text": "'Sadece yardım etmeye çalışıyordum!' diye bağır.", "next": "merkez_hol" },
+        { "text": "Binbaşı'ya saldırmayı dene (Riskli).", "next": "bad_ending_vuruldun" }
       ]
     },
     {
-      "scene_id": "suclama_isabella",
-      "text": "Isabella kahkaha atıyor. 'Ben mi? Aptal dedektif. Mektuptaki E.V. ben miyim? Ayrıca ben solak değilim, Baron'un boğazındaki kesik sağ elle yapılmış.' Viktor bu hatandan faydalanıp silahını çekiyor. 'Beceriksizler...' diyor. Oyun bitti.",
-      "image": "./img/bad_ending.jpg",
+      "scene_id": "eva_hack",
+      "text": "Eva klavyenin başına geçti. Parmakları uçuyor. 'Bu... bu imkansız. Dosyaların yarısı silinmiş. Ama sistem loglarına göre silme işlemi bu odadan değil, Server Odası'ndan yapılmış. Hem de 10 dakika önce. Profesör öldükten sonra!'",
+      "image": "./img/char_eva.jpg",
+      "hint": "Katil sadece Profesörü öldürmedi, delilleri de karartıyor. Server odasına gitmek şart.",
       "choices": [
-        { "text": "BAŞARISIZ OLDUN. Tekrar Dene.", "next": "giris" }
+        { "text": "Server Odası'na gidelim.", "next": "server_odasi" },
+        { "text": "Burada kalıp cesedi incelemeye devam edelim.", "next": "ceset_detayli_inceleme" },
+        { "text": "Eva'ya güvenip güvenmediğini sorgula.", "next": "sorgu_eva_baski" }
       ]
     },
     {
-      "scene_id": "suclama_viktor",
-      "text": "Viktor öfkeyle üzerine yürüyor. 'Benim adım Viktor Krum! V.K.! E.V. değil!' O sırada gerçek katil arkandan yaklaşıyor. Karanlıkta son hissettiğin şey, keskin bir acı.",
-      "image": "./img/bad_ending.jpg",
+      "scene_id": "merkez_hol",
+      "text": "Profesörün odasından çıktınız ve Merkezi Hol'e geldiniz. Burası istasyonun kalbi. Buradan üç yere gidebilirsiniz: 1. Laboratuvar (Dr. Stone'un alanı), 2. Server Odası (Tüm veriler orada), 3. Yemekhane (Olay öncesi son toplanma yeri).",
+      "image": "./img/polar_koridor.jpg",
       "choices": [
-        { "text": "BAŞARISIZ OLDUN. Tekrar Dene.", "next": "giris" }
+        { "text": "Laboratuvara git (Biyolojik izler için).", "next": "lab_giris" },
+        { "text": "Server Odasına git (Kamera kayıtları için).", "next": "server_odasi" },
+        { "text": "Yemekhaneye git (Zehir şüphesi).", "next": "yemekhane_giris" }
       ]
     },
     {
-      "scene_id": "suclama_alfred",
-      "text": "Alfred bayılıyor. Yaşlı adamın sinek bile öldüremeyeceği çok belli. Zaman kaybettin. Katil kaçtı.",
-      "image": "./img/bad_ending.jpg",
+      "scene_id": "lab_giris",
+      "text": "Laboratuvar buz gibi. Raflarda tuhaf, yeşilimsi sıvılarla dolu tüpler var. Dr. Stone hemen bir masaya yöneldi ve bir şeyi saklamaya çalıştı. Masanın üzerinde kırık bir deney tüpü ve yanında kanlı bir neşter duruyor.",
+      "image": "./img/polar_lab.jpg",
       "choices": [
-        { "text": "BAŞARISIZ OLDUN. Tekrar Dene.", "next": "giris" }
+        { "text": "Dr. Stone'un sakladığı şeye bak.", "next": "ipucu_gizli_dosya" },
+        { "text": "Kanlı neşteri incele.", "next": "ipucu_nester" },
+        { "text": "Deney tüplerindeki sıvıyı incele.", "next": "ipucu_virus" }
       ]
     },
     {
-      "scene_id": "suclama_elena",
-      "text": "Elena'ya dönüp 'Eldivenini çıkar Elena Vance (E.V.)!' diye bağırıyorsun. Elena geriliyor. 'O mektubu sen yazdın. Babanın mirasını geri almak istedin. Işıklar söndüğünde aynayı kırdın, büyük bir parçayı eline aldın ve Baron'un boğazını kestin. Elini de o cam kesti, egzama değil!'",
-      "image": "./img/elena.jpg",
+      "scene_id": "ipucu_nester",
+      "text": "Neşter cerrahi bir alet. Üzerindeki kan taze değil, kurumuş. Ama Profesörün vücudunda kesik yoktu. Bu kan kime ait? Neşterin sapında 'S.S.' harfleri kazılı. Dr. Samuel Stone.",
+      "image": "./img/item_bicak.jpg",
       "choices": [
-        { "text": "Devam et...", "next": "final_dogru" }
+        { "text": "Bu neşter senin mi Stone?", "next": "sorgu_stone_nester" },
+        { "text": "Kanıtı al ve merkez hole dön.", "next": "merkez_hol" },
+        { "text": "Neşteri Eva'ya göster.", "next": "eva_yorum" }
       ]
     },
     {
-      "scene_id": "final_dogru",
-      "text": "Elena bir anda değişiyor. O masum kız gidiyor, yerine nefret dolu bir kadın geliyor. Eldivenini çıkarıp atıyor; eli kan içinde. 'O babamın hayatını çaldı! O ayna bizimdi!' diyerek cebinden sakladığı büyük cam parçasını çıkarıp üzerine atılıyor. Ama Viktor atik davranıp onu etkisiz hale getiriyor. Polisler vardığında dava çözülmüştü.",
-      "image": "./img/police.jpg",
+      "scene_id": "server_odasi",
+      "text": "Server odası karanlık ve gürültülü. Fanlar son hızda çalışıyor. Yerde sürüklenme izleri var. Ana konsolun kabloları kesilmiş. Birisi burayı sabote etmiş! Köşede Binbaşı'nın taktik eldiveninin tekini buluyorsun.",
+      "image": "./img/polar_server.jpg",
       "choices": [
-        { "text": "TEBRİKLER! DAVAYI ÇÖZDÜN. (Ana Menüye Dön)", "next": "giris" }
+        { "text": "Eldiveni al ve sakla.", "next": "ipucu_eldiven" },
+        { "text": "Kabloları tamir etmeyi dene (Mühendislik).", "next": "tamir_denemesi" },
+        { "text": "Binbaşı ile yüzleşmek için geri dön.", "next": "merkez_hol" }
+      ]
+    },
+    {
+      "scene_id": "yemekhane_giris",
+      "text": "Yemekhanede masalar devrilmiş değil ama Profesörün her zaman oturduğu masada yarım kalmış bir çorba var. Çorbanın rengi biraz... maviye çalıyor? Yanındaki peçetede 'Beni izliyorlar' yazısı karalanmış.",
+      "image": "./img/polar_yemekhane.jpg",
+      "choices": [
+        { "text": "Çorbadan örnek al.", "next": "ipucu_zehir" },
+        { "text": "Mutfağı ara.", "next": "mutfak_arama" },
+        { "text": "Merkez hole dön.", "next": "merkez_hol" }
+      ]
+    },
+    {
+      "scene_id": "ipucu_zehir",
+      "text": "Çorbayı kokladığında acı badem kokusu alıyorsun. Siyanür! Ama profesör donarak öldü, zehirlenerek değil. Belki de zehir işe yaramayınca başka bir yöntem denediler? Bu istasyonda siyanüre erişimi olan tek kişi Biyolog Stone.",
+      "image": "./img/polar_yemekhane.jpg",
+      "choices": [
+        { "text": "Bu çok güçlü bir kanıt. Oylamaya gitmeliyiz.", "next": "oylama_hazirlik" },
+        { "text": "Daha fazla kanıt topla.", "next": "merkez_hol" },
+        { "text": "Eva'ya bu durumu anlat.", "next": "sorgu_eva_zehir" }
+      ]
+    },
+    {
+      "scene_id": "oylama_hazirlik",
+      "text": "Tüm ekip Merkez Hol'de toplandı. Fırtına şiddetini artırdı. Jeneratör tekliyor. Artık bir karar vermek zorundasınız. Katil aranızda. Yanlış kişiyi suçlarsanız, bu istasyon hepimize mezar olacak.",
+      "image": "./img/polar_koridor.jpg",
+      "choices": [
+        { "text": "Suçlu Dr. Stone (Biyolog)!", "next": "suclama_stone" },
+        { "text": "Suçlu Binbaşı (Güvenlik)!", "next": "suclama_binbasi" },
+        { "text": "Suçlu Eva (Mühendis)!", "next": "suclama_eva" },
+        { "text": "Bu bir cinayet değil, Virüs!", "next": "suclama_virus" }
+      ]
+    },
+    {
+      "scene_id": "suclama_stone",
+      "text": "Dr. Stone'u köşeye sıkıştırıyorsunuz. 'Ben sadece dünyayı korumaya çalışıyordum!' diye bağırıyor. 'Profesör o antik virüsü serbest bırakacaktı. Onu zehirlemeye çalıştım evet, ama ölmedi! O lanet şey onu öldürmedi!'. Stone zehirlemeyi itiraf etti ama donarak ölümü açıklayamıyor.",
+      "image": "./img/char_dr_stone.jpg",
+      "choices": [
+        { "text": "Onu hapse atın. (Oyun Biter - Kısmi Başarı)", "next": "ending_kismi" },
+        { "text": "Yalan söylüyor, donma olayını da o yaptı.", "next": "ending_bad" },
+        { "text": "Başkası işi bitirdi...", "next": "suclama_binbasi" }
+      ]
+    },
+    {
+      "scene_id": "suclama_binbasi",
+      "text": "Binbaşı silahını çekiyor. 'Emirleri uyguladım! Protokol 0: Eğer enfeksiyon riski varsa, konakçıyı yok et.' Binbaşı, Profesörü server odasında virüsü yaymaya çalışırken yakaladığını ve soğutma sistemini 'Sıvı Nitrojen' moduna alarak odayı dondurduğunu itiraf ediyor. 'Onu vuramazdım, kanı virüsü yayardı. Dondurmak tek çareydi.'",
+      "image": "./img/char_major.jpg",
+      "choices": [
+        { "text": "Binbaşı haklıydı. Onu serbest bırak.", "next": "ending_good" },
+        { "text": "Bu bir cinayet! Teslim ol!", "next": "ending_fight" },
+        { "text": "Eva'nın bu işte parmağı var mı?", "next": "suclama_eva" }
+      ]
+    },
+    {
+      "scene_id": "suclama_eva",
+      "text": "Eva ağlamaya başlıyor. 'Ben sadece eve dönmek istedim...' Ama kanıtlar onu göstermiyor. Eva masum. Gerçek katili kaçırdınız.",
+      "image": "./img/char_eva.jpg",
+      "choices": [
+        { "text": "BAŞARISIZLIK. Tekrar Dene.", "next": "giris" }
+      ]
+    },
+    {
+      "scene_id": "ending_good",
+      "text": "Gerçeği ortaya çıkardınız. Profesör, antik bir virüsün etkisi altındaydı ve tüm dünyayı enfekte etmek istiyordu. Dr. Stone onu durdurmak için zehirledi, başaramayınca Binbaşı devreye girip odayı -200 dereceye soğutarak onu dondurdu (Protokol 0). Binbaşı bir kahraman mı yoksa katil mi? Buna mahkeme karar verecek ama en azından siz hayattasınız. Helikopter sesi duyuluyor.",
+      "image": "./img/good_ending_heli.jpg",
+      "choices": [
+        { "text": "ANA MENÜYE DÖN", "next": "giris" }
+      ]
+    },
+    {
+      "scene_id": "ending_fight",
+      "text": "Binbaşı teslim olmuyor. Çıkan çatışmada istasyonun basınç paneli zarar görüyor. İçeriye dolan dondurucu soğuk ve kar, hepinizi yavaş yavaş uykuya daldırıyor. Gerçek, karın altında gömülü kalacak.",
+      "image": "./img/bad_ending_monster.jpg",
+      "choices": [
+        { "text": "OYUN BİTTİ. Tekrar Dene.", "next": "giris" }
+      ]
+    },
+    {
+      "scene_id": "ending_bad",
+      "text": "Yanlış kişiyi suçladınız. Gerçek tehdit hala aranızda dolaşıyor. Işıklar tamamen kesildiğinde, arkanızdaki nefes sesini duyuyorsunuz.",
+      "image": "./img/bad_ending_monster.jpg",
+      "choices": [
+        { "text": "OYUN BİTTİ. Tekrar Dene.", "next": "giris" }
+      ]
+    },
+    {
+      "scene_id": "bad_ending_vuruldun",
+      "text": "Silahlı ve eğitimli bir askere saldırmak mı? Binbaşı tereddüt etmeden tetiği çekti. Göğsünde yayılan sıcaklık, Antarktika'nın soğuğunu unutturuyor. Gözlerin kararırken duyduğun son şey Eva'nın çığlığı.",
+      "image": "./img/bad_ending_monster.jpg",
+      "choices": [
+        { "text": "ÖLDÜNÜZ. Tekrar Dene.", "next": "giris" }
       ]
     }
   ]
