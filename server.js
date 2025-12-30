@@ -3,21 +3,17 @@ const http = require('http');
 const { Server } = require("socket.io");
 const cors = require('cors');
 
-// Uygulama Kurulumu
 const app = express();
 app.use(cors());
 
 const server = http.createServer(app);
 
-// CORS ayarı: Tüm sitelerden gelen bağlantıyı kabul et
 const io = new Server(server, {
     cors: { origin: "*", methods: ["GET", "POST"] }
 });
 
-// OYUN DURUMU (RAM Bellek)
 const rooms = new Map();
 
-// --- ODA KODU ALGORİTMASI ---
 function generateRoomCode() {
     const chars = "BCDFGHJKMNPQRSTVWXYZ23456789";
     let code = "";
@@ -27,62 +23,91 @@ function generateRoomCode() {
     return code;
 }
 
+// Açık odaları listeleme fonksiyonu
+function getPublicRoomList() {
+    const publicRooms = [];
+    rooms.forEach((room, code) => {
+        // Sadece 'playing' olmayan (lobideki) ve 'private' olmayan odaları gönder
+        if (room.gameState === 'lobby' && !room.isPrivate) {
+            publicRooms.push({
+                code: code,
+                host: room.players[0].name,
+                count: room.players.length,
+                isLocked: !!room.password, // Şifresi varsa true döner
+                mode: room.mode
+            });
+        }
+    });
+    return publicRooms;
+}
+
 io.on('connection', (socket) => {
     console.log(`🔌 Yeni bağlantı: ${socket.id}`);
 
-    // 1. Oda Oluşturma
-    socket.on('create_room', (playerName) => {
-        let roomCode = generateRoomCode();
-        while(rooms.has(roomCode)) {
-            roomCode = generateRoomCode();
-        }
+    // Bağlanan herkese güncel oda listesini gönder
+    socket.emit('room_list_update', getPublicRoomList());
 
-        // Oda verisini oluştur
+    // 1. Oda Oluşturma (Gelişmiş)
+    socket.on('create_room', ({ playerName, visibility, password }) => {
+        let roomCode = generateRoomCode();
+        while(rooms.has(roomCode)) { roomCode = generateRoomCode(); }
+
+        const isPrivate = (visibility === 'private');
+        // Eğer visibility 'protected' ise şifreyi kaydet, yoksa null
+        const roomPassword = (visibility === 'protected' && password) ? password : null;
+
         rooms.set(roomCode, {
             host: socket.id,
             players: [{ id: socket.id, name: playerName, score: 0 }],
             gameState: 'lobby',
             mode: 'individual', 
             votes: {},          
-            currentCase: null
+            currentCase: null,
+            isPrivate: isPrivate,
+            password: roomPassword
         });
 
         socket.join(roomCode);
         socket.emit('room_created', { roomCode, isHost: true });
-        console.log(`🏠 Oda kuruldu: ${roomCode} (Host: ${playerName})`);
+        
+        // Tüm lobilere güncel listeyi yayınla
+        io.emit('room_list_update', getPublicRoomList());
     });
 
-    // 2. Odaya Katılma
-    socket.on('join_room', ({ roomCode, playerName }) => {
+    // 2. Odaya Katılma (Şifre Kontrollü)
+    socket.on('join_room', ({ roomCode, playerName, password }) => {
         const room = rooms.get(roomCode);
 
         if (!room) {
-            socket.emit('error_message', '❌ Böyle bir oda bulunamadı!');
-            return;
+            return socket.emit('error_message', '❌ Böyle bir oda bulunamadı!');
         }
 
         if (room.gameState !== 'lobby') {
-            socket.emit('error_message', '⚠️ Oyun çoktan başladı!');
-            return;
+            return socket.emit('error_message', '⚠️ Oyun çoktan başladı!');
+        }
+
+        // Şifre Kontrolü
+        if (room.password && room.password !== password) {
+            return socket.emit('error_message', '🔒 Yanlış Şifre!');
         }
 
         room.players.push({ id: socket.id, name: playerName, score: 0 });
         socket.join(roomCode);
 
         io.to(roomCode).emit('update_player_list', room.players);
-        console.log(`👤 ${playerName} odaya katıldı: ${roomCode}`);
+        
+        // Liste değişti (kişi sayısı arttı), herkese güncelleme at
+        io.emit('room_list_update', getPublicRoomList());
     });
 
-    // 3. Oyunu Başlatma (GÜNCELLENDİ: 3 KİŞİ KURALI)
+    // 3. Oyunu Başlatma
     socket.on('start_game', ({ roomCode, caseId, mode }) => {
         const room = rooms.get(roomCode);
         
         if (room && room.host === socket.id) {
-            
-            // --- KURAL KONTROLÜ ---
             if (mode === 'voting' && room.players.length < 3) {
-                socket.emit('error_message', '⚠️ Demokrasi (Oylama) modu için en az 3 dedektif gereklidir! Lütfen "Bireysel" modu seçin veya daha fazla oyuncu bekleyin.');
-                return; // Oyunu başlatma, fonksiyondan çık.
+                socket.emit('error_message', '⚠️ Demokrasi modu için en az 3 kişi gereklidir!');
+                return;
             }
 
             room.gameState = 'playing';
@@ -90,20 +115,19 @@ io.on('connection', (socket) => {
             room.mode = mode || 'individual';
             
             io.to(roomCode).emit('game_started', { caseId, mode: room.mode });
-            console.log(`🎬 Oyun başladı: ${roomCode}, Mod: ${room.mode}, Oyuncular: ${room.players.length}`);
+            
+            // Oyun başladığı için listeden düşmeli -> Listeyi güncelle
+            io.emit('room_list_update', getPublicRoomList());
         }
     });
 
-    // 4. OY KULLANMA
+    // 4. Oy Kullanma
     socket.on('cast_vote', ({ roomCode, nextSceneId }) => {
         const room = rooms.get(roomCode);
-        
         if (!room || room.mode !== 'voting') return;
         
-        // Oyuncunun oyunu kaydet
         room.votes[socket.id] = nextSceneId;
         
-        // Detaylı Oylama Durum Listesi
         const voteStatus = room.players.map(player => ({
             name: player.name,
             id: player.id,
@@ -114,12 +138,9 @@ io.on('connection', (socket) => {
         const playerCount = room.players.length;
         const voteCount = Object.keys(room.votes).length;
 
-        // Herkese listeyi gönder
         io.to(roomCode).emit('vote_update', { voteStatus, voteCount, total: playerCount });
 
-        // HERKES OY VERDİ Mİ?
         if (voteCount >= playerCount) {
-            // Oyları say
             const counts = {};
             let winnerScene = null;
             let maxVotes = 0;
@@ -132,7 +153,6 @@ io.on('connection', (socket) => {
                 }
             });
 
-            // 3 Saniye bekle, sonucu görsünler
             setTimeout(() => {
                 room.votes = {}; 
                 io.to(roomCode).emit('force_scene_change', winnerScene);
@@ -140,13 +160,18 @@ io.on('connection', (socket) => {
         }
     });
 
+    // İstemci açık oda listesini manuel isterse
+    socket.on('get_public_rooms', () => {
+        socket.emit('room_list_update', getPublicRoomList());
+    });
+
     socket.on('disconnect', () => {
-        console.log(`❌ Ayrıldı: ${socket.id}`);
-        // Not: Gerçek uygulamada odadan düşen oyuncuyu silmek gerekir.
+        // Not: Gerçek uygulamada odadan düşen oyuncuyu silmek ve listeyi güncellemek gerekir.
+        // Şimdilik karmaşıklığı artırmamak için pas geçiyoruz.
     });
 });
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-    console.log(`🚀 Sunucu çalışıyor: http://localhost:${PORT}`);
+    console.log(`🚀 Sunucu çalışıyor`);
 });
