@@ -1,0 +1,782 @@
+{
+  "title": "Aldatmacanın Sanatı",
+  "description": "Zengin bir sanat koleksiyoncusu olan Victor Kline’ın malikanesinde işlenen cinayeti araştırdığınız, seçim odaklı bir dedektif oyunu. Motifleri ortaya çıkarın, bulmacaları çözün ve katili yakalayın ya da masumu suçlama riskini göze alın.",
+  "scenes": [
+    {
+      "scene_id": "giris",
+      "text": "Yağmur, Victor Kline’ın malikanesinin pencerelerine vururken, loş ışıklı çalışma odasına adım atıyorsunuz. Hava eski kitap ve bakır kokuyor. Ünlü bir sanat koleksiyoncusu olan Victor, masasında yığılmış, göğsünde 'E.V.' harfli bir mektup açacağı saplanmış halde yatıyor. Kan, nadir bir el yazmasının üzerine yayılmış, yakınlarda kırık bir vazo duruyor. Polis yolda, ancak sizin araştırmanız için bir saatiniz var. Malikânede üç şüpheli vardı: iş ortağı Elena Voss, uzaklaşmış oğlu Marcus Reed ve hizmetçisi Clara Holt. Nereden başlarsınız?",
+      "image": "./img/victim_body.jpg",
+      "choices": [
+        {
+          "text": "Suç mahallini dikkatlice inceleyin.",
+          "next": "suc_mahalli"
+        },
+        {
+          "text": "İş ortağı Elena Voss’u sorgulayın.",
+          "next": "elena_sorgu"
+        },
+        {
+          "text": "Uzaklaşmış oğul Marcus Reed’i sorgulayın.",
+          "next": "marcus_sorgu"
+        },
+        {
+          "text": "Hizmetçi Clara Holt’u sorgulayın.",
+          "next": "clara_sorgu"
+        }
+      ],
+      "hint": "Suç mahalli, şüphelilerin sözlerinden daha fazla ipucu barındırabilir."
+    },
+    {
+      "scene_id": "suc_mahalli",
+      "text": "Victor’un cesedinin yanına çömeliyorsunuz. Mektup açacağında 'E.V.' harfleri kazınmış, üzerinde silinmeye çalışılmış parmak izleri var. Masanın yakınında, kısmen silinmiş, çamurlu bir ayak izi (43 numara) var. Vazo parçalarında kırmızı kumaş izleri ve bir Gauloises sigara izmariti görüyorsunuz. Masaya gömülü bir kasa, 4 haneli bir kod gerektiriyor. Masada bir not: 'Gerçek, gölgelerin ışıkla buluştuğu yerde yatıyor.' Bir duvarda geometrik bir panel beliriyor: Daire, Kare, Üçgen, Dikdörtgen. Sonraki şekli seçin veya başka bir ipucu inceleyin. Ne yaparsınız?",
+      "image": "./img/murder_weapon.jpg",
+      "choices": [
+        {
+          "text": "Kasanin kodunu kırmayı deneyin.",
+          "next": "kasa_bulmacasi"
+        },
+        {
+          "text": "Ayak izini ve vazo parçalarını inceleyin.",
+          "next": "kanit_detaylari"
+        },
+        {
+          "text": "Parmak izlerini analiz edin.",
+          "next": "parmak_izi_bulmacasi"
+        },
+        {
+          "text": "Geometrik paneli çözün.",
+          "next": "sekil_bulmacasi"
+        },
+        {
+          "text": "Bir şüpheliyi sorgulayın.",
+          "next": "supheli_sec"
+        }
+      ],
+      "hint": "Notun esrarengiz mesajı ve panel, Victor’un sanat koleksiyonuyla ilgili olabilir."
+    },
+    {
+      "scene_id": "parmak_izi_bulmacasi",
+      "text": "Mektup açacağındaki parmak izleri dijital bir analizörle taranıyor. Ekranda bir denklem beliriyor: '10 - 4 = A', '15 + 3 = B', 'B - A = ?' Sonucu şüphelilerin parmak izi kodlarıyla eşleştirin (Elena: 12, Marcus: 8, Clara: 5). Hangi kod?",
+      "choices": [
+        {
+          "text": "12",
+          "next": "parmak_izi_basari"
+        },
+        {
+          "text": "8",
+          "next": "parmak_izi_basarisiz"
+        },
+        {
+          "text": "5",
+          "next": "parmak_izi_basarisiz"
+        }
+      ],
+      "hint": "Denklemi adım adım çözün ve sonucu şüpheli kodlarıyla karşılaştırın."
+    },
+    {
+      "scene_id": "parmak_izi_basari",
+      "text": "Analizör, parmak izinin Elena’ya ait olduğunu doğruluyor. Bu, onun mektup açacağına dokunduğunu kanıtlıyor, ancak suçluluğu için daha fazla kanıt gerek. Şimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Elena’yı parmak iziyle yüzleştirin.",
+          "next": "elena_yuzlestirme"
+        },
+        {
+          "text": "Suç mahalline dönün.",
+          "next": "suc_mahalli"
+        }
+      ],
+      "hint": "Parmak izi güçlü bir kanıt, ancak yalnız başına yeterli değil."
+    },
+    {
+      "scene_id": "parmak_izi_basarisiz",
+      "text": "Analizör hata veriyor. Parmak izi verileri karışmış. Başka kanıtlar arayın veya tekrar deneyin.",
+      "choices": [
+        {
+          "text": "Suç mahalline dönün.",
+          "next": "suc_mahalli"
+        },
+        {
+          "text": "Tekrar deneyin.",
+          "next": "parmak_izi_bulmacasi"
+        }
+      ],
+      "hint": "Denklemi dikkatlice çözün."
+    },
+    {
+      "scene_id": "sekil_bulmacasi",
+      "text": "Duvardaki panelde bir şekil dizisi parlıyor: Daire, Kare, Üçgen, Dikdörtgen. Victor’un notu—'Gerçek, gölgelerin ışıkla buluştuğu yerde yatıyor'—bir ipucu olabilir. Beşinci şekli seçin.",
+      "choices": [
+        {
+          "text": "Beşgen",
+          "next": "sekil_basari"
+        },
+        {
+          "text": "Altıgen",
+          "next": "sekil_basarisiz"
+        },
+        {
+          "text": "Daire",
+          "next": "sekil_basarisiz"
+        }
+      ],
+      "hint": "Şekillerin kenar sayılarını inceleyin: 0, 4, 3, 4..."
+    },
+    {
+      "scene_id": "sekil_basari",
+      "text": "Panel açılıyor ve bir not ortaya çıkıyor: 'Elena, koleksiyonumu rakip galeriye satmayı planladı.' Bu, Elena’nın motifini güçlendiriyor. Şimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Elena’yı notla yüzleştirin.",
+          "next": "elena_yuzlestirme"
+        },
+        {
+          "text": "Suç mahalline dönün.",
+          "next": "suc_mahalli"
+        }
+      ],
+      "hint": "Not, Elena’nın ihanetini gösteriyor."
+    },
+    {
+      "scene_id": "sekil_basarisiz",
+      "text": "Panel kilitleniyor. Koridordan ayak sesleri duyuyorsunuz—biri izliyor. Tekrar deneyin mi yoksa devam edin mi?",
+      "choices": [
+        {
+          "text": "Suç mahalline dönün.",
+          "next": "suc_mahalli"
+        },
+        {
+          "text": "Ayak seslerini kovalayın.",
+          "next": "kovalama_basarisiz"
+        }
+      ],
+      "hint": "Şekil dizisini tekrar gözden geçirin."
+    },
+    {
+      "scene_id": "kasa_bulmacasi",
+      "text": "Kasanin tuş takımı hafifçe parlıyor. Notun sözleri—'Gerçek, gölgelerin ışıkla buluştuğu yerde yatıyor'—aklınızda yankılanıyor. Victor, çalışma odasındaki 'Tutulma' adlı, bir güneş tutulmasını tasvir eden tabloya takıntılıydı. Tablonun plakasında 1969 yılı yazıyor. Bu kod olabilir mi? 4 haneli bir kod girin.",
+      "choices": [
+        {
+          "text": "1969’u girin.",
+          "next": "kasa_acildi"
+        },
+        {
+          "text": "0000’ı girin (varsayılan kod).",
+          "next": "kasa_basarisiz"
+        },
+        {
+          "text": "Başka bir ipucu arayın.",
+          "next": "suc_mahalli"
+        }
+      ],
+      "hint": "Victor’un sanat takıntısı sırlarını gizlemiş olabilir."
+    },
+    {
+      "scene_id": "kasa_acildi",
+      "text": "Kasa tıkırtıyla açılıyor. İçinde, yırtılmış bir sayfası olan bir günlük ve şifreli bir yazı: 'E.V. galeri anlaşmamı ifşa etmekle tehdit ediyor. M.R. çok şey biliyor. C.H. sadık ama çaresiz.' Sayfaya bantlanmış küçük bir anahtar var. Bu, malikânede bir şeyi açabilir. Şimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Anahtarı kullanarak kilitli bir şey arayın.",
+          "next": "anahtar_arama"
+        },
+        {
+          "text": "Bu yeni bilgiyle bir şüpheliyi sorgulayın.",
+          "next": "supheli_sec"
+        }
+      ],
+      "hint": "Günlük, tüm şüphelileri suçluyor—motiflerini düşünün."
+    },
+    {
+      "scene_id": "kasa_basarisiz",
+      "text": "Kasa yüksek sesle bipleyerek kodu reddediyor. Dışarıdan ayak sesleri duyuyorsunuz—biri izliyor. Kodu sonra bulmanız gerekecek. Ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Suç mahalline dönün.",
+          "next": "suc_mahalli"
+        },
+        {
+          "text": "Sesle ilgili bir şüpheliyi sıkıştırın.",
+          "next": "supheli_sec"
+        }
+      ],
+      "hint": "Çalışma odasındaki tablo cevabı barındırabilir."
+    },
+    {
+      "scene_id": "kanit_detaylari",
+      "text": "Ayak izi 9 numara (43 numara botlara uyuyor) ve yürüyüş botlarından gelen belirgin bir taban deseni var. Vazo parçalarındaki kırmızı kumaş, koridorda gördüğünüz bir atkıya benziyor. Gauloises sigara izmariti, Elena’nın içtiği markayla eşleşiyor (Marcus sigara içmez, Clara Parliament içer). Yakındaki bir kitaplıkta hafif aralık bir gizli panel var, üç sembolü (güneş, ay, yıldız) doğru sırayla basmanızı gerektiren bir bulmaca içeriyor. Ne yaparsınız?",
+      "image": "./img/broken_vase.jpg",
+      "choices": [
+        {
+          "text": "Sembol bulmacasını deneyin.",
+          "next": "sembol_bulmacasi_1"
+        },
+        {
+          "text": "Koridordaki kırmızı atkıyı ve sigara izmaritini inceleyin.",
+          "next": "atki_ipucu"
+        },
+        {
+          "text": "Bir şüpheliyi sorgulayın.",
+          "next": "supheli_sec"
+        }
+      ],
+      "hint": "Semboller ve izmarit, Victor’un esrarengiz notuyla bağlantılı olabilir."
+    },
+    {
+      "scene_id": "sembol_bulmacasi_1",
+      "text": "Panelin sembolleri hafifçe parlıyor: güneş, ay, yıldız. Notta, 'gölgeler ışıkla buluşur' yazıyordu. Victor’un 'Tutulma' tablosunu hatırlıyorsunuz; güneşin ay tarafından örtüldüğünü ve yıldızların göründüğünü gösteriyor. Sembolleri hangi sırayla basarsınız?",
+      "choices": [
+        {
+          "text": "Güneş, Ay, Yıldız",
+          "next": "sembol_basari"
+        },
+        {
+          "text": "Ay, Yıldız, Güneş",
+          "next": "sembol_basarisiz"
+        },
+        {
+          "text": "Yıldız, Güneş, Ay",
+          "next": "sembol_basarisiz"
+        }
+      ],
+      "hint": "Bir tutulmanın sırasını düşünün."
+    },
+    {
+      "scene_id": "sembol_basari",
+      "text": "Panel tıkırdayarak açılıyor ve bir mektup ortaya çıkıyor: 'Sadık arkadaşım Clara’ya, yeni bir başlangıç için yeterince bırakıyorum, ama E.V.’nin açgözlülüğüne dikkat et.' Bu, Clara’nın bir motifi olduğunu ama sadık olduğunu gösteriyor. Şimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Clara’yı mektupla yüzleştirin.",
+          "next": "clara_yuzlestirme"
+        },
+        {
+          "text": "Başka bir şüpheliyi sorgulayın.",
+          "next": "supheli_sec"
+        }
+      ],
+      "hint": "Clara’nın sadakati daha derin bir motifi gizliyor olabilir."
+    },
+    {
+      "scene_id": "sembol_basarisiz",
+      "text": "Panel vızıldayarak kilitleniyor. Bir güvenlik mekanizması tetiklediniz. Koridordan uzaklaşan ayak sesleri duyuyorsunuz—biri izliyordu. Tekrar deneyin mi yoksa devam edin mi?",
+      "choices": [
+        {
+          "text": "Suç mahalline dönün.",
+          "next": "suc_mahalli"
+        },
+        {
+          "text": "Ayak seslerini kovalayın.",
+          "next": "kovalama_basarisiz"
+        }
+      ],
+      "hint": "Doğru sıralama için tabloyu tekrar ziyaret edin."
+    },
+    {
+      "scene_id": "atki_ipucu",
+      "text": "Koridordaki kırmızı atkıda 'M.R.' harfleri işlenmiş, yırtık ve vazodaki kumaşla eşleşiyor. Yakındaki Gauloises sigara izmariti, Elena’nın içtiği markayla uyumlu (Marcus sigara içmez, Clara Marlboro tercih eder). Marcus, mücadele sırasında çalışma ödasında olabilir, ama sigara izmariti başka bir hikaye anlatıyor. Ne yaparsınız?",
+      "image": "./img/red_scarf.jpg",
+      "choices": [
+        {
+          "text": "Marcus’u atkı hakkında konuş.",
+          "next": "marcus_yuzlestirme"
+        },
+        {
+          "text": "Elena’yı sigara izmariti hakkında konuş.",
+          "next": "elena_yuzlestirme"
+        },
+        {
+          "text": "Suç mahalline dönün.",
+          "next": "suc_mahalli"
+        }
+      ],
+      "hint": "Sigara izmariti, gerçek suçluyu işaret edebilir."
+    },
+    {
+      "scene_id": "anahtar_arama",
+      "text": "Kasadan çıkan anahtar küçük, muhtemelen bir kilitli kutu veya çekmece için. Clara’nın sorgusunda bahsettiği, Victor’un yatak odasındaki kilitli bir çekmeceyi hatırlıyorsunuz. Oraya gider misiniz?",
+      "choices": [
+        {
+          "text": "Victor’un yatak odasına gidin.",
+          "next": "yatak_odasi_bulmacası"
+        },
+        {
+          "text": "Önce bir şüpheliyi sorgulayın.",
+          "next": "supheli_sec"
+        }
+      ],
+      "hint": "Yatak odası, Victor’un son sırlarını barındırabilir."
+    },
+    {
+      "scene_id": "yatak_odasi_bulmacası",
+      "text": "Yatak odasındaki çekmece açılıyor ve şifreli bir not ortaya çıkıyor: 'TRUST’ı yeniden düzenle, ihanetçimi bul.' Bu bir anagram. Çözerek bir isim bulun.",
+      "choices": [
+        {
+          "text": "Bir isim girin (metin girişi).",
+          "next": "anagram_bulmacası"
+        },
+        {
+          "text": "Odada başka ipuçları arayın.",
+          "next": "yatak_odasi_arama"
+        }
+      ],
+      "hint": "T-R-U-S-T harflerini dikkatlice yeniden düzenleyin."
+    },
+    {
+      "scene_id": "anagram_bulmacası",
+      "text": "'TRUST’ı yeniden düzenleyerek oluşan ismi girin.",
+      "choices": [
+        {
+          "text": "Giriş: RUST",
+          "next": "anagram_basarisiz"
+        },
+        {
+          "text": "Giriş: STUR",
+          "next": "anagram_basarisiz"
+        },
+        {
+          "text": "Giriş: RUTS",
+          "next": "anagram_basari"
+        }
+      ],
+      "hint": "RUTS"
+    },
+    {
+      "scene_id": "anagram_basari",
+      "text": "'RUTS' anagramı, Victor’un ihanetçisi için kullandığı bir kod adı öneriyor. Çekmecede gizli bir not: 'RUTS, koleksiyonumu rakip bir galeriye satmayı planladı.' Bu, günlüğünde galeri anlaşmalarından bahsedilen Elena’yı işaret ediyor. Şimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Elena’yı bu kanıtla karşılaştırın.",
+          "next": "elena_yuzlestirme"
+        },
+        {
+          "text": "Daha fazla araştırın.",
+          "next": "suc_mahalli"
+        }
+      ],
+      "hint": "Elena’nın iş anlaşmaları davanın anahtarı."
+    },
+    {
+      "scene_id": "anagram_basarisiz",
+      "text": "Anagram uymuyor. Bir gıcırtı duyuyorsunuz—yakında biri var. Tekrar deneyin mi yoksa devam edin mi?",
+      "choices": [
+        {
+          "text": "Anagramı tekrar deneyin.",
+          "next": "yatak_odasi_bulmacası"
+        },
+        {
+          "text": "Sesi kovalayın.",
+          "next": "kovalama_basarisiz"
+        }
+      ],
+      "hint": "T-R-U-S-T harfleri bir kelime oluşturur, isim değil."
+    },
+    {
+      "scene_id": "yatak_odasi_arama",
+      "text": "Marcus ve Victor’un geçen hafta tartıştığını gösteren bir fotoğraf buluyorsunuz. Arkasında bir not: 'Vasiyet için beni asla affetmeyecek.' Bu, Marcus’un motifini derinleştiriyor. Şimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Marcus’u fotoğrafla karşılaştırın.",
+          "next": "marcus_yuzlestirme"
+        },
+        {
+          "text": "Suç mahalline devam edin.",
+          "next": "suc_mahalli"
+        }
+      ],
+      "hint": "Vasiyet, önemli bir motif olabilir."
+    },
+    {
+      "scene_id": "supheli_sec",
+      "text": "Kimi sorgulamak istiyorsunuz?",
+      "choices": [
+        {
+          "text": "Elena Voss",
+          "next": "elena_sorgu"
+        },
+        {
+          "text": "Marcus Reed",
+          "next": "marcus_sorgu"
+        },
+        {
+          "text": "Clara Holt",
+          "next": "clara_sorgu"
+        }
+      ],
+      "hint": "Her şüpheli, Victor hakkında benzersiz bir bakış açısı sunuyor."
+    },
+    {
+      "scene_id": "elena_sorgu",
+      "text": "Elena Voss, 45 yaşında, 1.68 m, 63 kg, 37 numara ayakkabı, kendinden emin oturuyor, ama elleri yüzüğünde dönüp duruyor, alnında ter damlaları beliriyor. Victor’un iş ortağı, bir galerinin ortak sahibi. 'Victor parayla dikkatsizdi,' diyor, sesi hafifçe titrerken. 'Geçen hafta bir anlaşma yüzünden tartıştık, ama cinayet sırasında galerideydim—epostalarıma bakın.' Mektup açacağının cinayet silahıyla aynı baş harfleri ('E.V.') sahip olduğunu fark ediyorsunuz. Ne sorarsınız?",
+      "image": "./img/murder_weapon.jpg",
+      "choices": [
+        {
+          "text": "Victor’la tartışmasını sorun.",
+          "next": "elena_tartisma"
+        },
+        {
+          "text": "Alibisini sorun.",
+          "next": "elena_alibi"
+        },
+        {
+          "text": "Onu cinayetle suçlayın.",
+          "next": "elena_suclama"
+        }
+      ],
+      "hint": "Kıpırdanması ve terlemesi, bir şey sakladığını gösteriyor."
+    },
+    {
+      "scene_id": "elena_tartisma",
+      "text": "Elena iç çekiyor, gözleri yere sabitleniyor. 'Victor, sahte bir tabloyu bir müşteriye satmak istedi. Reddettim—bu itibarımızı mahvederdi. Beni işten çıkarmakla tehdit etti,' diyor, sesi çatallanıyor. Şimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Sahte tabloyu sıkıştırın.",
+          "next": "elena_tablo"
+        },
+        {
+          "text": "Alibisini sorun.",
+          "next": "elena_alibi"
+        }
+      ],
+      "hint": "Sahte tablo bir motif olabilir."
+    },
+    {
+      "scene_id": "elena_alibi",
+      "text": "Elena, cinayet sırasında galeride olduğunu gösteren bir e-posta gösteriyor. 'Asistanım beni orada gördü,' diyor, ama gözleri kaçamak. E-posta belirsiz ve asistanın sadakati şüpheli. Şimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Suç mahalline dönün.",
+          "next": "suc_mahalli"
+        },
+        {
+          "text": "Mektup açıcı veya sigara izmariti hakkında yüzleştirin.",
+          "next": "elena_yuzlestirme"
+        }
+      ],
+      "hint": "Alibisi sağlam görünüyor ama doğrulanmamış."
+    },
+    {
+      "scene_id": "elena_tablo",
+      "text": "Elena tereddüt ediyor, elleri titriyor. 'Tablo sahte bir Monet’tı. Victor onu malikanede sakladı. Ortaya çıksaydı her şeyimi kaybederdim.' Bu güçlü bir motif. Şimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Sahte tabloyu arayın.",
+          "next": "tablo_arama"
+        },
+        {
+          "text": "Mektup açıcı veya sigara izmariti hakkında yüzleştirin.",
+          "next": "elena_yuzlestirme"
+        }
+      ],
+      "hint": "Tablo, malikanede saklı olabilir."
+    },
+    {
+      "scene_id": "elena_yuzlestirme",
+      "text": "Mektup açıcı, sigara izmariti, günlük veya panel notunu gösteriyorsunuz. Elena’nın rengi soluyor, dudakları titriyor. 'O mektup açıcı Victor’un hediyesiydi! Sigarayı herkes içebilir! Onu öldürmedim—galeriyi kaybederdim!' Paniği gerçekçi görünüyor, ama motifi güçlü. Şimdi ne yaparsınız?",
+      "image": "./img/murder_weapon.jpg",
+      "choices": [
+        {
+          "text": "Onu cinayetle suçlayın.",
+          "next": "elena_suclama"
+        },
+        {
+          "text": "Daha fazla araştırın.",
+          "next": "suc_mahalli"
+        }
+      ],
+      "hint": "Tepkisi onu tamamen aklamıyor."
+    },
+    {
+      "scene_id": "elena_suclama",
+      "text": "Elena’yı suçluyorsunuz. Acı acı gülüyor. 'Kanıtın yok!' Sağlam kanıt olmadan polis iddianızı reddedikiyor ve Elena serbest kalıyor. Katil kaçıyor. Oyun Bitti.",
+      "choices": [],
+      "hint": "Suçlamak için somut kanıt gerek."
+    },
+    {
+      "scene_id": "marcus_sorgu",
+      "text": "Marcus Reed, 28 yaşında, 1.85 m, 81 kg, 43 numara ayakkabı, koltukta kambur oturuyor, çenesi sıkı, gözleri öfkeyle parlıyor. Victor’un vasiyetten çıkardığı oğlu, 'Tüm hafta boyunca yürüyüşteydim—GPS kayıtlarıma bakın. Onun parasına ihtiyacım yoktu,' diyor, alaycı bir gülümsemeyle. Botıları ayak iziyle aynı numarada ve yırtık bir kırmızı atkı takıyor. Sigara içmediğini söylüyor. Ne sorarsınız?",
+      "image": "./img/red_scarf.jpg",
+      "choices": [
+        {
+          "text": "Uzaklaşmasını sorun.",
+          "next": "marcus_uzaklasma"
+        },
+        {
+          "text": "Alibisini sorun.",
+          "next": "marcus_alibi"
+        },
+        {
+          "text": "Onu cinayetle suçlayın.",
+          "next": "marcus_suclama"
+        }
+      ],
+      "hint": "Botları ve atkısı şüpheli, ama sigara içmemesi önemli."
+    },
+    {
+      "scene_id": "marcus_uzaklasma",
+      "text": "Marcus alay ediyor, yumruklarını sıkarak. 'Babam, işine katılmayı reddettiğim için beni reddetti. Başarısızlık olduğumu söyledi. Geçen hafta barışmak için malikâneye çağırdı, ama tartıştık.' Öfkesi hissedilir. Şimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Tartışmayı sıkıştırın.",
+          "next": "marcus_kavga"
+        },
+        {
+          "text": "Alibisini sorun.",
+          "next": "marcus_alibi"
+        }
+      ],
+      "hint": "Tartışma, motifini açığa çıkarabilir."
+    },
+    {
+      "scene_id": "marcus_alibi",
+      "text": "Marcus, cinayet sırasında 30 kilometre uzakta olduğunu gösteren GPS kayıtları gösteriyor. 'Yalnız kamp yapıyordum,' diyor, sesi kırılgan. Kayıtlar dijital—sahteleştirilmesi kolay. Şimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Atkı hakkında konuş.",
+          "next": "marcus_yuzlestirme"
+        },
+        {
+          "text": "Suç mahalline dön.",
+          "next": "suc_mahalli"
+        }
+      ],
+      "hint": "Alibisi makul ama doğrulanmamış."
+    },
+    {
+      "scene_id": "marcus_kavga",
+      "text": "Marcus yumruklarını sıkıyor, acı bir kahkaha atıyor. 'Vasiyetle dalga geçti, yalvarmazsam hiçbir şey alamayacağımı söyledi. Öfkeyle ayrıldım.' Atkısı yırtık, vazodaki kumaşla eşleşiyor. devam ediyor?",
+      "image": "./img/red_scarf.jpg",
+      "choices": [
+        {
+          "text": "Atkı hakkında konuş.",
+          "next": "marcus_yuzlestirme"
+        },
+        {
+          "text": "Daha fazla araştırın.",
+          "next": "suc_mahalli"
+        }
+      ],
+      "hint": "Hatı, kasa olay yerini gösteriyor."
+    },
+    {
+      "scene_id": "marcus_yuzlestirme",
+      "text": "Marcus’a atkı kanıtını gösteriyorsunuz. Kekeliyor, 'O gün erken saatte oradaydım, ama ayrıldım! Bir tuzağa düşürüyor!' Paniği inandırıcı, ama kanıtlar aleyhinde. Şimdi ne yaparsınız?",
+      "image": "./img/red_scarf.jpg",
+      "choices": [
+        {
+          "text": "Onu cinayetle suçlayın.",
+          "next": "marcus_suclama"
+        },
+        {
+          "text": "Daha fazla araştırın.",
+          "next": "suc_mahalli"
+        }
+      ],
+      "hint": "Marcus tuzağa mı düşürüldü, yoksa yalan mı söylüyor?"
+    },
+    {
+      "scene_id": "marcus_mulama",
+      "text": "Marcus’u suçluyorsunuz. İtiraz ediyor, ama atkı ve ayak izi yeterli. Polis onu tutukluyor. Daha sonra kanıtlar, Elena tarafından tuzak kurulduğunu gösteriyor. Yanlış kişiyi suçladınız. Oyun Bitti.",
+      "choices": "Tuzağa düşmemek için daha fazla kanıt gerekliydi."
+    },
+    {
+      "scene_id": "clara_sorgu",
+      "text": "Clara Holt, 52 yaşında, 1.60 m, 59 kg, 36 numara ayakkabı, gergin bir şekilde kıpırdanıyor, elleri titriyor, gözleri yaşlı. Victor’un 20 yıllık hizmetçisi, yumuşak sesle konuşuyor. 'Cinayet sırasında misafir kanadını temizliyordum—Elena bunu doğrulayabilir. Victor nazikti, ama sırları onu ağırlaştırıyordu,' diyor, hıçkırarak. Marlboro içtiğini söylüyor. Elleri nasırlı, güçlülüğünü gösteriyor. Ne sorarsınız?",
+      "choices": [
+        {
+          "text": "Victor’un sırlarını sorun.",
+          "next": "clara_sirlar"
+        },
+        {
+          "text": "Alibisini sorun.",
+          "next": "clara_alibi"
+        },
+        {
+          "text": "Onu cinayetle suçlayın.",
+          "next": "clara_suclama"
+        }
+      ],
+      "hint": "Victor’a sadakati, bir kini gizliyor olabilir."
+    },
+    {
+      "scene_id": "clara_sirlar",
+      "text": "Clara fısıldıyor, gözleri doluyor. 'Victor tehlikeli sahalara borçluyordu. Bana geçmişimden kaçmam için para sözü verdi, ama Elena onu beni kesmesi için baskı yaptı.' Çaresizliği açık. Şimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Geçmişini sorun.",
+          "next": "clara_pre_nis"
+        },
+        {
+          "text": "Alibisini sorun.",
+          "next": "clara_alibi"
+        }
+      ],
+      "hint": "Geçmiş, onun motifini ortaya çıkarabilir."
+    },
+    {
+      "scene_id": "clara_alibi",
+      "text": "Clara, 'Elena beni saat 20:00’de misafir kanadında gördü. Çalışma odasına yakın değildim,'’ diyor, sesi titrek. Elena’nın doğrulaması çok uygun—fazla uygun. Şimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Clara’yı mektupla karşılaştırın.",
+          "next": "clara_yuzlestar"
+        },
+        {
+          "text": "Suç mahalline dön.",
+          "next": "suc_mahalli"
+        }
+      ],
+      "hint": "Elena’nın Clara için kefil olması olasıdır."
+    },
+    {
+      "scene_id": "clara_pre_nis",
+      "text": "Clara’nın gözleri doluyor, hıçkırıyor. 'Yılarar önce tacizci bir kocadan kaçtım. Victor bana yeni bir başlangıç yapmama yardım etti, ama saklanmak için o paraya ihtiyacım vardı.' Motifi duygusal. Şimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Clara’yı mektupla karşılaştırın.",
+          "next": "clara_yuzlestar"
+        },
+        {
+          "text": "Daha fazla araştırın.",
+          "next": "suc_mahalli"
+        }
+      ],
+      "hint": "Çaresizliği, onu harekete geçirmiş olabilir."
+    },
+    {
+      "scene_id": "clara_yuzlestar",
+      "text": "Clara’ya mektubu gösteriyorsunuz. Hıçkırarak, 'Victor bana özgürlük sözü verdi! Onu öldürmedim—aile gibi seviyordum!' Kederi gerçekçi görünüyor, ama motifi hâlâ mevcut. Şimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Onu cinayetle suçlayın.",
+          "next": "clara_suclama"
+        },
+        {
+          "text": "Daha fazla araştırın",
+          "next": "suc_mahalli"
+        }
+      ],
+      "hint": "Duyguları suçluluğunu dışlamıyor."
+    },
+    {
+      "scene_id": "clara_su",
+      "text": "Clara’yı suçlıyorsunuz. Çöküyor ve polis onu alıyor. Daha sonra kanıtlar, Elena’nın onu tuzağa düşürdüğünü gösteriyor. Masum bir kadını suçladınız, katil kaçıyor. Oyun Bitti.",
+      "choices": [],
+      "hint": "Tuzağa düşmemek için daha fazla kanıt gerekliydi."
+    },
+    {
+      "scene_id": "tablo_arama",
+      "text": "Galeri odasında sahte Monet tablosunu, sahte bir duvarın arkasında buluyorsunuz. Elena’nın el yazısıyla bir not: 'Sat, yoksa mahvoluruz.' İkinci bir bulmaca, dört bulutanı (fırça, palet, tuval, sehpa) doğru sırayla hizalamayı gerektiriyor. Hangi sıra?",
+      "choices": [
+        {
+          "text": "Fırça at, Palet, Tuval, Sehpa",
+          "next": "sembol_bulmacası_2_basari"
+        },
+        {
+          "text": "Sehpaşa, Tuval, Palet, Fırça",
+          "next": "sembol_bulmacası_2_basarisiz"
+        },
+        {
+          "text": "Tuval, Fırça, Sehpa, Palet",
+          "next": "sembol_bulmacası_2_basarisiz"
+        }
+      ],
+      "hint": "Resim yapma sırasını düşünün."
+    },
+    {
+      "scene_id": "sembol_bulmacası_2_basari",
+      "text": "Bölme açılıyor ve Elena’nın Victor’un koleksiyonunu yasadışı satmak için imzaladığı bir sözleşme ortaya çıkıyor. Bu, suçlayıcı bir kanıt. Şimdi ne yaparsınız?",
+      "choices": [
+        {
+          "text": "Elena’yı sözleşmeyle karşılaştırın.",
+          "next": "elena_final"
+        },
+        {
+          "text": "Daha fazla kanıt toplayın.",
+          "next": "suc_mahalli"
+        }
+      ],
+      "hint": "Bu sözleşme, davanın anahtarı."
+    },
+    {
+      "scene_id": "sembol_bulmacası_2_basarisiz",
+      "text": "Bölme kilitleniyor. Dışarıdan bir araba motoru sesi duyuyorsunuz—biri kaçıyor. Tekrar deneyin ya da harekete geçin?",
+      "choices": [
+        {
+          "text": "Bulmacayı tekrar deneyin.",
+          "next": "tablo_arama"
+        },
+        {
+          "text": "Arabayı kovalayın.",
+          "next": "kovalama_basarisiz"
+        }
+      ],
+      "hint": "Resim yapma süreci mantıklı bir sıraya sahip."
+    },
+    {
+      "scene_id": "kovalama_basarisiz",
+      "text": "Dışarı koşturuyorsunuz, ama araba gitmiş. Gecikmeniz yüzünden katil kaçtı. Oyun Bitti.",
+      "choices": [],
+      "hint": "Zaman kritik—dikkatiniz dağılmasın."
+    },
+    {
+      "scene_id": "elena_final",
+      "text": "Elena’yı sözleşme, günlük, mektup açıcı, parmak izi ve sigara izmaritiyle yüzleştiriyorsunuz. Sırıtıyor, sonra kapıya fırlıyor, yüzünde panik ve öfke karışımı. Cebinde bir şifreli mesaj: 'HIDE, kaçışım olur.' Anagramı çözerek onu yakalayın.",
+      "image": "./img/murder_weapon.jpg",
+      "choices": [
+        {
+          "text": "Giriş: DIHE",
+          "next": "anagram_final_basarisiz"
+        },
+        {
+          "text": "Giriş: HEDI",
+          "next": "anagram_final_basari"
+        },
+        {
+          "text": "Giriş: EHID",
+          "next": "anagram_final_basarisiz"
+        }
+      ],
+      "hint": "H-I-D-E’yi bir isim oluşturacak şekilde düzenleyin."
+    },
+    {
+      "scene_id": "anagram_final_basari",
+      "text": "'HEDI' anagramı, Elena’nın takma adını ortaya çıkarıyor. Kapıya ulaşırken onu yakalıyorsunuz. Polis geliyor ve sözleşme suçluluğunu kanıtlıyor. Elena çöküyor, gözleri öfkeyle parlıyor: 'Victor’un açgözlülüğü bir zehirdi. O sahte tablo, galerimi kurtaracaktı, ama beni ifşa etmekle tehdit etti. Öfkeden bıçakladım ve Marcus’u suçlamak için atkıyı bıraktım. Pişman değilim—galerim benim hayatımdı.' Katili yakaladınız. Zafer!",
+      "choices": [],
+      "hint": "Davayı çözdünüz!"
+    },
+    {
+      "scene_id": "anagram_final_basarisiz",
+      "text": "Anagram başarısız. Elena gizli bir çıkıştan kaçıyor. Polis kanıt bulamıyor ve katil kayboluyor. Oyun Bitti.",
+      "choices": [],
+      "hint": "Anagram, onun takma adıydı."
+    }
+  ],
+  "supheliler": [
+    {
+      "name": "Elena Voss",
+      "role": "İş Ortağı",
+      "physical": {"boy": "1.68 m", "kilo": "63 kg", "ayakkabi_numarasi": 37},
+      "background": "Victor’la galeri ortak sahibi. Sahte tablo anlaşması yüzünden tartıştı. İtibarını ve servetini kaybetme tehdidi altında.",
+      "alibi": "Cinayet sırasında galeride olduğunu iddia ediyor, e-posta ve asistanın tanıklığıyla destekleniyor.",
+      "haftalik_aktiviteler": "Pazartesi müşteri görüşmeleri, Salı Victor’la tartışma, Çarşamba-Perşembe galeri evrakları, Cuma yatırımcılarla yemek.",
+      "sigara_aliskanligi": "Gauloises sigara içiyor."
+    },
+    {
+      "name": "Marcus Reed",
+      "role": "Uzaklaşmış Oğul",
+      "physical": {"boy": "1.85 m", "kilo": "81 kg", "ayakkabi_numarasi": 43},
+      "background": "Victor’un işine katılmayı reddettiği için vasiyetten çıkarıldı. Geçen hafta barışmak için Victor’la tartıştı.",
+      "alibi": "Yürüyüşte olduğunu iddia ediyor, GPS kayıtlarıyla destekleniyor.",
+      "haftalik_aktiviteler": "Pazartesi-Çarşamba kamp, Perşembe Victor’u ziyaret, Cuma tekrar yürüyüş.",
+      "sigara_aliskanligi": "Sigara içmez."
+    },
+    {
+      "name": "Clara Holt",
+      "role": "Hizmetçi",
+      "physical": {"boy": "1.60 m", "kilo": "59 kg", "ayakkabi_numarasi": 36},
+      "background": "Victor’a 20 yıl sadık, tacizci bir geçmişten kaçıyor. Victor ona para sözü verdi, ama Elena onu kesmesi için baskı yaptı.",
+      "alibi": "Misafir kanadını temizlediğini iddia ediyor, Elena tarafından doğrulanıyor.",
+      "haftalik_aktiviteler": "Her gün malikâne temizliği, Salı banka ziyareti, Çarşamba alışveriş, Perşembe-Cuma temizlik.",
+      "sigara_aliskanligi": "Marlboro sigara içiyor."
+    }
+  ]
+}
