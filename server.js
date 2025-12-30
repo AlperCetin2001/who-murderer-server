@@ -43,7 +43,6 @@ io.on('connection', (socket) => {
     console.log(`🔌 Yeni bağlantı: ${socket.id}`);
     socket.emit('room_list_update', getPublicRoomList());
 
-    // ODA OLUŞTURMA
     socket.on('create_room', ({ playerName, visibility, password, avatar }) => {
         let roomCode = generateRoomCode();
         while(rooms.has(roomCode)) { roomCode = generateRoomCode(); }
@@ -65,7 +64,6 @@ io.on('connection', (socket) => {
         io.emit('room_list_update', getPublicRoomList());
         io.to(roomCode).emit('update_player_list', rooms.get(roomCode).players);
         
-        // Sohbete Sistem Mesajı
         io.to(roomCode).emit('chat_message', { 
             sender: 'Sistem', 
             text: `Oda kuruldu. Dedektif ${playerName} giriş yaptı.`, 
@@ -73,7 +71,6 @@ io.on('connection', (socket) => {
         });
     });
 
-    // ODAYA KATILMA
     socket.on('join_room', ({ roomCode, playerName, password, avatar }) => {
         const room = rooms.get(roomCode);
 
@@ -91,7 +88,6 @@ io.on('connection', (socket) => {
         io.to(roomCode).emit('update_player_list', room.players);
         io.emit('room_list_update', getPublicRoomList());
 
-        // Sohbete Bildirim
         io.to(roomCode).emit('chat_message', { 
             sender: 'Sistem', 
             text: `${playerName} ekibe katıldı.`, 
@@ -99,7 +95,6 @@ io.on('connection', (socket) => {
         });
     });
 
-    // SOHBET MESAJI
     socket.on('send_chat', ({ roomCode, message, playerName, avatar }) => {
         io.to(roomCode).emit('chat_message', { 
             sender: playerName, 
@@ -110,12 +105,10 @@ io.on('connection', (socket) => {
         });
     });
 
-    // YAZIYOR... GÖSTERGESİ
     socket.on('typing', ({ roomCode, playerName, isTyping }) => {
         socket.to(roomCode).emit('user_typing', { playerName, isTyping });
     });
 
-    // OYUNU BAŞLATMA
     socket.on('start_game', ({ roomCode, caseId, mode }) => {
         const room = rooms.get(roomCode);
         if (room && room.host === socket.id) {
@@ -129,7 +122,6 @@ io.on('connection', (socket) => {
             room.mode = mode || 'individual';
             room.hintCount = 3; 
             
-            // Sohbeti Temizle Sinyali
             io.to(roomCode).emit('clear_chat');
             io.to(roomCode).emit('chat_message', { sender: 'Sistem', text: '--- YENİ DAVA BAŞLADI ---', type: 'system' });
 
@@ -138,7 +130,6 @@ io.on('connection', (socket) => {
         }
     });
 
-    // OYLAMA VE DİĞERLERİ (AYNI KALDI)
     socket.on('cast_vote', ({ roomCode, nextSceneId }) => {
         const room = rooms.get(roomCode);
         if (!room || room.mode !== 'voting') return;
@@ -184,16 +175,13 @@ io.on('connection', (socket) => {
     socket.on('get_public_rooms', () => { socket.emit('room_list_update', getPublicRoomList()); });
 
     socket.on('disconnect', () => {
-        // Ayrılma mantığı: Hangi odada olduğunu bulup bildirim gönder
         rooms.forEach((room, code) => {
             const playerIndex = room.players.findIndex(p => p.id === socket.id);
             if (playerIndex !== -1) {
                 const pName = room.players[playerIndex].name;
-                room.players.splice(playerIndex, 1); // Listeden sil
+                room.players.splice(playerIndex, 1); 
                 io.to(code).emit('update_player_list', room.players);
                 io.to(code).emit('chat_message', { sender: 'Sistem', text: `${pName} ayrıldı.`, type: 'leave' });
-                
-                // Oda boşaldıysa sil
                 if(room.players.length === 0) rooms.delete(code);
                 else io.emit('room_list_update', getPublicRoomList());
             }
