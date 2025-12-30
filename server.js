@@ -2,73 +2,17 @@ const express = require('express');
 const http = require('http');
 const { Server } = require("socket.io");
 const cors = require('cors');
-const fs = require('fs');
-const path = require('path');
 
 const app = express();
 app.use(cors());
-app.use(express.json());
-
-// -----------------------------------------------------------
-// 1. DEĞİŞİKLİK: 'public' yerine 'htdocs' yapıldı
-// -----------------------------------------------------------
-app.use(express.static(path.join(__dirname, 'htdocs')));
-
-// ÇEVİRİ PROXY (Aynı kalıyor - Ücretsiz ve Engelsiz)
-app.post('/api/translate', async (req, res) => {
-    const { text, targetLang } = req.body;
-    if (!text) return res.status(400).json({ error: 'Metin yok' });
-    if (targetLang === 'tr') return res.json({ translatedText: text });
-
-    try {
-        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=tr&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        
-        if (data && data[0]) {
-            const translatedText = data[0].map(segment => segment[0]).join('');
-            return res.json({ translatedText });
-        }
-        res.json({ translatedText: text });
-    } catch (error) {
-        console.error('Çeviri hatası:', error);
-        res.json({ translatedText: text });
-    }
-});
 
 const server = http.createServer(app);
+
 const io = new Server(server, {
     cors: { origin: "*", methods: ["GET", "POST"] }
 });
 
 const rooms = new Map();
-const scenesCache = {}; 
-
-// -----------------------------------------------------------
-// 2. DEĞİŞİKLİK: Senaryo yükleme yolu 'htdocs/data' yapıldı
-// -----------------------------------------------------------
-function loadCaseData(caseId) {
-    if (scenesCache[caseId]) return scenesCache[caseId];
-    try {
-        // BURASI DEĞİŞTİ: public -> htdocs
-        const dataPath = path.join(__dirname, 'htdocs', 'data', `scenes${caseId.replace('case', '')}.json`);
-        
-        if (!fs.existsSync(dataPath)) {
-            console.error(`Dosya bulunamadı: ${dataPath}`);
-            return null;
-        }
-
-        const rawData = fs.readFileSync(dataPath);
-        const jsonData = JSON.parse(rawData);
-        scenesCache[caseId] = jsonData;
-        return jsonData;
-    } catch (err) {
-        console.error(`Senaryo yükleme hatası (${caseId}):`, err);
-        return null;
-    }
-}
-
-// ... STANDART SOCKET KODLARI (Aynı Kalıyor) ...
 
 function generateRoomCode() {
     const chars = "BCDFGHJKMNPQRSTVWXYZ23456789";
@@ -99,6 +43,7 @@ io.on('connection', (socket) => {
     console.log(`🔌 Yeni bağlantı: ${socket.id}`);
     socket.emit('room_list_update', getPublicRoomList());
 
+    // ODA OLUŞTURMA
     socket.on('create_room', ({ playerName, visibility, password, avatar }) => {
         let roomCode = generateRoomCode();
         while(rooms.has(roomCode)) { roomCode = generateRoomCode(); }
@@ -109,11 +54,10 @@ io.on('connection', (socket) => {
             gameState: 'lobby',
             mode: 'individual', 
             votes: {},          
-            currentCaseId: null,
-            currentSceneId: 'giris',
+            currentCase: null,
             isPrivate: (visibility === 'private'),
             password: (visibility === 'protected' && password) ? password : null,
-            hintCount: 3
+            hintCount: 3 // Başlangıç hakkı
         });
 
         socket.join(roomCode);
@@ -128,8 +72,10 @@ io.on('connection', (socket) => {
         });
     });
 
+    // ODAYA KATILMA
     socket.on('join_room', ({ roomCode, playerName, password, avatar }) => {
         const room = rooms.get(roomCode);
+
         if (!room) return socket.emit('error_message', '❌ Böyle bir oda bulunamadı!');
         if (room.gameState !== 'lobby') return socket.emit('error_message', '⚠️ Oyun çoktan başladı!');
         if (room.password && room.password !== password) return socket.emit('error_message', '🔒 Yanlış Şifre!');
@@ -152,64 +98,56 @@ io.on('connection', (socket) => {
     });
 
     socket.on('send_chat', ({ roomCode, message, playerName, avatar }) => {
-        if (!message || message.trim().length === 0) return;
-        const safeMessage = message.substring(0, 500); 
         io.to(roomCode).emit('chat_message', { 
             sender: playerName, 
-            text: safeMessage, 
+            text: message, 
             avatar: avatar,
             id: socket.id,
             type: 'user'
         });
     });
 
+    socket.on('typing', ({ roomCode, playerName, isTyping }) => {
+        socket.to(roomCode).emit('user_typing', { playerName, isTyping });
+    });
+
+    // OYUNU BAŞLATMA (İPUCU SIFIRLAMA)
     socket.on('start_game', ({ roomCode, caseId, mode }) => {
         const room = rooms.get(roomCode);
         if (room && room.host === socket.id) {
-            const caseData = loadCaseData(caseId);
-            
-            if (!caseData) {
-                // Eğer dosya bulunamazsa host'a hata ver
-                socket.emit('error_message', 'Senaryo dosyası (htdocs/data içinde) bulunamadı!');
+            if (mode === 'voting' && room.players.length < 3) {
+                socket.emit('error_message', '⚠️ Demokrasi modu için en az 3 dedektif gereklidir!');
                 return;
             }
 
             room.gameState = 'playing';
-            room.currentCaseId = caseId;
+            room.currentCase = caseId;
             room.mode = mode || 'individual';
-            room.hintCount = 3;
-            room.currentSceneId = 'giris';
+            room.hintCount = 3; // Hakları 3'e eşitle
             
             io.to(roomCode).emit('clear_chat');
+            io.to(roomCode).emit('chat_message', { sender: 'Sistem', text: '--- YENİ DAVA BAŞLADI ---', type: 'system' });
+
+            // currentHintCount parametresini gönderiyoruz
             io.to(roomCode).emit('game_started', { 
+                caseId, 
                 mode: room.mode, 
                 currentHintCount: 3 
             });
-
-            sendSceneToRoom(roomCode, 'giris');
             io.emit('room_list_update', getPublicRoomList());
         }
     });
 
-    socket.on('make_choice', ({ roomCode, nextSceneId }) => {
+    socket.on('cast_vote', ({ roomCode, nextSceneId }) => {
         const room = rooms.get(roomCode);
-        if (!room) return;
-        
-        if (room.mode === 'individual') {
-            sendSceneToSocket(socket, room.currentCaseId, nextSceneId);
-        } else if (room.mode === 'voting') {
-             handleVoting(socket, roomCode, nextSceneId);
-        }
-    });
-
-    function handleVoting(socket, roomCode, nextSceneId) {
-        const room = rooms.get(roomCode);
+        if (!room || room.mode !== 'voting') return;
         room.votes[socket.id] = nextSceneId;
         
         const voteStatus = room.players.map(player => ({
             name: player.name,
             id: player.id,
             hasVoted: room.votes.hasOwnProperty(player.id),
+            votedForId: room.votes[player.id] || null 
         }));
 
         const playerCount = room.players.length;
@@ -225,55 +163,37 @@ io.on('connection', (socket) => {
                 counts[sceneId] = (counts[sceneId] || 0) + 1;
                 if (counts[sceneId] > maxVotes) { maxVotes = counts[sceneId]; winnerScene = sceneId; }
             });
-            
             setTimeout(() => {
                 room.votes = {}; 
-                room.currentSceneId = winnerScene;
-                sendSceneToRoom(roomCode, winnerScene);
+                io.to(roomCode).emit('force_scene_change', winnerScene);
             }, 3000);
         }
-    }
+    });
 
-    socket.on('request_hint', ({ roomCode, playerName }) => {
+    // İPUCU İSTEĞİ (DÜZELTİLDİ: HERKESE GÖNDERİM)
+    socket.on('request_hint', ({ roomCode, hintText, playerName }) => {
         const room = rooms.get(roomCode);
-        if (!room) return;
-        
-        if (room.mode === 'voting') {
+        if (room && room.mode === 'voting') {
             if (room.hintCount > 0) {
-                room.hintCount--;
-                const currentSceneData = getSceneData(room.currentCaseId, room.currentSceneId);
-                const hintText = currentSceneData ? (currentSceneData.hint || currentSceneData.hint_text) : "İpucu yok.";
+                room.hintCount--; // Sunucuda azalt
                 
+                // HERKESE yeni sayıyı ve metni gönder
                 io.to(roomCode).emit('hint_revealed', { 
                     hintText: hintText, 
                     newCount: room.hintCount,
                     user: playerName
                 });
+            } else {
+                // Hakkı kalmadıysa sadece isteyene hata dön
+                socket.emit('error_message', '⚠️ İpucu hakkınız kalmadı!');
             }
-        } else {
-             const currentSceneData = getSceneData(room.currentCaseId, 'giris');
         }
     });
 
-    function sendSceneToSocket(socket, caseId, sceneId) {
-        const sceneData = getSceneData(caseId, sceneId);
-        if (sceneData) socket.emit('scene_data', sceneData);
-    }
+    socket.on('get_public_rooms', () => { socket.emit('room_list_update', getPublicRoomList()); });
 
-    function sendSceneToRoom(roomCode, sceneId) {
-        const room = rooms.get(roomCode);
-        const sceneData = getSceneData(room.currentCaseId, sceneId);
-        if (sceneData) io.to(roomCode).emit('scene_data', sceneData);
-    }
-
-    function getSceneData(caseId, sceneId) {
-        const caseJson = loadCaseData(caseId);
-        if (!caseJson || !caseJson.scenes) return null;
-        return caseJson.scenes.find(s => s.scene_id === sceneId);
-    }
-    
     socket.on('disconnect', () => {
-         rooms.forEach((room, code) => {
+        rooms.forEach((room, code) => {
             const playerIndex = room.players.findIndex(p => p.id === socket.id);
             if (playerIndex !== -1) {
                 const pName = room.players[playerIndex].name;
@@ -289,5 +209,5 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-    console.log(`🚀 Sunucu ${PORT} portunda çalışıyor`);
+    console.log(`🚀 Sunucu çalışıyor`);
 });
