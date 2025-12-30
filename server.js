@@ -27,13 +27,12 @@ function generateRoomCode() {
 function getPublicRoomList() {
     const publicRooms = [];
     rooms.forEach((room, code) => {
-        // Sadece 'playing' olmayan (lobideki) ve 'private' olmayan odaları gönder
         if (room.gameState === 'lobby' && !room.isPrivate) {
             publicRooms.push({
                 code: code,
                 host: room.players[0].name,
                 count: room.players.length,
-                isLocked: !!room.password, // Şifresi varsa true döner
+                isLocked: !!room.password, 
                 mode: room.mode
             });
         }
@@ -44,16 +43,15 @@ function getPublicRoomList() {
 io.on('connection', (socket) => {
     console.log(`🔌 Yeni bağlantı: ${socket.id}`);
 
-    // Bağlanan herkese güncel oda listesini gönder
+    // Bağlanan kişiye hemen listeyi gönder
     socket.emit('room_list_update', getPublicRoomList());
 
-    // 1. Oda Oluşturma (Gelişmiş)
+    // 1. Oda Oluşturma
     socket.on('create_room', ({ playerName, visibility, password }) => {
         let roomCode = generateRoomCode();
         while(rooms.has(roomCode)) { roomCode = generateRoomCode(); }
 
         const isPrivate = (visibility === 'private');
-        // Eğer visibility 'protected' ise şifreyi kaydet, yoksa null
         const roomPassword = (visibility === 'protected' && password) ? password : null;
 
         rooms.set(roomCode, {
@@ -70,33 +68,32 @@ io.on('connection', (socket) => {
         socket.join(roomCode);
         socket.emit('room_created', { roomCode, isHost: true });
         
-        // Tüm lobilere güncel listeyi yayınla
+        // Listeyi güncelle
         io.emit('room_list_update', getPublicRoomList());
     });
 
-    // 2. Odaya Katılma (Şifre Kontrollü)
+    // 2. Odaya Katılma (Düzeltildi)
     socket.on('join_room', ({ roomCode, playerName, password }) => {
         const room = rooms.get(roomCode);
 
-        if (!room) {
-            return socket.emit('error_message', '❌ Böyle bir oda bulunamadı!');
-        }
+        if (!room) return socket.emit('error_message', '❌ Böyle bir oda bulunamadı!');
+        if (room.gameState !== 'lobby') return socket.emit('error_message', '⚠️ Oyun çoktan başladı!');
+        if (room.password && room.password !== password) return socket.emit('error_message', '🔒 Yanlış Şifre!');
 
-        if (room.gameState !== 'lobby') {
-            return socket.emit('error_message', '⚠️ Oyun çoktan başladı!');
-        }
-
-        // Şifre Kontrolü
-        if (room.password && room.password !== password) {
-            return socket.emit('error_message', '🔒 Yanlış Şifre!');
-        }
+        // İsim Tekrarı Kontrolü (Aynı odada aynı isim olmasın)
+        const nameExists = room.players.some(p => p.name === playerName);
+        if (nameExists) return socket.emit('error_message', '⚠️ Bu isim zaten odada var!');
 
         room.players.push({ id: socket.id, name: playerName, score: 0 });
         socket.join(roomCode);
 
+        // Katılan kişiye "Başarılı" sinyali gönder (Ekran değişimi için kritik)
+        socket.emit('join_success', { roomCode, isHost: false });
+
+        // Odadaki herkese listeyi güncelle
         io.to(roomCode).emit('update_player_list', room.players);
         
-        // Liste değişti (kişi sayısı arttı), herkese güncelleme at
+        // Genel sunucu listesini güncelle (Kişi sayısı arttı)
         io.emit('room_list_update', getPublicRoomList());
     });
 
@@ -106,7 +103,7 @@ io.on('connection', (socket) => {
         
         if (room && room.host === socket.id) {
             if (mode === 'voting' && room.players.length < 3) {
-                socket.emit('error_message', '⚠️ Demokrasi modu için en az 3 kişi gereklidir!');
+                socket.emit('error_message', '⚠️ Demokrasi modu için en az 3 dedektif gereklidir!');
                 return;
             }
 
@@ -116,7 +113,7 @@ io.on('connection', (socket) => {
             
             io.to(roomCode).emit('game_started', { caseId, mode: room.mode });
             
-            // Oyun başladığı için listeden düşmeli -> Listeyi güncelle
+            // Oyun başladığı için listeden kaldır
             io.emit('room_list_update', getPublicRoomList());
         }
     });
@@ -160,14 +157,15 @@ io.on('connection', (socket) => {
         }
     });
 
-    // İstemci açık oda listesini manuel isterse
     socket.on('get_public_rooms', () => {
         socket.emit('room_list_update', getPublicRoomList());
     });
 
     socket.on('disconnect', () => {
-        // Not: Gerçek uygulamada odadan düşen oyuncuyu silmek ve listeyi güncellemek gerekir.
-        // Şimdilik karmaşıklığı artırmamak için pas geçiyoruz.
+        // Basit temizlik: Eğer host çıkarsa odayı silebiliriz ama
+        // şimdilik sadece oyuncu sayısını düşürme mantığı karmaşık olacağı için
+        // listeyi olduğu gibi bırakıyoruz. (İdeal çözümde burada oda temizliği yapılmalı)
+        console.log(`❌ Ayrıldı: ${socket.id}`);
     });
 });
 
