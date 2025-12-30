@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs'); // Dosya sistemi modülü eklendi
 const express = require('express');
 const http = require('http');
 const { Server } = require("socket.io");
@@ -14,6 +14,26 @@ const io = new Server(server, {
 });
 
 const rooms = new Map();
+
+// --- SENARYO YÜKLEME SİSTEMİ BAŞLANGIÇ ---
+const loadedScenarios = {};
+
+function loadAllScenarios() {
+    // 3 adet vaka dosyamız olduğunu varsayıyoruz (scenes1.json, scenes2.json...)
+    ['case1', 'case2', 'case3'].forEach(caseId => {
+        try {
+            // Dosya yolunu ./data/scenes1.json olacak şekilde ayarlıyoruz
+            const fileName = `scenes${caseId.replace('case', '')}.json`;
+            const rawData = fs.readFileSync(`./data/${fileName}`);
+            loadedScenarios[caseId] = JSON.parse(rawData);
+            console.log(`✅ ${caseId} (${fileName}) başarıyla yüklendi.`);
+        } catch (error) {
+            console.error(`❌ ${caseId} yüklenemedi. ./data/ klasöründe dosya var mı?:`, error.message);
+        }
+    });
+}
+loadAllScenarios(); // Sunucu başlarken çalıştır
+// --- SENARYO YÜKLEME SİSTEMİ BİTİŞ ---
 
 function generateRoomCode() {
     const chars = "BCDFGHJKMNPQRSTVWXYZ23456789";
@@ -43,6 +63,31 @@ function getPublicRoomList() {
 io.on('connection', (socket) => {
     console.log(`🔌 Yeni bağlantı: ${socket.id}`);
     socket.emit('room_list_update', getPublicRoomList());
+
+    // --- YENİ EKLENEN KISIM: SAHNE VERİSİ İSTEĞİ (Anti-Spoiler) ---
+    socket.on('request_scene_data', ({ roomCode, sceneId }) => {
+        const room = rooms.get(roomCode);
+        
+        // Güvenlik kontrolleri
+        if (!room) return;
+        if (!room.players.find(p => p.id === socket.id)) return; // Oyuncu odada mı?
+        
+        // Odadaki aktif davayı bul
+        const caseData = loadedScenarios[room.currentCase]; 
+        if (!caseData || !caseData.scenes) return;
+
+        // İstenen sahneyi hafızadan bul
+        const sceneData = caseData.scenes.find(s => s.scene_id === sceneId);
+        
+        if (sceneData) {
+            // Veriyi sadece isteyene gönder (Güvenlik için)
+            socket.emit('scene_data_update', sceneData);
+        } else {
+            // Sahne bulunamazsa hata veya log
+            console.log(`Sahne bulunamadı: ${sceneId}`);
+        }
+    });
+    // -------------------------------------------------------------
 
     // ODA OLUŞTURMA
     socket.on('create_room', ({ playerName, visibility, password, avatar }) => {
@@ -171,7 +216,7 @@ io.on('connection', (socket) => {
         }
     });
 
-    // İPUCU İSTEĞİ (DÜZELTİLDİ: HERKESE GÖNDERİM)
+    // İPUCU İSTEĞİ
     socket.on('request_hint', ({ roomCode, hintText, playerName }) => {
         const room = rooms.get(roomCode);
         if (room && room.mode === 'voting') {
