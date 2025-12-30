@@ -3,7 +3,7 @@
     {
       "scene_id": "giris",
       "text": "Antarktika'nın derinliklerinde, haritalarda bile görünmeyen 'Kutup Yıldızı' araştırma istasyonundasınız. Dışarıda -60 derecelik bir fırtına var. İletişim koptu. İstasyonun Baş Araştırmacısı Prof. Hakan, sabah sayımına gelmedi. Ekip olarak onun odasına gittiğinizde kapı kilitliydi. Kapıyı kırdınız ve... Prof. Hakan yerde, donmuş bir şekilde yatıyor. Odanın ısıtma sistemi 'maksimum'da olmasına rağmen ceset buz tutmuş. Bir cinayet... ya da daha kötüsü.",
-      "image": "./img/polar_dis.jpg",
+      "image": "./img/case1/polar_dis.jpg",
       "choices": [
         { "text": "Cesede yaklaş ve ilk incelemeyi yap.", "next": "ceset_ilk_bakis" },
         { "text": "Odadaki diğer detaylara (masaya, pencerelere) bak.", "next": "oda_arastirma" },
@@ -13,7 +13,7 @@
     {
       "scene_id": "ceset_ilk_bakis",
       "text": "Prof. Hakan'ın yüzünde saf bir dehşet ifadesi var. Tuhaf olan şu: Vücudunda darp izi yok ama elinde sıkıca tuttuğu bir şey var. Ayrıca ceketinin cebinden bir kağıt parçası sarkıyor. Odanın sıcaklığı 25 derece ama adamın kirpikleri bile buzlu.",
-      "image": "./img/polar_ceset.jpg",
+      "image": "./img/case1/polar_ceset.jpg",
       "hint": "Isı normal ama ceset donmuş. Bu fizik kurallarına aykırı. Kimyasal bir madde olabilir mi?",
       "choices": [
         { "text": "Elindeki nesneyi zorla al.", "next": "ipucu_tablet" },
@@ -24,7 +24,7 @@
     {
       "scene_id": "oda_arastirma",
       "text": "Oda dağınık. Sanki bir boğuşma yaşanmış ama devrilen eşyalar rastgele değil, sanki bir şey aranmış gibi. Duvardaki havalandırma ızgarası gevşemiş. Masanın üzerinde yarım kalmış bir kahve ve açık bir laptop var. Laptop ekranında 'VERİ YÜKLENİYOR... %99' yazısı donmuş.",
-      "image": "./img/polar_lab.jpg",
+      "image": "./img/case1/polar_lab.jpg",
       "choices": [
         { "text": "Laptopu incele (Şifre isteyebilir).", "next": "ipucu_laptop" },
         { "text": "Havalandırma ızgarasına bak.", "next": "ipucu_havalandirma" },
@@ -32,9 +32,29 @@
       ]
     },
     {
+      "scene_id": "ipucu_havalandirma",
+      "text": "Izgarayı vidalarından söküp kenara koydun. İçeriden soğuk bir hava geliyor. El fenerini tuttuğunda içeride parlayan metalik bir cisim görüyorsun. Uzanıp aldığında bunun bir USB bellek olduğunu fark ettin. Üzerinde 'B PLANI' yazıyor.",
+      "image": "./img/case1/item_tablet.jpg",
+      "hint": "Bu USB, laptopta işe yarayabilir mi? Yoksa başka bir bilgisayar için mi?",
+      "choices": [
+        { "text": "USB'yi al ve Laptopu dene.", "next": "ipucu_laptop" },
+        { "text": "USB'yi sakla, sonra Server odasında denerim.", "next": "merkez_hol" }
+      ]
+    },
+    {
+      "scene_id": "ipucu_kahve",
+      "text": "Kupayı dikkatlice kaldırıp kokladın. Kahve kokusunun altında çok keskin, acıbadem benzeri bir koku var. Siyanür! Profesör zehirlenmiş olabilir mi? Ama zehirlenme donmaya sebep olmaz.",
+      "image": "./img/case1/polar_yemekhane.jpg",
+      "hint": "Zehir teşebbüsü var ama ölüm sebebi bu olmayabilir.",
+      "choices": [
+        { "text": "Bu bilgiyi aklında tut ve odayı aramaya devam et.", "next": "oda_arastirma" },
+        { "text": "Cesede tekrar bak, zehirlenme belirtisi var mı?", "next": "ceset_ilk_bakis" }
+      ]
+    },
+    {
       "scene_id": "ekip_tepki",
       "text": "Odadaki üç kişi sana bakıyor. 1. Dr. Stone (Biyolog): Soğukkanlı, hemen nabzı kontrol etmek istiyor. 2. Eva (Mühendis): Titriyor, sürekli kapıya bakıyor, kaçmak istiyor. 3. Binbaşı (Güvenlik): Silahı elinde, herkese potansiyel suçlu gibi bakıyor. Birinden şüphelenmeye başlamalısın.",
-      "image": "./img/polar_koridor.jpg",
+      "image": "./img/case1/polar_koridor.jpg",
       "hint": "Binbaşı fazla agresif, Eva fazla korkak. Dr. Stone ise fazla sakin. Hangisi normal değil?",
       "choices": [
         { "text": "Dr. Stone ile konuş: 'Neden bu kadar sakinsin?'", "next": "sorgu_stone" },
@@ -43,9 +63,36 @@
       ]
     },
     {
+      "scene_id": "sorgu_stone",
+      "text": "Dr. Stone gözlüklerini düzeltiyor. 'Panik yapmak ölüleri geri getirmez evlat. Profesör riskli bir oyun oynuyordu. Antik buz tabakalarında bulduğumuz o... şey. Onu uyandırmamalıydı.' Stone bir şeylerden pişman gibi.",
+      "image": "./img/case1/char_dr_stone.jpg",
+      "choices": [
+        { "text": "'O şey' nedir? Anlat!", "next": "sorgu_stone_sert" },
+        { "text": "Konuşmayı kes ve odayı incele.", "next": "oda_arastirma" }
+      ]
+    },
+    {
+      "scene_id": "sorgu_eva",
+      "text": "Eva fısıldayarak konuşuyor: 'Havalandırmadan sesler geliyordu... Dün gece. Sanki metalin içinde yürüyen bir şey vardı. Profesör bunu biliyordu! Odayı kilitledi ama o şey kapıdan girmedi!'",
+      "image": "./img/case1/char_eva.jpg",
+      "choices": [
+        { "text": "Havalandırmaya bakmalıyım.", "next": "ipucu_havalandirma" },
+        { "text": "Sakin ol Eva, sadece rüzgardır.", "next": "oda_arastirma" }
+      ]
+    },
+    {
+      "scene_id": "sorgu_binbasi",
+      "text": "Binbaşı silahını indirmiyor. 'Burası artık bir olay mahalli değil, karantina bölgesi. Kimse odadan çıkmayacak. Profesör protokole uymadı ve bedelini ödedi. Siz de aynısını yapmayın.'",
+      "image": "./img/case1/char_major.jpg",
+      "choices": [
+        { "text": "Hangi protokol? Ne saklıyorsunuz?", "next": "sorgu_binbasi_protokol" },
+        { "text": "Tamam, biz sadece anlamaya çalışıyoruz.", "next": "ceset_ilk_bakis" }
+      ]
+    },
+    {
       "scene_id": "ipucu_tablet",
       "text": "Cesedin elinden zorla aldığın şey, ekranı çatlamış bir dijital kayıt cihazı. Son kaydı oynatıyorsun: 'Hata yaptık... O şeyi buzun altından çıkarmamalıydık... Stone beni uyardı ama dinlemedim. Şimdi sesleri duyuyorum. İçeri girdiler.' Ses kaydı çığlıklarla bitiyor.",
-      "image": "./img/item_tablet.jpg",
+      "image": "./img/case1/item_tablet.jpg",
       "choices": [
         { "text": "Bu 'Stone' biyolog olan mı? Ona hesap sor.", "next": "sorgu_stone_sert" },
         { "text": "Kaydı diğerlerine dinlet.", "next": "kayit_dinletme" },
@@ -53,9 +100,27 @@
       ]
     },
     {
+      "scene_id": "sorgu_stone_sert",
+      "text": "Dr. Stone kaydı duyunca irkiliyor. 'Evet, onu uyardım! O virüs... biyolojik bir silah gibi davranıyor. İnsanın sinir sistemini donduruyor. Profesör bunu silah olarak satmak istedi. Ben engel olmaya çalıştım ama beni laboratuvardan kovdu.'",
+      "image": "./img/case1/char_dr_stone.jpg",
+      "choices": [
+        { "text": "Yani onu sen mi öldürdün?", "next": "suclama_stone" },
+        { "text": "Laboratuvara gidip kanıt bulmalıyız.", "next": "merkez_hol" }
+      ]
+    },
+    {
+      "scene_id": "kayit_dinletme",
+      "text": "Kaydı herkese dinletiyorsun. Binbaşı'nın yüzü kireç gibi oluyor. Eva ise kulaklarını tıkıyor. Binbaşı mırıldanıyor: 'Sızma gerçekleşti. Temizlik başlamalı.'",
+      "image": "./img/case1/polar_koridor.jpg",
+      "choices": [
+        { "text": "Binbaşı'nın ne dediğini sorgula.", "next": "sorgu_binbasi_protokol" },
+        { "text": "Diğer ipuçlarına bak.", "next": "ipucu_not" }
+      ]
+    },
+    {
       "scene_id": "ipucu_not",
       "text": "Kağıtta titrek bir el yazısıyla şunlar yazılmış: 'Protokol 0. Kimseye güvenme. Şifre, kızımın doğum günü değil, onun öldüğü gün. 19-??'. Son iki rakam kanla lekelenmiş okunmuyor.",
-      "image": "./img/item_tablet.jpg",
+      "image": "./img/case1/item_tablet.jpg",
       "hint": "Laptop şifresi için bir tarih lazım. 19 ile başlıyor.",
       "choices": [
         { "text": "Bu şifreyi laptopta dene.", "next": "ipucu_laptop" },
@@ -64,9 +129,18 @@
       ]
     },
     {
+      "scene_id": "sorgu_binbasi_protokol",
+      "text": "Binbaşı sertçe cevap veriyor: 'Protokol 0, sivil personeli ilgilendirmez. Ama şunu bil, eğer bu odadan virüs sızarsa, üs komutanlığı burayı haritadan silmek için nükleer başlık gönderecek. Profesör aptallık etti.'",
+      "image": "./img/case1/char_major.jpg",
+      "choices": [
+        { "text": "Laptopta ne sakladığına bakalım.", "next": "ipucu_laptop" },
+        { "text": "Odayı aramaya devam et.", "next": "oda_arastirma" }
+      ]
+    },
+    {
       "scene_id": "ipucu_laptop",
       "text": "Laptop ekranı donmuş olsa da klavye çalışıyor. Sistem bir şifre istiyor. İpucu: 'YILDIZIN SÖNDÜĞÜ GÜN'. Kağıtta 19 ile başlayan bir tarih görmüştün.",
-      "image": "./img/polar_server.jpg",
+      "image": "./img/case1/polar_server.jpg",
       "puzzle": {
         "question": "Şifreyi girin (4 hane, Yıl):",
         "answer": "1999",
@@ -84,10 +158,10 @@
     {
       "scene_id": "laptop_acildi",
       "text": "Erişim sağlandı! E-postalarda Dr. Stone ile Profesör arasında geçen bir tartışma var. Stone: 'Deneyi durdurmalıyız! Virüs mutasyon geçiriyor. Sadece insanları öldürmüyor, onları... değiştiriyor.' Profesör ise 'Binbaşı onay verdi, devam edeceğiz' demiş.",
-      "image": "./img/polar_server.jpg",
+      "image": "./img/case1/polar_server.jpg",
       "hint": "Dr. Stone haklıymış gibi görünüyor ama cinayeti o işlemiş olabilir mi?",
       "choices": [
-        { "text": "Bu bilgiyi herkesle paylaş.", "next": "yuzlesme_baslangic" },
+        { "text": "Bu bilgiyi herkesle paylaş.", "next": "oylama_hazirlik" },
         { "text": "Sessiz kal ve Dr. Stone'u izle.", "next": "merkez_hol" },
         { "text": "Dosyaları USB'ye kopyala.", "next": "merkez_hol" }
       ]
@@ -95,7 +169,7 @@
     {
       "scene_id": "laptop_kilitlendi",
       "text": "Hatalı şifre! Sistem kendini kilitledi ve yüksek sesle alarm vermeye başladı. Binbaşı silahını sana doğrulttu: 'Ne karıştırıyorsun sen orada! Çekil o bilgisayardan!'",
-      "image": "./img/char_major.jpg",
+      "image": "./img/case1/char_major.jpg",
       "choices": [
         { "text": "Ellerini kaldır ve geri çekil.", "next": "oda_arastirma" },
         { "text": "'Sadece yardım etmeye çalışıyordum!' diye bağır.", "next": "merkez_hol" },
@@ -105,7 +179,7 @@
     {
       "scene_id": "eva_hack",
       "text": "Eva klavyenin başına geçti. Parmakları uçuyor. 'Bu... bu imkansız. Dosyaların yarısı silinmiş. Ama sistem loglarına göre silme işlemi bu odadan değil, Server Odası'ndan yapılmış. Hem de 10 dakika önce. Profesör öldükten sonra!'",
-      "image": "./img/char_eva.jpg",
+      "image": "./img/case1/char_eva.jpg",
       "hint": "Katil sadece Profesörü öldürmedi, delilleri de karartıyor. Server odasına gitmek şart.",
       "choices": [
         { "text": "Server Odası'na gidelim.", "next": "server_odasi" },
@@ -114,9 +188,27 @@
       ]
     },
     {
+      "scene_id": "ceset_detayli_inceleme",
+      "text": "Cesedin tırnak aralarında mavi bir kumaş parçası buldun. Ayrıca ensesinde çok küçük bir iğne izi var. Sanki bir şey enjekte edilmiş.",
+      "image": "./img/case1/polar_ceset.jpg",
+      "choices": [
+        { "text": "Bu iğne izi laboratuvarı işaret ediyor. Oraya gidelim.", "next": "lab_giris" },
+        { "text": "Mavi kumaş... Kim mavi giyiyor?", "next": "ekip_tepki" }
+      ]
+    },
+    {
+      "scene_id": "sorgu_eva_baski",
+      "text": "Eva'yı köşeye sıkıştırıyorsun. 'Neden bu kadar korkuyorsun?' Eva ağlamaya başlıyor: 'Ben server odasındaydım! Silinen dosyaları ben sildim çünkü Profesör beni kovmakla tehdit etmişti. Ama onu ben öldürmedim!'",
+      "image": "./img/case1/char_eva.jpg",
+      "choices": [
+        { "text": "Yani kanıtları sen kararttın! Bu seni şüpheli yapar.", "next": "suclama_eva" },
+        { "text": "İnanıyorum, ama server odasında başka ne gördün?", "next": "server_odasi" }
+      ]
+    },
+    {
       "scene_id": "merkez_hol",
       "text": "Profesörün odasından çıktınız ve Merkezi Hol'e geldiniz. Burası istasyonun kalbi. Buradan üç yere gidebilirsiniz: 1. Laboratuvar (Dr. Stone'un alanı), 2. Server Odası (Tüm veriler orada), 3. Yemekhane (Olay öncesi son toplanma yeri).",
-      "image": "./img/polar_koridor.jpg",
+      "image": "./img/case1/polar_koridor.jpg",
       "choices": [
         { "text": "Laboratuvara git (Biyolojik izler için).", "next": "lab_giris" },
         { "text": "Server Odasına git (Kamera kayıtları için).", "next": "server_odasi" },
@@ -126,7 +218,7 @@
     {
       "scene_id": "lab_giris",
       "text": "Laboratuvar buz gibi. Raflarda tuhaf, yeşilimsi sıvılarla dolu tüpler var. Dr. Stone hemen bir masaya yöneldi ve bir şeyi saklamaya çalıştı. Masanın üzerinde kırık bir deney tüpü ve yanında kanlı bir neşter duruyor.",
-      "image": "./img/polar_lab.jpg",
+      "image": "./img/case1/polar_lab.jpg",
       "choices": [
         { "text": "Dr. Stone'un sakladığı şeye bak.", "next": "ipucu_gizli_dosya" },
         { "text": "Kanlı neşteri incele.", "next": "ipucu_nester" },
@@ -134,9 +226,27 @@
       ]
     },
     {
+      "scene_id": "ipucu_gizli_dosya",
+      "text": "Stone'un elinden aldığın dosya, Profesörün otopsi raporunun bir taslağı. Tarih bugüne ait! Stone, Profesör daha ölmeden onun ölüm raporunu mu hazırlıyordu? Raporda 'Ölüm sebebi: Hipotermi (Planlanan)' yazıyor.",
+      "image": "./img/case1/item_tablet.jpg",
+      "choices": [
+        { "text": "Bu bir itiraf belgesi! Oylamaya gitmeliyiz.", "next": "oylama_hazirlik" },
+        { "text": "Stone'a açıklama fırsatı ver.", "next": "sorgu_stone_sert" }
+      ]
+    },
+    {
+      "scene_id": "ipucu_virus",
+      "text": "Tüplerin üzerindeki etikette 'Antifriz Proteini - Test 4' yazıyor. Bu madde kanı dondurmadan vücut ısısını düşürmek için kullanılıyor. Eğer bu madde Profesöre verildiyse, oda sıcak olsa bile donarak ölmüş olabilir.",
+      "image": "./img/case1/polar_lab.jpg",
+      "choices": [
+        { "text": "Bu, cesedin neden donduğunu açıklıyor. Katil biyolojiden anlıyor.", "next": "suclama_stone" },
+        { "text": "Başka kimin buna erişimi var?", "next": "sorgu_eva" }
+      ]
+    },
+    {
       "scene_id": "ipucu_nester",
       "text": "Neşter cerrahi bir alet. Üzerindeki kan taze değil, kurumuş. Ama Profesörün vücudunda kesik yoktu. Bu kan kime ait? Neşterin sapında 'S.S.' harfleri kazılı. Dr. Samuel Stone.",
-      "image": "./img/item_bicak.jpg",
+      "image": "./img/case1/item_bicak.jpg",
       "choices": [
         { "text": "Bu neşter senin mi Stone?", "next": "sorgu_stone_nester" },
         { "text": "Kanıtı al ve merkez hole dön.", "next": "merkez_hol" },
@@ -144,9 +254,27 @@
       ]
     },
     {
+      "scene_id": "sorgu_stone_nester",
+      "text": "Stone omuz silkiyor. 'Dün elimi kestim. O neşter oradaydı. Bu beni katil yapmaz. Profesör donarak öldü, bıçaklanarak değil.' Savunması mantıklı ama çok soğukkanlı.",
+      "image": "./img/case1/char_dr_stone.jpg",
+      "choices": [
+        { "text": "Peki ya zehir?", "next": "yemekhane_giris" },
+        { "text": "Tamam, server odasına bakalım.", "next": "server_odasi" }
+      ]
+    },
+    {
+      "scene_id": "eva_yorum",
+      "text": "Eva neşteri görünce gözlerini kaçırıyor. 'Dr. Stone dün gece çok sinirliydi. Elinde bu neşterle koridorda yürürken gördüm. Kendi kendine konuşuyordu.'",
+      "image": "./img/case1/char_eva.jpg",
+      "choices": [
+        { "text": "Stone kesinlikle şüpheli.", "next": "suclama_stone" },
+        { "text": "Eva, sen neden koridordaydın?", "next": "sorgu_eva_baski" }
+      ]
+    },
+    {
       "scene_id": "server_odasi",
       "text": "Server odası karanlık ve gürültülü. Fanlar son hızda çalışıyor. Yerde sürüklenme izleri var. Ana konsolun kabloları kesilmiş. Birisi burayı sabote etmiş! Köşede Binbaşı'nın taktik eldiveninin tekini buluyorsun.",
-      "image": "./img/polar_server.jpg",
+      "image": "./img/case1/polar_server.jpg",
       "choices": [
         { "text": "Eldiveni al ve sakla.", "next": "ipucu_eldiven" },
         { "text": "Kabloları tamir etmeyi dene (Mühendislik).", "next": "tamir_denemesi" },
@@ -154,9 +282,27 @@
       ]
     },
     {
+      "scene_id": "ipucu_eldiven",
+      "text": "Eldivenin üzerinde yanık izleri ve... mavi boya lekesi var? Profesörün tırnaklarındaki mavi kumaşla eşleşiyor olabilir mi? Binbaşı bir şeyler saklıyor.",
+      "image": "./img/case1/item_tablet.jpg",
+      "choices": [
+        { "text": "Bu kanıt Binbaşıyı işaret ediyor.", "next": "suclama_binbasi" },
+        { "text": "Diğer odalara da bak.", "next": "merkez_hol" }
+      ]
+    },
+    {
+      "scene_id": "tamir_denemesi",
+      "text": "Kabloları birleştirmeyi deniyorsun ama sistem çok hasar görmüş. Sadece son bir güvenlik kamerası görüntüsünü kurtarabiliyorsun. Görüntüde Binbaşı, Profesörü server odasından sürükleyerek çıkarıyor. Saat 02:00. Ölüm saati.",
+      "image": "./img/case1/polar_server.jpg",
+      "choices": [
+        { "text": "Binbaşı onu öldürdü! Oylamaya git.", "next": "oylama_hazirlik" },
+        { "text": "Bu görüntüyü sakla.", "next": "merkez_hol" }
+      ]
+    },
+    {
       "scene_id": "yemekhane_giris",
       "text": "Yemekhanede masalar devrilmiş değil ama Profesörün her zaman oturduğu masada yarım kalmış bir çorba var. Çorbanın rengi biraz... maviye çalıyor? Yanındaki peçetede 'Beni izliyorlar' yazısı karalanmış.",
-      "image": "./img/polar_yemekhane.jpg",
+      "image": "./img/case1/polar_yemekhane.jpg",
       "choices": [
         { "text": "Çorbadan örnek al.", "next": "ipucu_zehir" },
         { "text": "Mutfağı ara.", "next": "mutfak_arama" },
@@ -166,7 +312,7 @@
     {
       "scene_id": "ipucu_zehir",
       "text": "Çorbayı kokladığında acı badem kokusu alıyorsun. Siyanür! Ama profesör donarak öldü, zehirlenerek değil. Belki de zehir işe yaramayınca başka bir yöntem denediler? Bu istasyonda siyanüre erişimi olan tek kişi Biyolog Stone.",
-      "image": "./img/polar_yemekhane.jpg",
+      "image": "./img/case1/polar_yemekhane.jpg",
       "choices": [
         { "text": "Bu çok güçlü bir kanıt. Oylamaya gitmeliyiz.", "next": "oylama_hazirlik" },
         { "text": "Daha fazla kanıt topla.", "next": "merkez_hol" },
@@ -174,9 +320,27 @@
       ]
     },
     {
+      "scene_id": "sorgu_eva_zehir",
+      "text": "Eva şaşırıyor. 'Siyanür mü? Stone dün laboratuvarda bir şeyler karıştırıyordu ama fareler için olduğunu söylemişti. Fareler için siyanür kullanılmaz ki!'",
+      "image": "./img/case1/char_eva.jpg",
+      "choices": [
+        { "text": "Stone kesinlikle zehirledi. Ama öldürdü mü?", "next": "oylama_hazirlik" },
+        { "text": "Araştırmaya devam et.", "next": "merkez_hol" }
+      ]
+    },
+    {
+      "scene_id": "mutfak_arama",
+      "text": "Mutfak temiz. Ancak çöp kutusunda boş bir ilaç şişesi var. Etiketi sökülmüş. Bu şişe laboratuvardan gelmiş olmalı.",
+      "image": "./img/case1/polar_yemekhane.jpg",
+      "choices": [
+        { "text": "Lab'a gidip şişeyi karşılaştır.", "next": "lab_giris" },
+        { "text": "Merkez hole dön.", "next": "merkez_hol" }
+      ]
+    },
+    {
       "scene_id": "oylama_hazirlik",
       "text": "Tüm ekip Merkez Hol'de toplandı. Fırtına şiddetini artırdı. Jeneratör tekliyor. Artık bir karar vermek zorundasınız. Katil aranızda. Yanlış kişiyi suçlarsanız, bu istasyon hepimize mezar olacak.",
-      "image": "./img/polar_koridor.jpg",
+      "image": "./img/case1/polar_koridor.jpg",
       "choices": [
         { "text": "Suçlu Dr. Stone (Biyolog)!", "next": "suclama_stone" },
         { "text": "Suçlu Binbaşı (Güvenlik)!", "next": "suclama_binbasi" },
@@ -187,7 +351,7 @@
     {
       "scene_id": "suclama_stone",
       "text": "Dr. Stone'u köşeye sıkıştırıyorsunuz. 'Ben sadece dünyayı korumaya çalışıyordum!' diye bağırıyor. 'Profesör o antik virüsü serbest bırakacaktı. Onu zehirlemeye çalıştım evet, ama ölmedi! O lanet şey onu öldürmedi!'. Stone zehirlemeyi itiraf etti ama donarak ölümü açıklayamıyor.",
-      "image": "./img/char_dr_stone.jpg",
+      "image": "./img/case1/char_dr_stone.jpg",
       "choices": [
         { "text": "Onu hapse atın. (Oyun Biter - Kısmi Başarı)", "next": "ending_kismi" },
         { "text": "Yalan söylüyor, donma olayını da o yaptı.", "next": "ending_bad" },
@@ -197,7 +361,7 @@
     {
       "scene_id": "suclama_binbasi",
       "text": "Binbaşı silahını çekiyor. 'Emirleri uyguladım! Protokol 0: Eğer enfeksiyon riski varsa, konakçıyı yok et.' Binbaşı, Profesörü server odasında virüsü yaymaya çalışırken yakaladığını ve soğutma sistemini 'Sıvı Nitrojen' moduna alarak odayı dondurduğunu itiraf ediyor. 'Onu vuramazdım, kanı virüsü yayardı. Dondurmak tek çareydi.'",
-      "image": "./img/char_major.jpg",
+      "image": "./img/case1/char_major.jpg",
       "choices": [
         { "text": "Binbaşı haklıydı. Onu serbest bırak.", "next": "ending_good" },
         { "text": "Bu bir cinayet! Teslim ol!", "next": "ending_fight" },
@@ -207,23 +371,39 @@
     {
       "scene_id": "suclama_eva",
       "text": "Eva ağlamaya başlıyor. 'Ben sadece eve dönmek istedim...' Ama kanıtlar onu göstermiyor. Eva masum. Gerçek katili kaçırdınız.",
-      "image": "./img/char_eva.jpg",
+      "image": "./img/case1/char_eva.jpg",
       "choices": [
         { "text": "BAŞARISIZLIK. Tekrar Dene.", "next": "giris" }
       ]
     },
     {
+      "scene_id": "suclama_virus",
+      "text": "Kimseyi suçlamıyorsunuz. 'Bu virüsün işi' diyorsunuz. Ama arkanızda kilit sesi duyuluyor. Binbaşı hepinizi odaya kilitledi. 'Enfeksiyon riski var. Üzgünüm.' diyor. Oksijen azalıyor.",
+      "image": "./img/case1/bad_ending_monster.jpg",
+      "choices": [
+        { "text": "OYUN BİTTİ. Tekrar Dene.", "next": "giris" }
+      ]
+    },
+    {
       "scene_id": "ending_good",
       "text": "Gerçeği ortaya çıkardınız. Profesör, antik bir virüsün etkisi altındaydı ve tüm dünyayı enfekte etmek istiyordu. Dr. Stone onu durdurmak için zehirledi, başaramayınca Binbaşı devreye girip odayı -200 dereceye soğutarak onu dondurdu (Protokol 0). Binbaşı bir kahraman mı yoksa katil mi? Buna mahkeme karar verecek ama en azından siz hayattasınız. Helikopter sesi duyuluyor.",
-      "image": "./img/good_ending_heli.jpg",
+      "image": "./img/case1/good_ending_heli.jpg",
       "choices": [
         { "text": "ANA MENÜYE DÖN", "next": "giris" }
       ]
     },
     {
+      "scene_id": "ending_kismi",
+      "text": "Stone'u tutukladınız ama Profesörün donarak ölmesinin ardındaki gerçek sır (Binbaşı'nın müdahalesi) açığa çıkmadı. Binbaşı serbest kaldı ve belki de 'Protokol 0'ı uygulamaya devam edecek.",
+      "image": "./img/case1/good_ending_heli.jpg",
+      "choices": [
+        { "text": "YARIM ZAFER. Tekrar Dene.", "next": "giris" }
+      ]
+    },
+    {
       "scene_id": "ending_fight",
       "text": "Binbaşı teslim olmuyor. Çıkan çatışmada istasyonun basınç paneli zarar görüyor. İçeriye dolan dondurucu soğuk ve kar, hepinizi yavaş yavaş uykuya daldırıyor. Gerçek, karın altında gömülü kalacak.",
-      "image": "./img/bad_ending_monster.jpg",
+      "image": "./img/case1/bad_ending_monster.jpg",
       "choices": [
         { "text": "OYUN BİTTİ. Tekrar Dene.", "next": "giris" }
       ]
@@ -231,7 +411,7 @@
     {
       "scene_id": "ending_bad",
       "text": "Yanlış kişiyi suçladınız. Gerçek tehdit hala aranızda dolaşıyor. Işıklar tamamen kesildiğinde, arkanızdaki nefes sesini duyuyorsunuz.",
-      "image": "./img/bad_ending_monster.jpg",
+      "image": "./img/case1/bad_ending_monster.jpg",
       "choices": [
         { "text": "OYUN BİTTİ. Tekrar Dene.", "next": "giris" }
       ]
@@ -239,7 +419,7 @@
     {
       "scene_id": "bad_ending_vuruldun",
       "text": "Silahlı ve eğitimli bir askere saldırmak mı? Binbaşı tereddüt etmeden tetiği çekti. Göğsünde yayılan sıcaklık, Antarktika'nın soğuğunu unutturuyor. Gözlerin kararırken duyduğun son şey Eva'nın çığlığı.",
-      "image": "./img/bad_ending_monster.jpg",
+      "image": "./img/case1/bad_ending_monster.jpg",
       "choices": [
         { "text": "ÖLDÜNÜZ. Tekrar Dene.", "next": "giris" }
       ]
