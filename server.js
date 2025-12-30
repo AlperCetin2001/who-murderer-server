@@ -97,7 +97,6 @@ io.on('connection', (socket) => {
             room.mode = mode || 'individual';
             room.hintCount = 3; 
             
-            // Başlangıç ipucu sayısını gönderiyoruz
             io.to(roomCode).emit('game_started', { 
                 caseId, 
                 mode: room.mode,
@@ -114,11 +113,12 @@ io.on('connection', (socket) => {
         
         room.votes[socket.id] = nextSceneId;
         
+        // DETAYLI OYLAMA LİSTESİ OLUŞTURMA
         const voteStatus = room.players.map(player => ({
             name: player.name,
             id: player.id,
             hasVoted: room.votes.hasOwnProperty(player.id),
-            votedForId: room.votes[player.id] || null 
+            votedForId: room.votes[player.id] || null // Seçilen sahne ID'si
         }));
 
         const playerCount = room.players.length;
@@ -146,22 +146,16 @@ io.on('connection', (socket) => {
         }
     });
 
-    // İPUCU İSTEĞİ - KESİN ÇÖZÜM
     socket.on('request_hint', ({ roomCode, hintText, playerName }) => {
         const room = rooms.get(roomCode);
         if (room && room.mode === 'voting') {
             if (room.hintCount > 0) {
-                room.hintCount--; // Sunucuda azalt
-                
-                // Herkese yeni sayıyı gönder
+                room.hintCount--; 
                 io.to(roomCode).emit('hint_revealed', { 
                     hintText: hintText, 
                     newCount: room.hintCount,
                     user: playerName
                 });
-            } else {
-                // Hakkı bittiyse isteği yapana bildir
-                socket.emit('error_message', '⚠️ İpucu hakkınız kalmadı!');
             }
         }
     });
