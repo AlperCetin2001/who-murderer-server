@@ -66,6 +66,7 @@ io.on('connection', (socket) => {
     console.log(`🔌 Yeni bağlantı: ${socket.id}`);
     socket.emit('room_list_update', getPublicRoomList());
 
+    // --- SAHNE VE KANIT ---
     socket.on('request_scene_data', ({ roomCode, sceneId }) => {
         const room = rooms.get(roomCode);
         if (!room) return;
@@ -74,6 +75,7 @@ io.on('connection', (socket) => {
         const sceneData = caseData.scenes.find(s => s.scene_id === sceneId);
         if (sceneData) {
             socket.emit('scene_data_update', sceneData);
+            // Kanıt Ekleme
             if (sceneData.image && !sceneData.image.includes('char_') && !sceneData.image.includes('dis.jpg')) {
                 const exists = room.evidenceList.find(e => e.src === sceneData.image);
                 if (!exists) {
@@ -98,6 +100,7 @@ io.on('connection', (socket) => {
         if(room) socket.emit('update_evidence_board', room.evidenceList);
     });
 
+    // --- ODA YÖNETİMİ ---
     socket.on('create_room', ({ playerName, visibility, password, avatar }) => {
         let roomCode = generateRoomCode();
         while(rooms.has(roomCode)) { roomCode = generateRoomCode(); }
@@ -121,18 +124,13 @@ io.on('connection', (socket) => {
         const room = rooms.get(roomCode);
         if (!room) return socket.emit('error_message', '❌ Oda bulunamadı!');
         
-        // YENİDEN BAĞLANMA MANTIĞI:
-        // Eğer oyun başladıysa (gameState !== lobby) normalde almıyoruz.
-        // Ama oyuncu kod ile geldiyse ve oda varsa, "Yeniden Bağlanma" sayalım.
         let isReconnection = false;
         if (room.gameState !== 'lobby') {
-            isReconnection = true; 
-            // İsim kontrolünü esnetebiliriz veya "X (Döndü)" yapabiliriz.
+            isReconnection = true; // Oyun başlamışsa yeniden bağlanma sayılır
         }
 
         if (room.password && room.password !== password) return socket.emit('error_message', '🔒 Yanlış Şifre!');
 
-        // İsim çakışması kontrolü (Reconnection değilse)
         if (!isReconnection) {
             const nameExists = room.players.some(p => p.name === playerName);
             if (nameExists) return socket.emit('error_message', '⚠️ İsim kullanımda!');
@@ -144,10 +142,9 @@ io.on('connection', (socket) => {
         socket.emit('join_success', { roomCode, isHost: false });
         io.to(roomCode).emit('update_player_list', room.players);
         
-        // ÖZEL MESAJ
         if(isReconnection) {
             io.to(roomCode).emit('chat_message', { sender: 'Sistem', text: `🔄 ${playerName} odaya tekrar bağlandı.`, type: 'join' });
-            // Oyuncuya mevcut durumu gönder
+            // Oyuncuya oyun durumunu at
             if(room.currentCase) socket.emit('game_started', { caseId: room.currentCase, mode: room.mode, currentHintCount: room.hintCount });
         } else {
             io.to(roomCode).emit('chat_message', { sender: 'Sistem', text: `${playerName} katıldı.`, type: 'join' });
@@ -163,14 +160,14 @@ io.on('connection', (socket) => {
     socket.on('start_game', ({ roomCode, caseId, mode }) => {
         const room = rooms.get(roomCode);
         if (room && room.host === socket.id) {
-            room.gameState = 'playing'; // Artık listede görünmeyecek
+            room.gameState = 'playing'; // Listeden kalkar
             room.currentCase = caseId;
             room.mode = mode || 'individual';
             room.hintCount = 3;
             room.evidenceList = [];
             room.votes = {};
             io.to(roomCode).emit('game_started', { caseId, mode: room.mode, currentHintCount: 3 });
-            io.emit('room_list_update', getPublicRoomList()); // Listeyi güncelle (Oda kaybolacak)
+            io.emit('room_list_update', getPublicRoomList());
         }
     });
 
@@ -220,7 +217,6 @@ io.on('connection', (socket) => {
             if (playerIndex !== -1) {
                 room.players.splice(playerIndex, 1); 
                 io.to(code).emit('update_player_list', room.players);
-                // Oda boşalırsa sil, yoksa oyun devam eder (Reconnect için silmiyoruz hemen)
                 if(room.players.length === 0) rooms.delete(code);
                 else io.emit('room_list_update', getPublicRoomList());
             }
