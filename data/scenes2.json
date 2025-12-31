@@ -1,490 +1,234 @@
 {
-  "title": "Yansımaların Gölgesi",
-  "description": "Yağmurlu bir akşam, sanat koleksiyoncusu Victor Moreau’nun malikanesinde cinayet işlendi. Victor, çalışma odasında hançerlenmiş, değerli tablosu 'Yansımalar' çalınmış. Genç dedektif olarak katili bulmalısınız. Her kararınız gerçeğe yaklaştırır ya da tuzaklara düşürür.",
-  "suspects": [
-    {
-      "name": "Isabelle Dubois",
-      "role": "Victor’un Protejesi",
-      "background": "Victor’un öğrencisi, sanatını çaldığını düşünüyor. Cinayet gecesi malikanede."
-    },
-    {
-      "name": "Arthur Finch",
-      "role": "Borçlu İş Ortağı",
-      "background": "Victor’a borçlu, malikanenin satışından pay istiyordu. Alibisi zayıf."
-    },
-    {
-      "name": "Elara Vance",
-      "role": "Rakip Sanatçı",
-      "background": "Victor’u tablosunu çalmakla suçluyor. Olay yerinde sigara izmariti bulundu."
-    },
-    {
-      "name": "Dr. Leonard Voss",
-      "role": "Sanat Tarihçisi",
-      "background": "Gizemli ‘Aynalar Loncası’ ile bağlantılı, Victor’un sırlarını biliyor."
-    }
-  ],
   "scenes": [
     {
       "scene_id": "giris",
-      "text": "Yağmurlu bir akşam, Victor Moreau’nun malikanesinin önündesiniz. Victor, çalışma odasında hançerlenmiş, ‘Yansımalar’ tablosu çalınmış. Polis soygun diyor, ama siz komplo şüpheleniyorsunuz. Nereden başlarsınız?",
+      "text": "Şehirde aylardır korku salan 'Kuklacı' lakaplı seri katil, son hamlesini yaptı. Başkomiser Kerem (senin mentorum) dün gece kayboldu. Bu sabah sana isimsiz bir zarf geldi. İçinde sadece bir koordinat ve eski bir tiyatro bileti vardı. Koordinatlar seni şehrin dışındaki terk edilmiş 'Mutlu Yarınlar Yetimhanesi'ne getirdi. Yağmur bardaktan boşalırcasına yağıyor. Mentorumuzu kurtarmak için sadece 1 saatin olabilir.",
+      "image": "./img/case2/kukla_dis.jpg",
       "choices": [
-        {
-          "text": "Victor’un ofisini incele.",
-          "next": "office",
-          "hint": "Ofis, Victor’un sırlarını ve cinayet ipuçlarını saklıyor olabilir."
-        },
-        {
-          "text": "Şüphelilerle konuş.",
-          "next": "interrogation_intro",
-          "hint": "Şüphelilerin ifadeleri, motifleri ve yalanları ortaya çıkarabilir."
-        },
-        {
-          "text": "Malikanenin girişini incele.",
-          "next": "entrance",
-          "hint": "Giriş, katilin bıraktığı izleri taşıyabilir."
-        }
+        { "text": "Demir kapıyı zorla ve bahçeye gir.", "next": "bahce_giris" },
+        { "text": "Etrafı dolaşıp arka giriş ara.", "next": "arka_giris" }
       ]
     },
     {
-      "scene_id": "office",
-      "text": "Victor’un ofisinde boş bir çerçeve, karalanmış bir ajanda ve kilitli bir kutu var. Çerçevenin kenarında kızıl saç teli dikkat çekiyor. Ne yaparsınız?",
+      "scene_id": "bahce_giris",
+      "text": "Paslı kapı gıcırdayarak açıldı. Yetimhanenin ana kapısı aralık. İçeriden çürümüş ahşap kokusu geliyor. Yerde taze çamur izleri var. Birisi yakın zamanda buraya girmiş.",
+      "image": "./img/case2/kukla_dis.jpg",
       "choices": [
-        {
-          "text": "Ajandayı incele.",
-          "next": "office_agenda",
-          "hint": "Ajanda, Victor’un son konuşmalarını veya düşmanlarını gösterebilir."
-        },
-        {
-          "text": "Kilitli kutuyu incele.",
-          "next": "office_box_puzzle",
-          "hint": "Kutu, gizli sırlar veya önemli belgeler içerebilir."
-        },
-        {
-          "text": "Kızıl saç telini incele.",
-          "next": "hair_clue",
-          "hint": "Saç teli, olay yerinde kimin olduğuna işaret edebilir."
-        },
-        {
-          "text": "Geri dön.",
-          "next": "giris",
-          "hint": "Başka bir başlangıç noktası deneyin."
-        }
+        { "text": "Silahını çek ve Ana Hol'e gir.", "next": "merkez_hol" }
       ]
     },
     {
-      "scene_id": "office_agenda",
-      "text": "Ajandada ‘Hayır! Sanatım benimdir!’ yazan bir not var, Isabelle’e ait gibi görünüyor. Ayrıca Victor’un mirasını Isabelle’e bıraktığı belirtiliyor. Bu ne anlama geliyor?",
+      "scene_id": "arka_giris",
+      "text": "Arka tarafta, mutfak girişine benzer bir kapı buldun ama kilitli. Kilidi kırmak çok zaman alır ve gürültü çıkarır. Ana kapıya dönmek zorundasın.",
+      "image": "./img/case2/kukla_dis.jpg",
       "choices": [
-        {
-          "text": "Isabelle ile not hakkında konuş.",
-          "next": "isabelle_talk",
-          "hint": "Not, Isabelle’in Victor’a öfkesini gösterebilir."
-        },
-        {
-          "text": "Kutuyu incele.",
-          "next": "office_box_puzzle",
-          "hint": "Not önemli, ama kutuda daha fazla sır olabilir."
-        },
-        {
-          "text": "Ofise geri dön.",
-          "next": "office",
-          "hint": "Başka ipuçları için ofisi tekrar incele."
-        }
+        { "text": "Ana kapıya dön.", "next": "bahce_giris" }
       ]
     },
     {
-      "scene_id": "office_box_puzzle",
-      "text": "Kilitli kutuda şekiller var: daire, kare, üçgen, dikdörtgen. Sıradaki şekli girin (örneğin: beşgen).",
+      "scene_id": "merkez_hol",
+      "text": "HUB: MERKEZ HOL. Devasa ve ürkütücü. Yerde kırık bir avize yatıyor. Buradan 4 farklı yöne gidebilirsin. Sesler yankı yapıyor. Dikkatli olmalısın.",
+      "image": "./img/case2/kukla_hol.jpg",
+      "choices": [
+        { "text": "Müdürün Odası'na git (Belgeler).", "next": "mudur_odasi" },
+        { "text": "Yatakhanelere in (Eski izler).", "next": "yatakhaneler" },
+        { "text": "Kazan Dairesi'ne in (Ses geliyor).", "next": "kazan_dairesi" },
+        { "text": "Tiyatro Salonu'na gir (Ana Sahne).", "next": "tiyatro_giris" }
+      ]
+    },
+    {
+      "scene_id": "mudur_odasi",
+      "text": "Oda talan edilmiş. Dosyalar yerlerde. Duvardaki bir tablonun yamuk durduğunu fark ediyorsun. Arkasında bir kasa olabilir. Masanın üzerinde ise 'Dr. Aris' adına imzalanmış bir hasta raporu var.",
+      "image": "./img/case2/kukla_mudur_odasi.jpg",
+      "choices": [
+        { "text": "Tabloyu kaldır ve kasaya bak.", "next": "mudur_kasa" },
+        { "text": "Hasta raporunu oku.", "next": "ipucu_rapor" },
+        { "text": "Merkez Hol'e dön.", "next": "merkez_hol" }
+      ]
+    },
+    {
+      "scene_id": "ipucu_rapor",
+      "text": "Rapor 1998 tarihli. 'Hasta No: 404. Çocuk, nesnelere insan muamelesi yapıyor ve insanları nesneleştiriyor. Ciddi sosyopati belirtileri. Şiddet eğilimi kontrol altına alınmalı.' İmza: Dr. Aris. Bu çocuk Kuklacı olabilir mi?",
+      "image": "./img/case2/item_gunluk.jpg",
+      "hint": "Dr. Aris bu çocuğu tedavi mi etti, yoksa yarattı mı?",
+      "choices": [
+        { "text": "Raporu al ve odayı aramaya devam et.", "next": "mudur_odasi" }
+      ]
+    },
+    {
+      "scene_id": "mudur_kasa",
+      "text": "Tahmin ettiğin gibi, tablonun arkasında eski bir kasa var. Şifre 4 haneli. Masanın üzerinde duran takvimde 14 Şubat tarihi daire içine alınmış ve yanına 'Kızımın doğumu' yazılmış. Ama yıl silik.",
+      "image": "./img/case2/kukla_mudur_odasi.jpg",
+      "puzzle": {
+        "question": "Şifreyi girin (İpucu: Yıl? Yetimhane 1980'de açıldı, müdür 40 yaşındaydı... Duvarlarda 1985 mezunları fotosu var... Deneme yanılma yapabilirsin: 19??)",
+        "answer": "1988",
+        "on_success": "kasa_acildi",
+        "on_failure": "kasa_kapali",
+        "options": []
+      },
       "input_type": "text",
-      "question": "Sıradaki şeklin adını yazın:",
-      "answer": "BEŞGEN",
-      "on_success": "secret_letter",
-      "on_failure": "locked_box",
-      "hint": "Şekillerin kenar sayılarını inceleyin: Daire (0), Kare (4), Üçgen (3), Dikdörtgen (4). Örüntü, kenar sayılarında olabilir."
-    },
-    {
-      "scene_id": "secret_letter",
-      "text": "Kutu açılıyor! İçinde Victor’un mektubu: mirasını Isabelle’e bırakıyor, Arthur’a borçları var ve ‘Yansımalar’ tablosu ‘Aynalar Loncası’nın sırrını saklıyor. Kan lekesi dikkat çekiyor. Ne yaparsınız?",
       "choices": [
-        {
-          "text": "Isabelle ile miras hakkında konuş.",
-          "next": "isabelle_confront_inheritance",
-          "hint": "Miras, Isabelle’in motifini zayıflatabilir mi?"
-        },
-        {
-          "text": "Arthur ile borçlar hakkında konuş.",
-          "next": "arthur_talk",
-          "hint": "Borçlar, Arthur’u şüpheli kılıyor."
-        },
-        {
-          "text": "Elara ile tablo hakkında konuş.",
-          "next": "elara_talk",
-          "hint": "Tablo, Elara’nın intikam motivasyonunu gösterebilir."
-        },
-        {
-          "text": "Voss ile lonca hakkında konuş.",
-          "next": "voss_talk",
-          "hint": "Lonca, Voss’un suçluluğunu açığa çıkarabilir."
-        },
-        {
-          "text": "Katili suçla.",
-          "next": "final_accusation",
-          "hint": "Yeterli kanıt topladınız mı? Katili şimdi suçlayabilirsiniz."
-        }
+        { "text": "Şifreyi girmeyi dene.", "next": "null" },
+        { "text": "Vazgeç ve Hole dön.", "next": "merkez_hol" }
       ]
     },
     {
-      "scene_id": "locked_box",
-      "text": "Yanlış cevap! Kutu kilitli kalıyor. Başka ne yapabilirsiniz?",
+      "scene_id": "kasa_kapali",
+      "text": "Kasa açılmadı. Tarihi yanlış tahmin ettin.",
       "choices": [
-        {
-          "text": "Ofise geri dön.",
-          "next": "office",
-          "hint": "Başka ipuçları için ofisi tekrar incele."
-        },
-        {
-          "text": "Girişe git.",
-          "next": "entrance",
-          "hint": "Kutu açılmadı, başka ipuçları arayın."
-        }
+        { "text": "Tekrar dene.", "next": "mudur_kasa" },
+        { "text": "Geri çekil.", "next": "mudur_odasi" }
       ]
     },
     {
-      "scene_id": "hair_clue",
-      "text": "Kızıl saç teli, Elara Vance’ın saçıyla eşleşiyor. Ayrıca çerçevenin kenarında fosforlu boya kalıntısı var, Elara’nın kullandığı pigmentlere benziyor. Ne yaparsınız?",
+      "scene_id": "kasa_acildi",
+      "text": "Kasa açıldı! İçinde paslı bir anahtar ve bir Mor Işık (UV) Feneri var. Anahtarın üzerinde 'Kazan Dairesi - Kilitli Bölme' yazıyor. UV feneri ise görünmez yazıları okumaya yarayabilir.",
+      "image": "./img/case2/item_uv_fener.jpg",
+      "hint": "UV fenerini karanlık odalarda (Yatakhaneler) kullanmayı unutma.",
       "choices": [
-        {
-          "text": "Elara ile saç ve boya hakkında konuş.",
-          "next": "elara_talk",
-          "hint": "Bu kanıtlar, Elara’yı olay yerine bağlayabilir."
-        },
-        {
-          "text": "Ofise geri dön.",
-          "next": "office",
-          "hint": "Başka ipuçları için ofisi tekrar incele."
-        }
+        { "text": "Eşyaları al ve Merkez Hol'e dön.", "next": "merkez_hol" }
       ]
     },
     {
-      "scene_id": "entrance",
-      "text": "Malikanenin girişinde kırık bir vazo ve lavanta kalıntıları var. Kapının dışında ‘Camel Pure’ sigara izmariti bulunuyor. İzmarit kime ait?",
-      "input_type": "multiple_choice",
-      "question": "Sigara izmariti kime ait?",
-      "options": ["Isabelle", "Arthur", "Elara", "Voss"],
-      "answer": "Elara",
-      "on_success": "elara_presence",
-      "on_failure": "wrong_smoke",
-      "hint": "Elara’nın ‘Camel Pure’ sigara içtiği biliniyor."
-    },
-    {
-      "scene_id": "elara_presence",
-      "text": "Doğru! İzmarit Elara’ya ait. Kameralar da onu malikanenin yakınında gösteriyor. Lavanta kalıntıları Isabelle’i işaret ediyor. Ne yaparsınız?",
+      "scene_id": "yatakhaneler",
+      "text": "Burası buz gibi. Demir ranzalar paslanmış. Duvarlarda çocukların çizdiği ürkütücü resimler var. Bazı resimlerin üzerinde çıplak gözle görülmeyen garip lekeler var.",
+      "image": "./img/case2/kukla_yatakhaneler.jpg",
       "choices": [
-        {
-          "text": "Elara ile izmarit hakkında konuş.",
-          "next": "elara_talk",
-          "hint": "İzmarit, Elara’yı olay yerine bağlar."
-        },
-        {
-          "text": "Isabelle ile lavanta hakkında konuş.",
-          "next": "isabelle_talk",
-          "hint": "Lavanta, Isabelle’in olay yerinde olduğunu gösterebilir."
-        },
-        {
-          "text": "Girişe geri dön.",
-          "next": "entrance",
-          "hint": "Başka ipuçları için girişi tekrar incele."
-        },
-        {
-          "text": "Katili suçla.",
-          "next": "final_accusation",
-          "hint": "Yeterli kanıt topladınız mı? Katili şimdi suçlayabilirsiniz."
-        }
+        { "text": "UV Fenerini kullan (Eğer aldıysan).", "next": "yatakhaneler_uv" },
+        { "text": "Çizimleri normal gözle incele.", "next": "yatakhaneler_normal" },
+        { "text": "Merkez Hol'e dön.", "next": "merkez_hol" }
       ]
     },
     {
-      "scene_id": "wrong_smoke",
-      "text": "Yanlış cevap! İzmaritin sahibi bulunamadı. Başka ne yaparsınız?",
+      "scene_id": "yatakhaneler_normal",
+      "text": "Resimlerde ağlayan çocuklar ve siyah giyimli uzun bir adam çizilmiş. Adamın elinde ipler var ve çocukları kukla gibi yönetiyor. Altında 'BABA BİZİ SEVİYOR' yazıyor. Tüyler ürpertici.",
+      "image": "./img/case2/kukla_yatakhaneler.jpg",
       "choices": [
-        {
-          "text": "Girişe geri dön.",
-          "next": "entrance",
-          "hint": "Başka ipuçları için girişi tekrar incele."
-        },
-        {
-          "text": "Şüphelilerle konuş.",
-          "next": "interrogation_intro",
-          "hint": "Şüphelilerin alışkanlıkları ipucu verebilir."
-        }
+        { "text": "Geri dön.", "next": "yatakhaneler" }
       ]
     },
     {
-      "scene_id": "interrogation_intro",
-      "text": "Karakolda şüphelilerle konuşmaya hazırsınız. Kimi sorgulayacaksınız?",
+      "scene_id": "yatakhaneler_uv",
+      "text": "UV ışığını duvara tuttuğunda gizli mesajlar parlıyor! 'O YALAN SÖYLÜYOR', 'DOKTOR BİZİ HASTA EDİYOR', 'ORHAN BİLİYOR'. Ve bir ok işareti, zemindeki gevşek bir parkeyi gösteriyor.",
+      "image": "./img/case2/item_uv_fener.jpg",
       "choices": [
-        {
-          "text": "Isabelle Dubois",
-          "next": "isabelle_talk",
-          "hint": "Isabelle’in Victor ile gerginliği ve lavanta kalıntıları şüpheli."
-        },
-        {
-          "text": "Arthur Finch",
-          "next": "arthur_talk",
-          "hint": "Arthur’un borçları ve kamera silueti onu şüpheli kılıyor."
-        },
-        {
-          "text": "Elara Vance",
-          "next": "elara_talk",
-          "hint": "Elara’nın sigara izmariti ve saç teli olay yerinde bulundu."
-        },
-        {
-          "text": "Dr. Leonard Voss",
-          "next": "voss_talk",
-          "hint": "Voss’un lonca bağlantısı cinayetin anahtarı olabilir."
-        },
-        {
-          "text": "Katili suçla.",
-          "next": "final_accusation",
-          "hint": "Yeterli kanıt topladınız mı? Katili şimdi suçlayabilirsiniz."
-        }
+        { "text": "Gevşek parkeyi kaldır.", "next": "yatakhaneler_gizli" },
+        { "text": "Işığı kapat.", "next": "yatakhaneler" }
       ]
     },
     {
-      "scene_id": "isabelle_talk",
-      "text": "Isabelle gergin, gözleri kaçamak. ‘Victor beni destekliyordu, ama sanatımı kendi adıyla satmak istedi!’ diyor. Lavanta kalıntıları ve ajandadaki not onu şüpheli kılıyor. Ne sorarsınız?",
+      "scene_id": "yatakhaneler_gizli",
+      "text": "Parkenin altında eski bir ses kayıt cihazı buldun. Çalıştırdığında Orhan'ın (Hademe) sesini duyuyorsun: 'Doktor Aris... o çocuklara ilaç veriyor. Onları delirtiyor. Bunu durdurmalıyım ama beni tehdit etti. Gazeteci kızla konuşacağım.'",
+      "image": "./img/case2/item_kaset.jpg",
+      "hint": "Orhan suç ortağı değil, tanık olabilir mi?",
       "choices": [
-        {
-          "text": "Lavanta kalıntıları hakkında yüzleş.",
-          "next": "isabelle_confront_lavender",
-          "hint": "Lavanta, Isabelle’i olay yerine bağlayabilir."
-        },
-        {
-          "text": "Miras mektubu hakkında konuş.",
-          "next": "isabelle_confront_inheritance",
-          "hint": "Miras, Isabelle’in motifini açıklayabilir."
-        },
-        {
-          "text": "Geri dön.",
-          "next": "interrogation_intro",
-          "hint": "Diğer şüphelileri sorgula."
-        }
+        { "text": "Kaseti al ve Merkez Hol'e dön.", "next": "merkez_hol" }
       ]
     },
     {
-      "scene_id": "isabelle_confront_lavender",
-      "text": "Siz: ‘Girişteki vazoda lavanta kalıntıları bulduk, sizin atölyenizden. Orada mıydınız?’ Isabelle panikliyor: ‘Lavanta mı? Victor almıştır, ben orada değildim!’ Tepkisi şüpheli. Ne yaparsınız?",
+      "scene_id": "kazan_dairesi",
+      "text": "Sıcak, nemli ve gürültülü. Buhar borularının arkasında bir karartı var. Birisi orada saklanıyor! 'Kimsin sen!' diye bağırıyorsun.",
+      "image": "./img/case2/kukla_kazan_dairesi.jpg",
       "choices": [
-        {
-          "text": "Daha fazla kanıt topla.",
-          "next": "interrogation_intro",
-          "hint": "Lavanta şüpheli, ama suçlama için daha fazla kanıt gerekli."
-        },
-        {
-          "text": "Ofisi tekrar incele.",
-          "next": "office",
-          "hint": "Başka ipuçları için ofise dön."
-        }
+        { "text": "Saklanan kişiyi yakala.", "next": "karsilasma_orhan" },
+        { "text": "Kilitli bölmeyi aç (Anahtarın varsa).", "next": "kazan_kilitli" },
+        { "text": "Geri çekil.", "next": "merkez_hol" }
       ]
     },
     {
-      "scene_id": "isabelle_confront_inheritance",
-      "text": "Siz: ‘Victor mirasını size bırakmış.’ Isabelle şaşırıyor: ‘Haberim yoktu! Victor bana inanıyordu!’ Masum görünüyor. Ne yaparsınız?",
+      "scene_id": "karsilasma_orhan",
+      "text": "Yaşlı bir adam, elinde İngiliz anahtarıyla üzerine atılıyor. Bu Orhan, eski hademe! Onu etkisiz hale getiriyorsun. 'Ben yapmadım! Yemin ederim!' diye bağırıyor. 'O kadın... Gazeteci... O buradaydı. Tiyatroya girdi!'",
+      "image": "./img/case2/char_orhan.jpg",
       "choices": [
-        {
-          "text": "Daha fazla kanıt topla.",
-          "next": "interrogation_intro",
-          "hint": "Miras masumiyetini gösteriyor, ama başka kanıtlar gerekli."
-        },
-        {
-          "text": "Girişi incele.",
-          "next": "entrance",
-          "hint": "Başka ipuçları için girişe git."
-        }
+        { "text": "Orhan'ı sorgula: 'Hangi gazeteci?'", "next": "sorgu_orhan" },
+        { "text": "Onu bayılt ve devam et.", "next": "kazan_dairesi" }
       ]
     },
     {
-      "scene_id": "arthur_talk",
-      "text": "Arthur küstah: ‘Victor bana borçluydu, ama cinayet mi? Asla! O gece galerideydim.’ Kamera silueti ona uyuyor. Ne sorarsınız?",
+      "scene_id": "sorgu_orhan",
+      "text": "Orhan titriyor: 'Selin... Selin adında biri. Yıllardır burayı araştırıyor. Bugün elinde silahla geldi. Başkomiseri o getirdi! Ben sadece saklanıyordum.' Orhan suçlu mu yoksa korkmuş bir yaşlı mı?",
+      "image": "./img/case2/char_orhan.jpg",
       "choices": [
-        {
-          "text": "Borçlar ve miras mektubu hakkında yüzleş.",
-          "next": "arthur_confront_inheritance",
-          "hint": "Borçlar, Arthur’un motifini güçlendiriyor."
-        },
-        {
-          "text": "Kamera siluetini sorgula.",
-          "next": "arthur_alibi_challenge",
-          "hint": "Siluet, Arthur’u olay yerine bağlayabilir."
-        },
-        {
-          "text": "Geri dön.",
-          "next": "interrogation_intro",
-          "hint": "Diğer şüphelileri sorgula."
-        }
+        { "text": "Ona inan ve serbest bırak.", "next": "kazan_dairesi" },
+        { "text": "Onu bir boruya kelepçele (Güvenlik için).", "next": "kazan_dairesi" }
       ]
     },
     {
-      "scene_id": "arthur_confront_inheritance",
-      "text": "Siz: ‘Victor borçlarınızı ödemek için tabloyu satacaktı, ama mirası Isabelle’e bıraktı.’ Arthur öfkeleniyor: ‘Beni mi kandırdı?’ Tepkisi şüpheli. Ne yaparsınız?",
+      "scene_id": "kazan_kilitli",
+      "text": "Anahtarı kullandın ve demir kapıyı açtın. İçerisi bir fotoğraf stüdyosu gibi! Duvarlarda yüzlerce fotoğraf var. Hepsi cinayet mahallerine ait. Ama bir dakika... Bu fotoğrafların bazılarında Selin (Gazeteci) var ve fotoğraflar cinayet işlenmeden ÖNCE çekilmiş gibi duruyor. Selin katil mi?",
+      "image": "./img/case2/char_selin.jpg",
+      "hint": "Selin cinayetleri önceden nasıl biliyordu?",
       "choices": [
-        {
-          "text": "Daha fazla kanıt topla.",
-          "next": "interrogation_intro",
-          "hint": "Borçlar güçlü motif, ama suçlama için daha fazla kanıt gerekli."
-        },
-        {
-          "text": "Ofisi tekrar incele.",
-          "next": "office",
-          "hint": "Başka ipuçları için ofise dön."
-        }
+        { "text": "Fotoğrafları kanıt olarak al.", "next": "kazan_dairesi" }
       ]
     },
     {
-      "scene_id": "arthur_alibi_challenge",
-      "text": "Siz: ‘Kamera silueti size uyuyor, alibiniz zayıf.’ Arthur panikliyor: ‘Beni tuzağa düşürüyorlar!’ Ne yaparsınız?",
+      "scene_id": "tiyatro_giris",
+      "text": "Büyük Tiyatro Salonu'nun kapısındasın. İçeriden klasik müzik sesi geliyor. Işıklar loş. Sahnenin ortasında bir sandalye ve sandalyede bağlı biri var. Başkomiser Kerem! Ama yanında iki kişi daha var: Gazeteci Selin ve Psikiyatrist Dr. Aris. İkisi de birbirine silah doğrultmuş.",
+      "image": "./img/case2/kukla_ceset_dummy.jpg",
       "choices": [
-        {
-          "text": "Daha fazla kanıt topla.",
-          "next": "interrogation_intro",
-          "hint": "Siluet şüpheli, ama suçlama için daha fazla kanıt gerekli."
-        },
-        {
-          "text": "Girişi incele.",
-          "next": "entrance",
-          "hint": "Başka ipuçları için girişe git."
-        }
+        { "text": "Saklan ve dinle.", "next": "tiyatro_dinleme" },
+        { "text": "İçeri dal ve 'Silahları atın!' de.", "next": "tiyatro_aksiyon" }
       ]
     },
     {
-      "scene_id": "elara_talk",
-      "text": "Elara öfkeli: ‘Victor tablomuzu çaldı! O gece malikanenin önünden geçtim, içeri girmedim.’ Saç teli ve izmarit onu yalanlıyor. Ne sorarsınız?",
+      "scene_id": "tiyatro_dinleme",
+      "text": "Gizleniyorsun. Selin bağırıyor: 'Her şeyi sen planladın Aris! O yetimleri sen canavara dönüştürdün! Kerem Komiser bunu öğrendiği için onu kaçırdın!' Dr. Aris ise sakin: 'Selin, sen hastamsın. İlaçlarını almadın. Bunların hepsi senin hayal ürünün. Silahı indir ve konuşalım.'",
+      "image": "./img/case2/kukla_ceset_dummy.jpg",
+      "hint": "Kim doğru söylüyor? Aris çok sakin, Selin çok dengesiz. Ama Yatakhanedeki UV yazıları 'Doktor bizi hasta ediyor' diyordu.",
       "choices": [
-        {
-          "text": "Saç teli ve boya hakkında yüzleş.",
-          "next": "elara_confront_hair",
-          "hint": "Saç ve boya, Elara’yı olay yerine bağlar."
-        },
-        {
-          "text": "Sigara izmariti hakkında yüzleş.",
-          "next": "elara_confront_cigarette",
-          "hint": "İzmarit, Elara’nın yalanını ortaya çıkarabilir."
-        },
-        {
-          "text": "Geri dön.",
-          "next": "interrogation_intro",
-          "hint": "Diğer şüphelileri sorgula."
-        }
+        { "text": "Yeterince duydum. Ortaya çık.", "next": "final_karar_ani" }
       ]
     },
     {
-      "scene_id": "elara_confront_hair",
-      "text": "Siz: ‘Ofiste kızıl saç teli ve fosforlu boya bulduk, size ait.’ Elara panikliyor: ‘Tablo benim, ama cinayet işlemedim!’ Ne yaparsınız?",
+      "scene_id": "tiyatro_aksiyon",
+      "text": "Silahınla sahneye çıktın. Herkes sana döndü. Kerem baygın. Selin: 'Komiserim, bu adam Kuklacı! Onu vurun!' Aris: 'Sakın! O kadın tehlikeli bir şizofren. Katil o!' Karar vermen lazım. Elindeki kanıtları hatırla.",
+      "image": "./img/case2/kukla_ceset_dummy.jpg",
       "choices": [
-        {
-          "text": "Daha fazla kanıt topla.",
-          "next": "interrogation_intro",
-          "hint": "Saç ve boya güçlü kanıt, ama suçlama için daha fazla bilgi gerekli."
-        },
-        {
-          "text": "Ofisi tekrar incele.",
-          "next": "office",
-          "hint": "Başka ipuçları için ofise dön."
-        }
+        { "text": "Karar ver.", "next": "final_karar_ani" }
       ]
     },
     {
-      "scene_id": "elara_confront_cigarette",
-      "text": "Siz: ‘Girişte ‘Camel Pure’ izmariti bulduk, sizin markanız.’ Elara kekeliyor: ‘Evet, oradaydım, ama içeri girmedim!’ Ne yaparsınız?",
+      "scene_id": "final_karar_ani",
+      "text": "Zaman daralıyor. Kerem'in sandalyesine bağlı bombanın sayacı 00:30. Katili etkisiz hale getirip şifreyi girmelisin. Katil kim?",
+      "image": "./img/case2/kukla_ceset_dummy.jpg",
       "choices": [
-        {
-          "text": "Daha fazla kanıt topla.",
-          "next": "interrogation_intro",
-          "hint": "İzmarit güçlü kanıt, ama suçlama için daha fazla bilgi gerekli."
-        },
-        {
-          "text": "Girişi incele.",
-          "next": "entrance",
-          "hint": "Başka ipuçları için girişe git."
-        }
+        { "text": "Katil SELİN! (Fotoğrafları o çekmişti)", "next": "suclama_selin" },
+        { "text": "Katil ORHAN! (Kazan dairesindeydi)", "next": "suclama_orhan" },
+        { "text": "Katil DR. ARIS! (Yatakhanedeki yazılar)", "next": "suclama_aris" }
       ]
     },
     {
-      "scene_id": "voss_talk",
-      "text": "Voss sakin: ‘Victor’un lonca sırlarını ifşa edeceğini biliyordum, ama cinayet? Asla.’ Alibisi zayıf. Ne sorarsınız?",
+      "scene_id": "suclama_selin",
+      "text": "Selin'i vurdun! Yere yığıldı. Dr. Aris gülümseyerek yanına geldi. 'Teşekkürler dedektif. Çok büyük bir dertten kurtardın beni.' Aris cebinden bir kumanda çıkardı ve bombayı durdurmak yerine... hızlandırdı. 'Sanırım tanık bırakmamalıyım.' Gözlerin kararırken son duyduğun şey patlama sesi.",
+      "image": "./img/case2/ending_bad.jpg",
       "choices": [
-        {
-          "text": "Lonca bağlantısını sorgula.",
-          "next": "voss_lonca_sorgu",
-          "hint": "Lonca, Voss’un motifini açıklayabilir."
-        },
-        {
-          "text": "Geri dön.",
-          "next": "interrogation_intro",
-          "hint": "Diğer şüphelileri sorgula."
-        }
+        { "text": "YANLIŞ SEÇİM. OYUN BİTTİ.", "next": "giris" }
       ]
     },
     {
-      "scene_id": "voss_lonca_sorgu",
-      "text": "Siz: ‘Lonca, Victor’u susturmak istedi, değil mi?’ Voss gülümsüyor: ‘Lonca sırlarını korur, ama ben katil değilim.’ Ne yaparsınız?",
+      "scene_id": "suclama_orhan",
+      "text": "Orhan sahnede bile değil! Zaman kaybediyorsun! Selin ve Aris tartışırken silah patladı. Kerem vuruldu. Her şey bitti.",
+      "image": "./img/case2/ending_bad.jpg",
       "choices": [
-        {
-          "text": "Daha fazla kanıt topla.",
-          "next": "interrogation_intro",
-          "hint": "Lonca bağlantısı şüpheli, ama suçlama için daha fazla kanıt gerekli."
-        },
-        {
-          "text": "Ofisi tekrar incele.",
-          "next": "office",
-          "hint": "Başka ipuçları için ofise dön."
-        }
+        { "text": "YANLIŞ SEÇİM. OYUN BİTTİ.", "next": "giris" }
       ]
     },
     {
-      "scene_id": "final_accusation",
-      "text": "Tüm kanıtları topladınız. Katili suçlama zamanı. Kimi suçlayacaksınız?",
+      "scene_id": "suclama_aris",
+      "text": "Silahını Aris'e doğrulttun! 'Kasetleri dinledim doktor! Yatakhanedeki yazıları okudum! Çocukları denek olarak kullandın!' Aris'in yüzündeki maske düştü. 'O nankör veletler... Sanata katkı sağlıyorlardı.' Elini cebine attığı an tetiği çektin. Aris omzundan vuruldu.",
+      "image": "./img/case2/char_aris.jpg",
       "choices": [
-        {
-          "text": "Isabelle Dubois",
-          "next": "isabelle_ending",
-          "hint": "Lavanta ve not şüpheli, ama miras masumiyetini gösteriyor."
-        },
-        {
-          "text": "Arthur Finch",
-          "next": "arthur_ending",
-          "hint": "Borçlar ve siluet güçlü, ama fiziksel kanıtlar eksik."
-        },
-        {
-          "text": "Elara Vance",
-          "next": "elara_ending",
-          "hint": "Saç, izmarit ve boya Elara’yı işaret ediyor."
-        },
-        {
-          "text": "Dr. Leonard Voss",
-          "next": "voss_ending",
-          "hint": "Lonca bağlantısı şüpheli, ama kanıtlar zayıf."
-        }
+        { "text": "Bombayı imha et ve Kerem'i kurtar.", "next": "happy_ending" }
       ]
     },
     {
-      "scene_id": "isabelle_ending",
-      "text": "Isabelle’i suçluyorsunuz. ‘Victor’u öldürmedim!’ diye bağırıyor. Lavanta ve not aleyhinde, ama DNA analizleri Elara’yı işaret ediyor. Yanlış suçlama, Elara kaçtı. Oyun Bitti.",
-      "choices": []
-    },
-    {
-      "scene_id": "arthur_ending",
-      "text": "Arthur’u suçluyorsunuz. ‘Beni tuzağa düşürdüler!’ diye bağırıyor. Borçlar ve siluet aleyhinde, ama DNA Elara’yı gösteriyor. Yanlış suçlama, Elara kaçtı. Oyun Bitti.",
-      "choices": []
-    },
-    {
-      "scene_id": "elara_ending",
-      "text": "Elara’yı suçluyorsunuz. ‘Evet, Victor’u ben öldürdüm. Sanatımı çaldı!’ diyor. Kanlı mektup açacağı ve fırça ucu onu ele veriyor. Polis Elara’yı tutukluyor. Dava çözüldü! TEBRİKLER!",
-      "choices": []
-    },
-    {
-      "scene_id": "voss_ending",
-      "text": "Voss’u suçluyorsunuz. ‘Katil değilim,’ diyor. Lonca bağlantısı şüpheli, ama fiziksel kanıtlar Elara’yı işaret ediyor. Yanlış suçlama, Elara kaçtı. Oyun Bitti.",
-      "choices": []
+      "scene_id": "happy_ending",
+      "text": "Selin hemen bombanın kablolarına koştu. 'Ben mühendislik okudum, halledebilirim!' dedi. Ve başardı. Kerem Komiser gözlerini açtı. Dışarıdan siren sesleri geliyor. Dr. Aris kelepçelenirken sana bakıp gülümsüyor: 'Oyun bitmedi dedektif. Sahne sadece değişti.' Ama en azından bu gece, perdeyi iyiler kapattı.",
+      "image": "./img/case2/ending_happy.jpg",
+      "choices": [
+        { "text": "TEBRİKLER! VAKAYI ÇÖZDÜN. (Ana Menü)", "next": "giris" }
+      ]
     }
   ]
 }
