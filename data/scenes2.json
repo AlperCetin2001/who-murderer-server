@@ -250,92 +250,122 @@
     },
     {
       "scene_id": "sahne_gozetleme",
-      "text": "Sahne spot ışıklarıyla aydınlatılmış. Sandalyede bağlı biri var: Başkomiser Kerem! Baygın. Yanında iki kişi ayakta duruyor. Biri, elinde fotoğraf makinesi ve silah olan Gazeteci Selin. Diğeri, şık takım elbisesiyle sakin duran Psikiyatrist Dr. Aris. Tartışıyorlar.",
+      "text": "Sahne spot ışıklarıyla aydınlatılmış. Sandalyede bağlı biri var: Başkomiser Kerem! Baygın. Yanında iki kişi ayakta duruyor. Biri, elinde fotoğraf makinesi ve silah olan Gazeteci Selin. Diğeri, şık takım elbisesiyle sakin duran Psikiyatrist Dr. Aris. Henüz seni fark etmediler.",
       "image": "./img/case2/kukla_ceset_dummy.jpg",
-      "hint": "Acele etme, dinle. Kimin eli titriyor? Kim manipüle ediyor?",
+      "hint": "Şu an avantaj sende. Aniden çıkmak yerine önce ne konuştuklarını dinle veya doğrudan sahneye fırla.",
       "choices": [
-        { "text": "Dinle: Selin ne diyor?", "next": "diyalog_selin" },
-        { "text": "Dinle: Dr. Aris ne diyor?", "next": "diyalog_aris" },
-        { "text": "Yeterince bekledim, kapağı tekmele ve sahneye çık!", "next": "sahneye_cikis" }
+        { "text": "Dinle: Aralarında ne konuşuyorlar?", "next": "sahne_diyalog_dinle" },
+        { "text": "Kapağı tekmele ve sahneye çık!", "next": "sahneye_cikis_sorgu" }
       ]
     },
     {
-      "scene_id": "diyalog_selin",
-      "text": "Selin, silahı doktora doğrultmuş bağırıyor: 'Senin yüzünden! O ilaçlar yüzünden kardeşim intihar etti! Bu yetimhaneyi laboratuvarın gibi kullandın. Kerem Komiser bunu öğrendiği için onu öldüreceksin değil mi?!'",
+      "scene_id": "sahne_diyalog_dinle",
+      "text": "Selin ağlıyor: 'Bana söz vermiştin! Kardeşimi iyileştirecektin!' Dr. Aris ise sakin: 'İyileştirdim Selin. Artık acı çekmiyor. O mükemmel bir kukla oldu. İtaatkar, sessiz...' Kerem Komiser ayılmaya başlıyor. Zaman daralıyor.",
+      "image": "./img/case2/kukla_ceset_dummy.jpg",
+      "hint": "Dr. Aris'in söyledikleri, Yatakhanedeki 'Kuklacı' temasını doğruluyor.",
+      "choices": [
+        { "text": "Daha fazla bekleyemem, sahneye çık!", "next": "sahneye_cikis_sorgu" }
+      ]
+    },
+    {
+      "scene_id": "sahneye_cikis_sorgu",
+      "text": "Yer kapağını gürültüyle açıp sahneye fırladın. Silahın ikisi arasında gidip geliyor. 'Kıpırdamayın!' Ortam buz kesti. Selin silahını Aris'e doğrultmuş durumda ama sana bakıyor. Aris ise ellerini iki yana açmış, gülümsüyor. Bir karar vermeden önce onları konuşturmalısın.",
+      "image": "./img/case2/kukla_ceset_dummy.jpg",
+      "hint": "Hemen ateş etme. Gerçeği öğrenmek için onları sorgula.",
+      "choices": [
+        { "text": "Selin'e sor: 'Neden silahın var?'", "next": "sorgu_selin" },
+        { "text": "Dr. Aris'e sor: 'Burada ne yapıyorsunuz?'", "next": "sorgu_aris" },
+        { "text": "Kerem'e seslen: 'Komiserim iyi misiniz?'", "next": "sorgu_kerem" },
+        { "text": "Yeterince dinledim, karar veriyorum.", "next": "final_karar_ani" }
+      ]
+    },
+    {
+      "scene_id": "sorgu_selin",
+      "text": "Selin titreyerek bağırıyor: 'Bu canavar! Yıllar önce kaybolan kardeşim Efe... Onu bu yetimhanede tuttuğunu öğrendim. İlaçlarla beynini yıkamış! Kerem Komiser dosyayı bulunca onu susturmak istedi. Ben sadece kardeşimin intikamını istiyorum!'",
       "image": "./img/case2/char_selin.jpg",
-      "hint": "Selin intikam peşinde gibi. Sesi çok acı dolu.",
+      "hint": "Selin'in acısı gerçek görünüyor. Ama müdür odasındaki kasetlerde Selin'in de eski bir hasta olduğu (404) söyleniyordu.",
       "choices": [
-        { "text": "Aris'in cevabını dinle.", "next": "diyalog_aris" },
-        { "text": "Sahneye çık.", "next": "sahneye_cikis" }
+        { "text": "Diğerlerini de sorgula.", "next": "sahneye_cikis_sorgu" },
+        { "text": "Karar ver.", "next": "final_karar_ani" }
       ]
     },
     {
-      "scene_id": "diyalog_aris",
-      "text": "Dr. Aris buz gibi sakin. 'Selin... İlaçlarını almadın yine. Paranoyaklaşıyorsun. Kardeşin hastaydı, senin gibi. Ben onları iyileştirmeye çalıştım. Komiseri sen kaçırdın, unuttun mu? Şizofreni nöbetlerin sıklaştı.'",
+      "scene_id": "sorgu_aris",
+      "text": "Dr. Aris, ceketinin yakasını düzeltiyor. 'Dedektif, bu kadın bir paranoyak şizofren. Eski hastam (404). Kardeşi yıllar önce doğal sebeplerden öldü. Bunu kabullenemediği için beni ve kurumumu suçluyor. Komiseri kaçıran o. Ben onu ikna etmeye geldim. Silahını ona doğrultmalısın.'",
       "image": "./img/case2/char_aris.jpg",
-      "hint": "Aris, Selin'in akıl sağlığını sorguluyor. Ama Yatakhanedeki UV yazıları 'Doktor Yalan Söylüyor' diyordu.",
+      "hint": "Aris çok mantıklı konuşuyor ama Yatakhanedeki UV yazıları 'Doktor Yalan Söylüyor' diyordu.",
       "choices": [
-        { "text": "Sahneye çık ve yüzleş.", "next": "sahneye_cikis" }
+        { "text": "Diğerlerini de sorgula.", "next": "sahneye_cikis_sorgu" },
+        { "text": "Karar ver.", "next": "final_karar_ani" }
       ]
     },
     {
-      "scene_id": "sahneye_cikis",
-      "text": "Yer kapağını tekmeleyip sahneye fırlıyorsun! Silahın hazır. 'Kıpırdamayın!' Herkes sana dönüyor. Kerem Komiser yavaşça ayılıyor. Ortamdaki gerilim elle tutulur cinsten. Şimdi bir taraf seçmek zorundasın. Kim doğruyu söylüyor?",
+      "scene_id": "sorgu_kerem",
+      "text": "Kerem Komiser öksürerek konuşuyor: 'Evlat... Tuzağa düştük. Aris... O... O sadece bir doktor değil. O bir tarikat lideri. Çocukları... İrade yoksunu kölelere çeviriyor. Selin'e güven. Vur şu şerefsizi!'",
       "image": "./img/case2/kukla_ceset_dummy.jpg",
-      "hint": "UV feneriyle gördüklerini, Müdürün odasındaki kasetleri hatırla. Doktor Aris çok tehlikeli.",
+      "hint": "Mentorumuz Kerem net konuştu. Ama Aris hala çok kendinden emin.",
       "choices": [
-        { "text": "Silahını Selin'e doğrult. (Dr. Aris haklı görünüyor)", "next": "secim_selin_suclu" },
-        { "text": "Silahını Dr. Aris'e doğrult. (Yatakhanedeki yazılar!)", "next": "secim_aris_suclu" },
-        { "text": "Havaya ateş et ve Kerem'i çözmeye çalış.", "next": "secim_tarafiz" }
+        { "text": "Geri dön ve karar ver.", "next": "sahneye_cikis_sorgu" }
+      ]
+    },
+    {
+      "scene_id": "final_karar_ani",
+      "text": "Herkes sana bakıyor. Selin ağlıyor, Aris gülümsüyor, Kerem acı içinde kıvranıyor. Silahının namlusu kimin üzerinde duracak? Bu seçim geri alınamaz.",
+      "image": "./img/case2/kukla_ceset_dummy.jpg",
+      "hint": "Kanıtları hatırla: UV Işık mesajları, Günlük, Kerem'in sözleri. Suçlu kim?",
+      "choices": [
+        { "text": "Silahı Selin'e doğrult (Dr. Aris haklı).", "next": "secim_selin_suclu" },
+        { "text": "Silahı Dr. Aris'e doğrult (UV Kanıtları ve Kerem).", "next": "secim_aris_suclu" },
+        { "text": "Havaya ateş et (Kimseye güvenmiyorum).", "next": "secim_tarafiz" }
       ]
     },
     {
       "scene_id": "secim_selin_suclu",
-      "text": "'Silahı bırak Selin!' diye bağırıyorsun. Selin şok içinde sana bakıyor. 'Sen de mi onun tarafındasın? Görmüyor musun?' O sırada Dr. Aris, Selin'in dalgınlığından faydalanıp cebinden bir şırınga çıkarıyor ve Selin'in boynuna saplıyor. Selin yığılıyor.",
+      "text": "'Silahı bırak Selin!' Selin şok içinde sana bakıyor. 'Sen de mi? Kör müsün?' Bu tereddütten faydalanan Aris, cebinden çıkardığı şırıngayı Selin'e saplıyor. Selin yığılıyor. Kerem bağırıyor: 'HAYIR!'",
       "image": "./img/case2/char_selin.jpg",
       "choices": [
-        { "text": "Ne yaptın doktor?!", "next": "bad_ending_manipule" }
+        { "text": "Ne oluyor?!", "next": "bad_ending_manipule" }
       ]
     },
     {
       "scene_id": "bad_ending_manipule",
-      "text": "Aris gülümsüyor. 'Sadece hastamı sakinleştirdim dedektif. Teşekkürler. Sen olmasan beni vuracaktı.' Kerem Komiser bağırıyor: 'Hayır! Kaç! O adam suçlu!' Ama çok geç. Aris sana dönüyor: 'Ne yazık... Sen de enfekte olmuşsun.' Arkanı döndüğünde Orhan'ın elindeki küreği görüyorsun.",
+      "text": "Aris sana dönüyor. 'Teşekkürler Dedektif. Testi geçtin. İtaat... En sevdiğim özellik.' Birden sahne ışıkları sönüyor. Ensenden bir iğne batıyor. Gözlerin kararırken Orhan'ın sesini duyuyorsun: 'Yeni kuklamız hazır doktor.'",
       "image": "./img/case2/ending_bad.jpg",
       "choices": [
-        { "text": "ÖLDÜN. (Yanlış kişiye güvendin. UV ışığındaki mesajları hatırla: 'Doktor Yalan Söylüyor').", "next": "giris" }
+        { "text": "KÖTÜ SON: Kuklaya Dönüştün. (UV kanıtlarını görmezden geldin).", "next": "giris" }
       ]
     },
     {
       "scene_id": "secim_tarafiz",
-      "text": "Havaya ateş edip dikkati dağıttın. Kerem'e koştun. Ama bu bir hata. Aris ve Selin birbirine girdi. Silah patladı. Selin vuruldu. Aris kaçtı. Kerem yaşıyor ama asıl suçlu ellerinden kaçtı.",
+      "text": "Havaya ateş ettin. Karışıklık çıktı. Aris sahne arkasına kaçtı. Selin peşinden gitti ama bir patlama sesi duyuldu. Sahne çöküyor! Kerem'i zorlukla dışarı çıkarıyorsun ama Aris kaçtı. Selin enkaz altında kaldı.",
       "image": "./img/case2/ending_bad.jpg",
       "choices": [
-        { "text": "YARIM ZAFER. (Katil kaçtı). Tekrar Dene.", "next": "giris" }
+        { "text": "YARIM ZAFER: Katil Kaçtı. Tekrar Dene.", "next": "giris" }
       ]
     },
     {
       "scene_id": "secim_aris_suclu",
-      "text": "Silahını Aris'e kilitledin. 'Oyun bitti Doktor! UV ışıklarını gördüm. Çocukların yazdıklarını okudum! Selin deli değil, sen onları delirttin!' Aris'in yüzündeki o kibar maske düştü. Saf bir nefretle bakıyor. 'O veletler... Sadece deney faresiydi. Bilim kurban ister.' Elini ceketine atıyor.",
+      "text": "Silahını Aris'in alnına kilitledin. 'Oyun bitti Doktor! Duvarlardaki yazıları okudum. 404 numaralı deneğin kim olduğunu biliyorum!' Aris'in maskesi düştü. Yüzü şeytani bir hal aldı. 'Onlar insan değildi... Sadece kil. Ben onlara şekil verdim!' Ceketine uzanıyor!",
       "image": "./img/case2/char_aris.jpg",
       "choices": [
-        { "text": "ATEŞ ET!", "next": "happy_ending" },
-        { "text": "Teslim olmasını bekle.", "next": "bad_ending_gec_kalma" }
+        { "text": "Tetiği çek!", "next": "happy_ending_gecis" }
       ]
     },
     {
-      "scene_id": "bad_ending_gec_kalma",
-      "text": "Tereddüt ettin. Aris ceketinden bir kumanda çıkardı. 'Sahne kapanıyor.' Düğmeye bastı. Tiyatro salonunun tavanı çökmeye başladı.",
-      "image": "./img/case2/ending_bad.jpg",
-      "choices": [
-        { "text": "ÖLDÜN. (Bir psikopatla pazarlık yapılmaz).", "next": "giris" }
-      ]
-    },
-    {
-      "scene_id": "happy_ending",
-      "text": "Tereddüt etmedin. Aris omzundan vurulup geriye savruldu. Selin hemen Kerem'in iplerini çözdü. Dışarıdan siren sesleri duyuluyor. Kerem sana bakıp gülümsüyor: 'İyi iş evlat. Seni yetiştirdiğime değmiş.' Yağmur dindi. Yetimhanenin laneti, Dr. Aris'in kelepçelenmesiyle son buldu.",
+      "scene_id": "happy_ending_gecis",
+      "text": "BAM! Tek kurşun. Aris omzundan vurulup sahneden aşağı, orkestra çukuruna düştü. Selin hemen Kerem'i çözdü. Kerem sana sarılıyor: 'Başardın evlat.' Aris'in düştüğü yere bakıyorsun. Cesedi orada ama ceketinden bir zarf fırlamış. Üzerinde 'Kuklacı'nın Manifestosu' yazıyor.",
       "image": "./img/case2/ending_happy.jpg",
+      "hint": "Her şey bitti ama nedenini öğrenmek için o mektubu okumalısın.",
       "choices": [
-        { "text": "TEBRİKLER! VAKAYI MÜKEMMEL ÇÖZDÜN. (Ana Menü)", "next": "giris" }
+        { "text": "Mektubu al ve oku.", "next": "itiraf_mektubu_oku" }
+      ]
+    },
+    {
+      "scene_id": "itiraf_mektubu_oku",
+      "text": "'İnsanlar acı çeker çünkü hissederler. Korkarlar çünkü düşünürler. Ben onlardan bu kusurları aldım. Mutlu Yarınlar Yetimhanesi bir okul değildi, bir arınma merkeziydi. Çocukların zihinlerini boşaltıp, onları itaatkar, acısız, mükemmel varlıklara dönüştürdüm. Bana canavar diyorsunuz... Ama ben onlara huzur verdim. Şimdi ben gidiyorum ama tohumlarım her yerde. Kuklalarım uyanmayı bekliyor. - Dr. Aris'",
+      "image": "./img/case2/item_gunluk.jpg",
+      "choices": [
+        { "text": "Dosyayı Kapat (MÜKEMMEL SON).", "next": "giris" }
       ]
     }
   ]
