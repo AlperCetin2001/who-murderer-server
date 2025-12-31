@@ -8,6 +8,9 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
+// Statik dosyaları sunmak için (public klasörü varsa)
+app.use(express.static(path.join(__dirname, 'public')));
+
 const server = http.createServer(app);
 
 const io = new Server(server, {
@@ -70,6 +73,7 @@ io.on('connection', (socket) => {
         const caseData = loadedScenarios[room.currentCase]; 
         if (!caseData || !caseData.scenes) return;
         const sceneData = caseData.scenes.find(s => s.scene_id === sceneId);
+        
         if (sceneData) {
             socket.emit('scene_data_update', sceneData);
             if (sceneData.image && !sceneData.image.includes('char_') && !sceneData.image.includes('dis.jpg')) {
@@ -102,7 +106,9 @@ io.on('connection', (socket) => {
         rooms.set(roomCode, {
             host: socket.id,
             players: [{ id: socket.id, name: playerName, score: 0, avatar: avatar || '🕵️' }],
-            gameState: 'lobby', mode: 'individual', votes: {}, currentCase: null,
+            gameState: 'lobby',
+            mode: 'individual', 
+            votes: {}, currentCase: null,
             isPrivate: (visibility === 'private'),
             password: (visibility === 'protected' && password) ? password : null,
             hintCount: 3, evidenceList: []
@@ -116,15 +122,20 @@ io.on('connection', (socket) => {
     socket.on('join_room', ({ roomCode, playerName, password, avatar }) => {
         const room = rooms.get(roomCode);
         if (!room) return socket.emit('error_message', '❌ Oda bulunamadı!');
+        
         let isReconnection = false;
         if (room.gameState !== 'lobby') { isReconnection = true; }
+
         if (room.password && room.password !== password) return socket.emit('error_message', '🔒 Yanlış Şifre!');
+
         if (!isReconnection) {
             const nameExists = room.players.some(p => p.name === playerName);
             if (nameExists) return socket.emit('error_message', '⚠️ İsim kullanımda!');
         }
+
         room.players.push({ id: socket.id, name: playerName, score: 0, avatar: avatar || '🕵️' });
         socket.join(roomCode);
+
         socket.emit('join_success', { roomCode, isHost: false });
         io.to(roomCode).emit('update_player_list', room.players);
         
@@ -159,15 +170,29 @@ io.on('connection', (socket) => {
         const room = rooms.get(roomCode);
         if (!room || room.mode !== 'voting') return;
         room.votes[socket.id] = nextSceneId;
+        
         const voteStatus = room.players.map(p => ({
             name: p.name, id: p.id, avatar: p.avatar,
-            hasVoted: room.votes.hasOwnProperty(p.id), votedForId: room.votes[p.id] || null 
+            hasVoted: room.votes.hasOwnProperty(p.id), 
+            votedForId: room.votes[p.id] || null 
         }));
-        io.to(roomCode).emit('vote_update', { voteStatus, voteCount: Object.keys(room.votes).length, total: room.players.length });
-        if (Object.keys(room.votes).length >= room.players.length) {
-            const counts = {}; let winnerScene = null; let maxVotes = 0;
-            Object.values(room.votes).forEach(sid => { counts[sid] = (counts[sid] || 0) + 1; if (counts[sid] > maxVotes) { maxVotes = counts[sid]; winnerScene = sid; } });
-            setTimeout(() => { room.votes = {}; io.to(roomCode).emit('force_scene_change', winnerScene); }, 3000);
+
+        const playerCount = room.players.length;
+        const voteCount = Object.keys(room.votes).length;
+        io.to(roomCode).emit('vote_update', { voteStatus, voteCount, total: playerCount });
+
+        if (voteCount >= playerCount) {
+            const counts = {};
+            let winnerScene = null;
+            let maxVotes = 0;
+            Object.values(room.votes).forEach(sid => {
+                counts[sid] = (counts[sid] || 0) + 1;
+                if (counts[sid] > maxVotes) { maxVotes = counts[sid]; winnerScene = sid; }
+            });
+            setTimeout(() => {
+                room.votes = {}; 
+                io.to(roomCode).emit('force_scene_change', winnerScene);
+            }, 3000);
         }
     });
 
