@@ -7,23 +7,33 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors());
+
 const server = http.createServer(app);
-const io = new Server(server, { cors: { origin: "*", methods: ["GET", "POST"] } });
+
+const io = new Server(server, {
+    cors: { origin: "*", methods: ["GET", "POST"] }
+});
+
 const rooms = new Map();
 
 // --- SENARYO YÜKLEME ---
 const loadedScenarios = {};
 function loadAllScenarios() {
     const dataFolderPath = path.join(__dirname, 'data');
-    if (!fs.existsSync(dataFolderPath)) return console.error("❌ HATA: 'data' klasörü yok!");
+    if (!fs.existsSync(dataFolderPath)) {
+        console.error("❌ HATA: 'data' klasörü bulunamadı!");
+        return;
+    }
     ['case1', 'case2', 'case3'].forEach(caseId => {
         try {
-            const filePath = path.join(dataFolderPath, `scenes${caseId.replace('case', '')}.json`);
+            const fileName = `scenes${caseId.replace('case', '')}.json`;
+            const filePath = path.join(dataFolderPath, fileName);
             if (fs.existsSync(filePath)) {
-                loadedScenarios[caseId] = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+                const rawData = fs.readFileSync(filePath, 'utf8');
+                loadedScenarios[caseId] = JSON.parse(rawData);
                 console.log(`✅ ${caseId} yüklendi.`);
             }
-        } catch (error) { console.error(`❌ ${caseId} hata:`, error.message); }
+        } catch (error) { console.error(`❌ ${caseId} yüklenemedi.`); }
     });
 }
 loadAllScenarios();
@@ -31,7 +41,7 @@ loadAllScenarios();
 function generateRoomCode() {
     const chars = "BCDFGHJKMNPQRSTVWXYZ23456789";
     let code = "";
-    for (let i = 0; i < 4; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
+    for (let i = 0; i < 4; i++) { code += chars.charAt(Math.floor(Math.random() * chars.length)); }
     return code;
 }
 
@@ -39,7 +49,13 @@ function getPublicRoomList() {
     const publicRooms = [];
     rooms.forEach((room, code) => {
         if (room.gameState === 'lobby' && !room.isPrivate) {
-            publicRooms.push({ code, host: room.players[0].name, count: room.players.length, isLocked: !!room.password, mode: room.mode });
+            publicRooms.push({
+                code: code,
+                host: room.players[0].name,
+                count: room.players.length,
+                isLocked: !!room.password, 
+                mode: room.mode
+            });
         }
     });
     return publicRooms;
@@ -51,15 +67,16 @@ io.on('connection', (socket) => {
     socket.on('request_scene_data', ({ roomCode, sceneId }) => {
         const room = rooms.get(roomCode);
         if (!room) return;
-        const caseData = loadedScenarios[room.currentCase];
-        if (!caseData) return;
+        const caseData = loadedScenarios[room.currentCase]; 
+        if (!caseData || !caseData.scenes) return;
         const sceneData = caseData.scenes.find(s => s.scene_id === sceneId);
         if (sceneData) {
             socket.emit('scene_data_update', sceneData);
             if (sceneData.image && !sceneData.image.includes('char_') && !sceneData.image.includes('dis.jpg')) {
                 const exists = room.evidenceList.find(e => e.src === sceneData.image);
                 if (!exists) {
-                    room.evidenceList.push({ id: 'ev_' + Date.now(), src: sceneData.image, x: 50, y: 50 });
+                    const newEvidence = { id: 'ev_' + Date.now(), src: sceneData.image, x: 50, y: 50 };
+                    room.evidenceList.push(newEvidence);
                     io.to(roomCode).emit('update_evidence_board', room.evidenceList);
                 }
             }
@@ -81,11 +98,13 @@ io.on('connection', (socket) => {
 
     socket.on('create_room', ({ playerName, visibility, password, avatar }) => {
         let roomCode = generateRoomCode();
-        while(rooms.has(roomCode)) roomCode = generateRoomCode();
+        while(rooms.has(roomCode)) { roomCode = generateRoomCode(); }
         rooms.set(roomCode, {
-            host: socket.id, players: [{ id: socket.id, name: playerName, score: 0, avatar: avatar || '🕵️' }],
+            host: socket.id,
+            players: [{ id: socket.id, name: playerName, score: 0, avatar: avatar || '🕵️' }],
             gameState: 'lobby', mode: 'individual', votes: {}, currentCase: null,
-            isPrivate: (visibility === 'private'), password: (visibility === 'protected' && password) ? password : null,
+            isPrivate: (visibility === 'private'),
+            password: (visibility === 'protected' && password) ? password : null,
             hintCount: 3, evidenceList: []
         });
         socket.join(roomCode);
@@ -97,34 +116,40 @@ io.on('connection', (socket) => {
     socket.on('join_room', ({ roomCode, playerName, password, avatar }) => {
         const room = rooms.get(roomCode);
         if (!room) return socket.emit('error_message', '❌ Oda bulunamadı!');
-        let isReconnection = (room.gameState !== 'lobby');
+        let isReconnection = false;
+        if (room.gameState !== 'lobby') { isReconnection = true; }
         if (room.password && room.password !== password) return socket.emit('error_message', '🔒 Yanlış Şifre!');
         if (!isReconnection) {
-            if (room.players.some(p => p.name === playerName)) return socket.emit('error_message', '⚠️ İsim kullanımda!');
+            const nameExists = room.players.some(p => p.name === playerName);
+            if (nameExists) return socket.emit('error_message', '⚠️ İsim kullanımda!');
         }
         room.players.push({ id: socket.id, name: playerName, score: 0, avatar: avatar || '🕵️' });
         socket.join(roomCode);
         socket.emit('join_success', { roomCode, isHost: false });
         io.to(roomCode).emit('update_player_list', room.players);
         
-        const msgType = isReconnection ? `🔄 ${playerName} tekrar bağlandı.` : `${playerName} katıldı.`;
-        io.to(roomCode).emit('chat_message', { sender: 'Sistem', text: msgType, type: 'join' });
-        
-        if(isReconnection && room.currentCase) {
-            socket.emit('game_started', { caseId: room.currentCase, mode: room.mode, currentHintCount: room.hintCount });
+        if(isReconnection) {
+            io.to(roomCode).emit('chat_message', { sender: 'Sistem', text: `🔄 ${playerName} odaya tekrar bağlandı.`, type: 'join' });
+            if(room.currentCase) socket.emit('game_started', { caseId: room.currentCase, mode: room.mode, currentHintCount: room.hintCount });
+        } else {
+            io.to(roomCode).emit('chat_message', { sender: 'Sistem', text: `${playerName} katıldı.`, type: 'join' });
         }
         io.emit('room_list_update', getPublicRoomList());
     });
 
     socket.on('send_chat', ({ roomCode, message, playerName, avatar }) => {
-        io.to(roomCode).emit('chat_message', { sender: playerName, text: message, avatar, id: socket.id, type: 'user' });
+        io.to(roomCode).emit('chat_message', { sender: playerName, text: message, avatar: avatar, id: socket.id, type: 'user' });
     });
 
     socket.on('start_game', ({ roomCode, caseId, mode }) => {
         const room = rooms.get(roomCode);
         if (room && room.host === socket.id) {
-            room.gameState = 'playing'; room.currentCase = caseId; room.mode = mode || 'individual';
-            room.hintCount = 3; room.evidenceList = []; room.votes = {};
+            room.gameState = 'playing';
+            room.currentCase = caseId;
+            room.mode = mode || 'individual';
+            room.hintCount = 3;
+            room.evidenceList = [];
+            room.votes = {};
             io.to(roomCode).emit('game_started', { caseId, mode: room.mode, currentHintCount: 3 });
             io.emit('room_list_update', getPublicRoomList());
         }
@@ -135,10 +160,10 @@ io.on('connection', (socket) => {
         if (!room || room.mode !== 'voting') return;
         room.votes[socket.id] = nextSceneId;
         const voteStatus = room.players.map(p => ({
-            name: p.name, id: p.id, avatar: p.avatar, hasVoted: room.votes.hasOwnProperty(p.id), votedForId: room.votes[p.id] || null
+            name: p.name, id: p.id, avatar: p.avatar,
+            hasVoted: room.votes.hasOwnProperty(p.id), votedForId: room.votes[p.id] || null 
         }));
         io.to(roomCode).emit('vote_update', { voteStatus, voteCount: Object.keys(room.votes).length, total: room.players.length });
-
         if (Object.keys(room.votes).length >= room.players.length) {
             const counts = {}; let winnerScene = null; let maxVotes = 0;
             Object.values(room.votes).forEach(sid => { counts[sid] = (counts[sid] || 0) + 1; if (counts[sid] > maxVotes) { maxVotes = counts[sid]; winnerScene = sid; } });
@@ -158,11 +183,11 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         rooms.forEach((room, code) => {
-            const idx = room.players.findIndex(p => p.id === socket.id);
-            if (idx !== -1) {
-                room.players.splice(idx, 1);
+            const playerIndex = room.players.findIndex(p => p.id === socket.id);
+            if (playerIndex !== -1) {
+                room.players.splice(playerIndex, 1); 
                 io.to(code).emit('update_player_list', room.players);
-                if (room.players.length === 0) rooms.delete(code);
+                if(room.players.length === 0) rooms.delete(code);
                 else io.emit('room_list_update', getPublicRoomList());
             }
         });
@@ -170,4 +195,4 @@ io.on('connection', (socket) => {
 });
 
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => console.log(`🚀 Sunucu Port ${PORT}`));
+server.listen(PORT, () => { console.log(`🚀 Sunucu Port ${PORT}`); });
