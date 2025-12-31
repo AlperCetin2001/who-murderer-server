@@ -48,7 +48,6 @@ function generateRoomCode() {
 function getPublicRoomList() {
     const publicRooms = [];
     rooms.forEach((room, code) => {
-        // Sadece Lobi aşamasındaki ve Gizli olmayan odaları göster
         if (room.gameState === 'lobby' && !room.isPrivate) {
             publicRooms.push({
                 code: code,
@@ -63,16 +62,16 @@ function getPublicRoomList() {
 }
 
 io.on('connection', (socket) => {
-    console.log(`🔌 Yeni bağlantı: ${socket.id}`);
     socket.emit('room_list_update', getPublicRoomList());
 
-    // --- SAHNE VE KANIT ---
+    // --- SAHNE VERİSİ ---
     socket.on('request_scene_data', ({ roomCode, sceneId }) => {
         const room = rooms.get(roomCode);
         if (!room) return;
         const caseData = loadedScenarios[room.currentCase]; 
         if (!caseData || !caseData.scenes) return;
         const sceneData = caseData.scenes.find(s => s.scene_id === sceneId);
+        
         if (sceneData) {
             socket.emit('scene_data_update', sceneData);
             // Kanıt Ekleme
@@ -125,9 +124,7 @@ io.on('connection', (socket) => {
         if (!room) return socket.emit('error_message', '❌ Oda bulunamadı!');
         
         let isReconnection = false;
-        if (room.gameState !== 'lobby') {
-            isReconnection = true; // Oyun başlamışsa yeniden bağlanma sayılır
-        }
+        if (room.gameState !== 'lobby') { isReconnection = true; }
 
         if (room.password && room.password !== password) return socket.emit('error_message', '🔒 Yanlış Şifre!');
 
@@ -136,6 +133,7 @@ io.on('connection', (socket) => {
             if (nameExists) return socket.emit('error_message', '⚠️ İsim kullanımda!');
         }
 
+        // Oyuncu listesine avatarı ile ekle
         room.players.push({ id: socket.id, name: playerName, score: 0, avatar: avatar || '🕵️' });
         socket.join(roomCode);
 
@@ -144,23 +142,24 @@ io.on('connection', (socket) => {
         
         if(isReconnection) {
             io.to(roomCode).emit('chat_message', { sender: 'Sistem', text: `🔄 ${playerName} odaya tekrar bağlandı.`, type: 'join' });
-            // Oyuncuya oyun durumunu at
             if(room.currentCase) socket.emit('game_started', { caseId: room.currentCase, mode: room.mode, currentHintCount: room.hintCount });
         } else {
             io.to(roomCode).emit('chat_message', { sender: 'Sistem', text: `${playerName} katıldı.`, type: 'join' });
         }
-        
         io.emit('room_list_update', getPublicRoomList());
     });
 
     socket.on('send_chat', ({ roomCode, message, playerName, avatar }) => {
-        io.to(roomCode).emit('chat_message', { sender: playerName, text: message, avatar: avatar, id: socket.id, type: 'user' });
+        // Avatar bilgisini de gönderiyoruz
+        io.to(roomCode).emit('chat_message', { 
+            sender: playerName, text: message, avatar: avatar, id: socket.id, type: 'user' 
+        });
     });
 
     socket.on('start_game', ({ roomCode, caseId, mode }) => {
         const room = rooms.get(roomCode);
         if (room && room.host === socket.id) {
-            room.gameState = 'playing'; // Listeden kalkar
+            room.gameState = 'playing';
             room.currentCase = caseId;
             room.mode = mode || 'individual';
             room.hintCount = 3;
