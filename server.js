@@ -7,8 +7,6 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors());
-
-// Statik dosyaları sunmak için
 app.use(express.static(path.join(__dirname, 'public')));
 
 const server = http.createServer(app);
@@ -152,15 +150,20 @@ io.on('connection', (socket) => {
         io.to(roomCode).emit('chat_message', { sender: playerName, text: message, avatar: avatar, id: socket.id, type: 'user' });
     });
 
+    // --- YAZIYOR ÖZELLİĞİ ---
+    socket.on('typing', ({ roomCode, user }) => {
+        // Gönderen hariç diğerlerine bildir
+        socket.to(roomCode).emit('display_typing', { user });
+    });
+    // -------------------------
+
     socket.on('start_game', ({ roomCode, caseId, mode }) => {
         const room = rooms.get(roomCode);
         if (room && room.host === socket.id) {
             
-            // --- DÜZELTME: DEMOKRASİ MODU KONTROLÜ ---
             if (mode === 'voting' && room.players.length < 3) {
                 return socket.emit('error_message', '⚠️ Demokrasi modu için en az 3 oyuncu gereklidir!');
             }
-            // -----------------------------------------
 
             room.gameState = 'playing';
             room.currentCase = caseId;
