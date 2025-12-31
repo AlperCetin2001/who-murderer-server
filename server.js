@@ -8,6 +8,9 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
+// Statik dosyaları sunmak için (Eğer node üzerinden sunuyorsan)
+app.use(express.static(path.join(__dirname, 'public')));
+
 const server = http.createServer(app);
 
 const io = new Server(server, {
@@ -21,7 +24,7 @@ const loadedScenarios = {};
 function loadAllScenarios() {
     const dataFolderPath = path.join(__dirname, 'data');
     if (!fs.existsSync(dataFolderPath)) {
-        console.error("❌ HATA: 'data' klasörü bulunamadı!");
+        console.error("❌ HATA: 'data' klasörü bulunamadı! Lütfen oluşturun.");
         return;
     }
     ['case1', 'case2', 'case3'].forEach(caseId => {
@@ -31,9 +34,9 @@ function loadAllScenarios() {
             if (fs.existsSync(filePath)) {
                 const rawData = fs.readFileSync(filePath, 'utf8');
                 loadedScenarios[caseId] = JSON.parse(rawData);
-                console.log(`✅ ${caseId} yüklendi.`);
+                console.log(`✅ ${caseId} başarıyla yüklendi.`);
             }
-        } catch (error) { console.error(`❌ ${caseId} yüklenemedi.`); }
+        } catch (error) { console.error(`❌ ${caseId} yüklenemedi: ${error.message}`); }
     });
 }
 loadAllScenarios();
@@ -64,7 +67,6 @@ function getPublicRoomList() {
 io.on('connection', (socket) => {
     socket.emit('room_list_update', getPublicRoomList());
 
-    // --- SAHNE VERİSİ ---
     socket.on('request_scene_data', ({ roomCode, sceneId }) => {
         const room = rooms.get(roomCode);
         if (!room) return;
@@ -74,7 +76,6 @@ io.on('connection', (socket) => {
         
         if (sceneData) {
             socket.emit('scene_data_update', sceneData);
-            // Kanıt Ekleme
             if (sceneData.image && !sceneData.image.includes('char_') && !sceneData.image.includes('dis.jpg')) {
                 const exists = room.evidenceList.find(e => e.src === sceneData.image);
                 if (!exists) {
@@ -99,7 +100,6 @@ io.on('connection', (socket) => {
         if(room) socket.emit('update_evidence_board', room.evidenceList);
     });
 
-    // --- ODA YÖNETİMİ ---
     socket.on('create_room', ({ playerName, visibility, password, avatar }) => {
         let roomCode = generateRoomCode();
         while(rooms.has(roomCode)) { roomCode = generateRoomCode(); }
@@ -133,7 +133,6 @@ io.on('connection', (socket) => {
             if (nameExists) return socket.emit('error_message', '⚠️ İsim kullanımda!');
         }
 
-        // Oyuncu listesine avatarı ile ekle
         room.players.push({ id: socket.id, name: playerName, score: 0, avatar: avatar || '🕵️' });
         socket.join(roomCode);
 
@@ -150,10 +149,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('send_chat', ({ roomCode, message, playerName, avatar }) => {
-        // Avatar bilgisini de gönderiyoruz
-        io.to(roomCode).emit('chat_message', { 
-            sender: playerName, text: message, avatar: avatar, id: socket.id, type: 'user' 
-        });
+        io.to(roomCode).emit('chat_message', { sender: playerName, text: message, avatar: avatar, id: socket.id, type: 'user' });
     });
 
     socket.on('start_game', ({ roomCode, caseId, mode }) => {
@@ -224,4 +220,4 @@ io.on('connection', (socket) => {
 });
 
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => { console.log(`🚀 Sunucu Port ${PORT}`); });
+server.listen(PORT, () => { console.log(`🚀 Sunucu Port ${PORT} üzerinde çalışıyor`); });
