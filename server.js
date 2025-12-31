@@ -7,6 +7,8 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors());
+
+// Statik dosyaları sunmak için
 app.use(express.static(path.join(__dirname, 'public')));
 
 const server = http.createServer(app);
@@ -154,11 +156,11 @@ io.on('connection', (socket) => {
         const room = rooms.get(roomCode);
         if (room && room.host === socket.id) {
             
-            // --- KURAL EKLENDİ: DEMOKRASİ İÇİN MİNİMUM 3 OYUNCU ---
+            // --- DÜZELTME: DEMOKRASİ MODU KONTROLÜ ---
             if (mode === 'voting' && room.players.length < 3) {
                 return socket.emit('error_message', '⚠️ Demokrasi modu için en az 3 oyuncu gereklidir!');
             }
-            // -----------------------------------------------------
+            // -----------------------------------------
 
             room.gameState = 'playing';
             room.currentCase = caseId;
