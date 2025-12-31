@@ -23,7 +23,6 @@ function loadAllScenarios() {
     const dataFolderPath = path.join(__dirname, 'data');
     if (!fs.existsSync(dataFolderPath)) {
         console.error("❌ HATA: 'data' klasörü bulunamadı!");
-        // data klasörü yoksa boş obje ile devam et, çökmesin.
         return;
     }
     ['case1', 'case2', 'case3'].forEach(caseId => {
@@ -47,6 +46,7 @@ function generateRoomCode() {
     return code;
 }
 
+// 7. MADDE: Odalardaki kişi sayısını doğru formatta dön
 function getPublicRoomList() {
     const publicRooms = [];
     rooms.forEach((room, code) => {
@@ -54,7 +54,7 @@ function getPublicRoomList() {
             publicRooms.push({
                 code: code,
                 host: room.players[0].name,
-                count: room.players.length,
+                count: room.players.length, // Kişi sayısı
                 isLocked: !!room.password, 
                 mode: room.mode
             });
@@ -66,12 +66,9 @@ function getPublicRoomList() {
 io.on('connection', (socket) => {
     socket.emit('room_list_update', getPublicRoomList());
 
-    // --- 9. MADDE: YAZIYOR ÖZELLİĞİ ---
     socket.on('typing', ({ roomCode, playerName }) => {
-        // Gönderen hariç odadaki diğer herkese haber ver
         socket.to(roomCode).emit('display_typing', { playerName });
     });
-    // ----------------------------------
 
     socket.on('request_scene_data', ({ roomCode, sceneId }) => {
         const room = rooms.get(roomCode);
@@ -82,7 +79,6 @@ io.on('connection', (socket) => {
         
         if (sceneData) {
             socket.emit('scene_data_update', sceneData);
-            // Kanıt kontrolü (resim varsa ve karakter değilse)
             if (sceneData.image && !sceneData.image.includes('char_') && !sceneData.image.includes('dis.jpg')) {
                 const exists = room.evidenceList.find(e => e.src === sceneData.image);
                 if (!exists) {
