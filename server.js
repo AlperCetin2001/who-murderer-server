@@ -23,6 +23,7 @@ function loadAllScenarios() {
     const dataFolderPath = path.join(__dirname, 'data');
     if (!fs.existsSync(dataFolderPath)) {
         console.error("❌ HATA: 'data' klasörü bulunamadı!");
+        // data klasörü yoksa boş obje ile devam et, çökmesin.
         return;
     }
     ['case1', 'case2', 'case3'].forEach(caseId => {
@@ -65,6 +66,13 @@ function getPublicRoomList() {
 io.on('connection', (socket) => {
     socket.emit('room_list_update', getPublicRoomList());
 
+    // --- 9. MADDE: YAZIYOR ÖZELLİĞİ ---
+    socket.on('typing', ({ roomCode, playerName }) => {
+        // Gönderen hariç odadaki diğer herkese haber ver
+        socket.to(roomCode).emit('display_typing', { playerName });
+    });
+    // ----------------------------------
+
     socket.on('request_scene_data', ({ roomCode, sceneId }) => {
         const room = rooms.get(roomCode);
         if (!room) return;
@@ -74,6 +82,7 @@ io.on('connection', (socket) => {
         
         if (sceneData) {
             socket.emit('scene_data_update', sceneData);
+            // Kanıt kontrolü (resim varsa ve karakter değilse)
             if (sceneData.image && !sceneData.image.includes('char_') && !sceneData.image.includes('dis.jpg')) {
                 const exists = room.evidenceList.find(e => e.src === sceneData.image);
                 if (!exists) {
@@ -150,21 +159,12 @@ io.on('connection', (socket) => {
         io.to(roomCode).emit('chat_message', { sender: playerName, text: message, avatar: avatar, id: socket.id, type: 'user' });
     });
 
-    // --- YAZIYOR ÖZELLİĞİ ---
-    socket.on('typing', ({ roomCode, user }) => {
-        // Gönderen hariç diğerlerine bildir
-        socket.to(roomCode).emit('display_typing', { user });
-    });
-    // -------------------------
-
     socket.on('start_game', ({ roomCode, caseId, mode }) => {
         const room = rooms.get(roomCode);
         if (room && room.host === socket.id) {
-            
             if (mode === 'voting' && room.players.length < 3) {
                 return socket.emit('error_message', '⚠️ Demokrasi modu için en az 3 oyuncu gereklidir!');
             }
-
             room.gameState = 'playing';
             room.currentCase = caseId;
             room.mode = mode || 'individual';
