@@ -4,6 +4,7 @@
       "scene_id": "giris",
       "text": "Şehrin efsanesi 'Kuklacı' geri döndü. Başkomiser Kerem (mentorumuz) 24 saattir kayıp. Bu sabah kapına bırakılan zarfın içinden eski, kan lekeli bir tiyatro bileti ve bir koordinat çıktı: 'Mutlu Yarınlar Yetimhanesi'. Yıllar önce kapatılan, hakkında 'çocuklar kayboluyor' dedikodusu çıkan o lanetli yer. Yağmur şiddetini artırıyor. Demir kapının önündesin. İçeriden gelen o metalik gıcırtı sesi... Rüzgar mı, yoksa bir davet mi?",
       "image": "./img/case2/kukla_dis.jpg",
+      "hint": "Acele etme. Bazen dışarıdan bir bakış, içerideki tehlikeyi görmeni sağlar. Pencereye göz at.",
       "choices": [
         { "text": "Silahını kontrol et ve ana kapıdan gir.", "next": "ana_hol_giris" },
         { "text": "Pencereden içeriye göz at.", "next": "pencere_bakis" },
@@ -14,6 +15,7 @@
       "scene_id": "telsiz_hata",
       "text": "Telsizden sadece cızırtı geliyor. '...burada... yalnızsın...' diyen bir fısıltı duyar gibi oldun. Ya da zihnin sana oyun oynuyor. Destek gelmeyecek. Tek başınasın.",
       "image": "./img/case2/kukla_dis.jpg",
+      "hint": "Burada telefon veya telsiz çekmez. Tek yol içeri girmek.",
       "choices": [
         { "text": "Lanet olsun. Kapıdan gir.", "next": "ana_hol_giris" },
         { "text": "Pencereden bak.", "next": "pencere_bakis" }
@@ -23,7 +25,7 @@
       "scene_id": "pencere_bakis",
       "text": "Kirli camı elinle siliyorsun. İçerideki büyük holü görüyorsun. Yerde sürüklenme izleri var... Kan izleri. Ve merdivenlerin başında bir gölge duruyor. Sana mı bakıyor? Şimşek çaktığı an gölge kayboluyor.",
       "image": "./img/case2/kukla_dis.jpg",
-      "hint": "İçeride biri seni bekliyor.",
+      "hint": "İçeride yalnız değilsin. Silahın elinde olsun.",
       "choices": [
         { "text": "Vakit kaybetme, içeri gir!", "next": "ana_hol_giris" }
       ]
@@ -32,6 +34,7 @@
       "scene_id": "ana_hol_giris",
       "text": "MERKEZ HOL. Çürümüş ahşap ve küf kokusu ciğerlerine doluyor. Dev avize yere çakılmış, cam kırıkları her yerde. Duvarda kırmızı boyayla (veya kanla?) 'OYUN BAŞLADI' yazılmış. Burası bir merkez. Dört ana yolun var ama acele etme, ortamı dinle. Tıkırtılar... Kazan dairesinden geliyor.",
       "image": "./img/case2/kukla_hol.jpg",
+      "hint": "Kazan dairesi ve Tiyatro kilitli olabilir. Önce açık olan odalardan (Müdür veya Yatakhane) bilgi topla.",
       "choices": [
         { "text": "Müdürün Odası (Belgeler ve Kasa).", "next": "mudur_odasi_giris" },
         { "text": "Yatakhaneler (Çocukların izleri).", "next": "yatakhaneler_giris" },
@@ -43,6 +46,7 @@
       "scene_id": "merkez_hol_donus",
       "text": "Tekrar Merkez Hol'desin. Sanki... avizenin yeri değişmiş gibi? Ya da sen paranoyaklaşıyorsun. Hangi ipucunun peşinden gideceksin?",
       "image": "./img/case2/kukla_hol.jpg",
+      "hint": "Elinde yeni bir eşya (Anahtar, Fener) varsa, daha önce giremediğin veya göremediğin yerlere tekrar git.",
       "choices": [
         { "text": "Müdürün Odası.", "next": "mudur_odasi_giris" },
         { "text": "Yatakhaneler.", "next": "yatakhaneler_giris" },
@@ -54,6 +58,7 @@
       "scene_id": "tiyatro_kilitli",
       "text": "İki kanatlı devasa kapı zincirle kilitlenmiş. İçeriden boğuk bir klasik müzik sesi geliyor. 'Kuğu Gölü Balesi'... Başkomiser içeride olabilir. Ama bu zinciri kırmak için bir 'Demir Kesici' veya anahtar lazım. Buraya sonra dönmelisin.",
       "image": "./img/case2/kukla_ceset_dummy.jpg",
+      "hint": "Bu kapı oyunun finali. Henüz girmek için gerekli bilgiye veya gizli geçide sahip değilsin. Kazan dairesini araştır.",
       "choices": [
         { "text": "Geri dön.", "next": "merkez_hol_donus" }
       ]
@@ -62,15 +67,16 @@
       "scene_id": "kazan_dairesi_kilitli",
       "text": "Kazan dairesinin ağır metal kapısı kilitli değil ama sıkışmış. İçeriden metalik vurma sesleri geliyor. Kapıyı açmak için bir levyeye ya da güçlü bir darbeye ihtiyacın yok, sadece kolu doğru çevirmelisin ama çok sıcak. Bir eldiven veya bez lazım.",
       "image": "./img/case2/kukla_kazan_dairesi.jpg",
-      "hint": "Çıplak elle açamazsın. Yatakhanelerde bir şeyler bulabilir misin?",
+      "hint": "Kapı kolu elini yakar. Yatakhanelerdeki oyuncakların içinde bir eldiven saklanmış olabilir mi?",
       "choices": [
         { "text": "Zorlama, elin yanar. Geri dön.", "next": "merkez_hol_donus" }
       ]
     },
     {
       "scene_id": "yatakhaneler_giris",
-      "text": "Yatakhaneler buz gibi. Ranzalar paslanmış. Yerde eski, parçalanmış oyuncak ayılar var. Duvarlarda çocukların çizimleri... Ama bir dakika, çizimler çok taze duruyor? Boya kokusu hala havada.",
+      "text": "Yatakhaneler buz gibi. Ranzalar paslanmış. Yerde eski, parçalanmış oyuncak ayılar var. Duvarlarda çocukların çizdiği ürkütücü resimler var. Ama bir dakika, çizimler çok taze duruyor? Boya kokusu hala havada.",
       "image": "./img/case2/kukla_yatakhaneler.jpg",
+      "hint": "Yastık altlarına ve oyuncaklara bak. Duvarlardaki yazılar çıplak gözle okunmuyor olabilir (UV Fener lazım).",
       "choices": [
         { "text": "Yatakları ve dolapları ara.", "next": "yatak_arama" },
         { "text": "Duvardaki çizimleri incele.", "next": "duvar_resimleri" },
@@ -81,6 +87,7 @@
       "scene_id": "oyuncak_ayi",
       "text": "Ayıyı eline aldığında içinin sert olduğunu fark ettin. Dikişleri sökülmüş. İçini açtığında... paslı bir 'Kazan Dairesi Anahtarı' ve kalın bir iş eldiveni buldun. Bir çocuk bunları neden saklasın?",
       "image": "./img/case2/kukla_yatakhaneler.jpg",
+      "hint": "Bu eldivenle Kazan Dairesinin sıcak kapısını açabilirsin!",
       "choices": [
         { "text": "Eldiveni ve anahtarı al.", "next": "yatakhaneler_donus" }
       ]
@@ -89,7 +96,7 @@
       "scene_id": "yatak_arama",
       "text": "Yastıkların altında eski bir günlük buluyorsun. 'Orhan Amca bize kızdı. Bodruma inmemizi yasakladı. Ama Dr. Aris geceleri oraya gidiyor. Çocukları götürüyor... Geri gelmiyorlar.'",
       "image": "./img/case2/item_gunluk.jpg",
-      "hint": "Orhan (Hademe) ve Dr. Aris (Psikiyatrist) işbirliği mi yapıyor?",
+      "hint": "Günlükte şifreler gizli olabilir. Okumaya devam et.",
       "choices": [
         { "text": "Okumaya devam et.", "next": "gunluk_detay" },
         { "text": "Günlüğü al ve geri dön.", "next": "yatakhaneler_donus" }
@@ -99,6 +106,7 @@
       "scene_id": "gunluk_detay",
       "text": "'Dr. Aris bizi uyutmak için özel bir ilaç veriyor. İlacın kutusunu Müdürün odasındaki kasaya sakladı. Şifre, en sevdiği hastanın numarasıymış: 4-0-4.' Bu bilgi çok önemli olabilir!",
       "image": "./img/case2/item_gunluk.jpg",
+      "hint": "Müdürün odasındaki kasanın şifresi: 404.",
       "choices": [
         { "text": "Şifreyi aklına kazı (404).", "next": "yatakhaneler_donus" }
       ]
@@ -107,6 +115,7 @@
       "scene_id": "duvar_resimleri",
       "text": "Çizimlerde siyah pelerinli bir adam, çocukları iplerle tavana asıyor. Resmin altına karalanmış: 'GÖZLER SADECE MOR IŞIKTA GÖRÜR'. Bu ne demek? Mor ışık... UV feneri?",
       "image": "./img/case2/kukla_yatakhaneler.jpg",
+      "hint": "Buradaki gizli mesajı okumak için Müdürün odasındaki kasadan UV Fenerini almalısın.",
       "choices": [
         { "text": "UV feneri bulmam lazım. Müdürün odasına bak.", "next": "yatakhaneler_donus" }
       ]
@@ -115,6 +124,7 @@
       "scene_id": "yatakhaneler_donus",
       "text": "Yatakhanedeki işin bitti gibi. Ama o çizimlerdeki 'Mor Işık' uyarısı aklını kurcalıyor. UV Feneri bulursan buraya tekrar gelmelisin.",
       "image": "./img/case2/kukla_yatakhaneler.jpg",
+      "hint": "Müdür odasına gitmeyi dene.",
       "choices": [
         { "text": "Merkez Hol'e dön.", "next": "merkez_hol_donus" }
       ]
@@ -123,6 +133,7 @@
       "scene_id": "mudur_odasi_giris",
       "text": "Müdürün ofisi darmadağın. Dosyalar yerlerde. Bir kavga yaşanmış. Masanın üzerinde duran antika bir kasetçalar var. Ve duvarda, yamuk duran o meşhur tablo. Arkasında kesinlikle bir kasa var.",
       "image": "./img/case2/kukla_mudur_odasi.jpg",
+      "hint": "Tablonun arkasındaki kasayı incele. Ama şifreyi biliyor musun? (Yatakhanede buldun mu?)",
       "choices": [
         { "text": "Tabloyu indir ve kasayı incele.", "next": "kasa_sifre_ekrani" },
         { "text": "Kasetçaları çalıştır.", "next": "kaset_dinle" },
@@ -133,7 +144,7 @@
       "scene_id": "kaset_dinle",
       "text": "Play tuşuna bastın. Dr. Aris'in sesi: 'Denek 404... Selin. Tedaviye yanıt vermiyor. Şiddet eğilimi artıyor. Onu yetimhaneden uzaklaştırmalıyız yoksa diğer çocuklara zarar verecek. Orhan, onu bodruma kilitle.' Kaset burada bitiyor. Selin... Bu isim tanıdık mı?",
       "image": "./img/case2/item_kaset.jpg",
-      "hint": "Selin bir kurban mı yoksa canavar mı?",
+      "hint": "Selin (Gazeteci) eski bir hasta olabilir mi? Bu onu şüpheli yapar.",
       "choices": [
         { "text": "Kasaya odaklan.", "next": "kasa_sifre_ekrani" },
         { "text": "Geri çekil.", "next": "mudur_odasi_giris" }
@@ -158,7 +169,7 @@
     },
     {
       "scene_id": "kasa_hata_mudur",
-      "text": "Kasa kilitli. Yanlış şifre. İpuçlarını tekrar düşün.",
+      "text": "Kasa kilitli. Yanlış şifre. Şifre yatakhanedeki bir günlüğün içinde yazıyordu. Orayı araştırmadıysan bilemezsin.",
       "choices": [
         { "text": "Tekrar dene.", "next": "kasa_sifre_ekrani" },
         { "text": "Vazgeç.", "next": "mudur_odasi_giris" }
@@ -168,6 +179,7 @@
       "scene_id": "kasa_acildi_full",
       "text": "Klik! Kasa açıldı. İçinde bir tabanca (mermisi az), bir UV (Mor Işık) Feneri ve bir tomar para var. Paraların üzerinde kan lekeleri... UV Fenerini aldın. Artık yatakhanedeki gizli mesajları okuyabilirsin.",
       "image": "./img/case2/item_uv_fener.jpg",
+      "hint": "UV Feneri aldın! Şimdi Yatakhaneye dön ve duvarlara ışık tut.",
       "choices": [
         { "text": "Hemen Yatakhaneye dön ve UV ışığını kullan!", "next": "yatakhaneler_uv_modu" },
         { "text": "Merkez Hol'e dön.", "next": "merkez_hol_donus" }
@@ -177,6 +189,7 @@
       "scene_id": "yatakhaneler_uv_modu",
       "text": "UV ışığını duvarlara tutuyorsun. Aman Tanrım! Duvarlar çıplak gözle görülmeyen yazılarla dolu! 'KATİL ORHAN DEĞİL', 'DOKTOR YALAN SÖYLÜYOR', 'SELİN BİZİ KURTARMAYA GELDİ'. Ve bir ok işareti... Tiyatro salonunun gizli girişini gösteriyor: 'Kazan Dairesindeki 3. Boruyu Çevir'.",
       "image": "./img/case2/item_uv_fener.jpg",
+      "hint": "Bu yazı her şeyi değiştiriyor. Doktor suçlu olabilir. Ve Tiyatroya girmek için Kazan Dairesine gitmelisin.",
       "choices": [
         { "text": "Bu bilgi çok kritik! Kazan Dairesine koş!", "next": "kazan_dairesi_giris_kontrol" }
       ]
@@ -185,6 +198,7 @@
       "scene_id": "kazan_dairesi_giris_kontrol",
       "text": "Kazan dairesinin kapısındasın. Yatakhaneden aldığın 'İş Eldiveni' ve 'Anahtar' yanında mı?",
       "image": "./img/case2/kukla_kazan_dairesi.jpg",
+      "hint": "Yatakhanedeki oyuncak ayının içinden eldiven çıkmıştı. Onu almadan burayı açamazsın.",
       "choices": [
         { "text": "Evet, eldiveni tak ve kapıyı aç.", "next": "kazan_dairesi_ic" },
         { "text": "Hayır, henüz bulamadım (Geri dön).", "next": "merkez_hol_donus" }
@@ -194,6 +208,7 @@
       "scene_id": "kazan_dairesi_ic",
       "text": "İçerisi cehennem gibi sıcak. Buhar göz gözü görmüyor. Köşede birisi var! Elinde İngiliz anahtarıyla bekleyen yaşlı, korkunç görünümlü bir adam. Orhan! Seni fark etti.",
       "image": "./img/case2/char_orhan.jpg",
+      "hint": "Orhan saldırmaya hazır ama belki konuşulabilir. Yatakhanedeki UV yazısında 'Katil Orhan Değil' yazıyordu.",
       "choices": [
         { "text": "Silahını çek ve 'Teslim ol!' diye bağır.", "next": "orhan_yuzlesme_sert" },
         { "text": "Sakin olmasını söyle, konuşmaya çalış.", "next": "orhan_yuzlesme_yumusak" }
@@ -211,7 +226,7 @@
       "scene_id": "orhan_yuzlesme_yumusak",
       "text": "'Ben yapmadım... Yemin ederim!' Orhan ağlamaya başlıyor. 'Dr. Aris... O kadınla (Selin) anlaştı. Başkomiseri tuzağa çektiler. Ben sadece temizlikçiyim. Çocukları korumaya çalıştım ama bana deli dediler.' Orhan samimi görünüyor.",
       "image": "./img/case2/char_orhan.jpg",
-      "hint": "Orhan suçlu profiline uymuyor. Fazla korkak.",
+      "hint": "Orhan sana yardım edebilir. Tiyatronun gizli girişini biliyor.",
       "choices": [
         { "text": "Bana tiyatroya giren gizli yolu göster.", "next": "orhan_yardim" },
         { "text": "Ona güvenme, etkisiz hale getir.", "next": "orhan_yuzlesme_sert" }
@@ -237,6 +252,7 @@
       "scene_id": "sahne_gozetleme",
       "text": "Sahne spot ışıklarıyla aydınlatılmış. Sandalyede bağlı biri var: Başkomiser Kerem! Baygın. Yanında iki kişi ayakta duruyor. Biri, elinde fotoğraf makinesi ve silah olan Gazeteci Selin. Diğeri, şık takım elbisesiyle sakin duran Psikiyatrist Dr. Aris. Tartışıyorlar.",
       "image": "./img/case2/kukla_ceset_dummy.jpg",
+      "hint": "Acele etme, dinle. Kimin eli titriyor? Kim manipüle ediyor?",
       "choices": [
         { "text": "Dinle: Selin ne diyor?", "next": "diyalog_selin" },
         { "text": "Dinle: Dr. Aris ne diyor?", "next": "diyalog_aris" },
@@ -247,7 +263,7 @@
       "scene_id": "diyalog_selin",
       "text": "Selin, silahı doktora doğrultmuş bağırıyor: 'Senin yüzünden! O ilaçlar yüzünden kardeşim intihar etti! Bu yetimhaneyi laboratuvarın gibi kullandın. Kerem Komiser bunu öğrendiği için onu öldüreceksin değil mi?!'",
       "image": "./img/case2/char_selin.jpg",
-      "hint": "Selin intikam peşinde gibi. Ama elinde neden silah var?",
+      "hint": "Selin intikam peşinde gibi. Sesi çok acı dolu.",
       "choices": [
         { "text": "Aris'in cevabını dinle.", "next": "diyalog_aris" },
         { "text": "Sahneye çık.", "next": "sahneye_cikis" }
@@ -257,7 +273,7 @@
       "scene_id": "diyalog_aris",
       "text": "Dr. Aris buz gibi sakin. 'Selin... İlaçlarını almadın yine. Paranoyaklaşıyorsun. Kardeşin hastaydı, senin gibi. Ben onları iyileştirmeye çalıştım. Komiseri sen kaçırdın, unuttun mu? Şizofreni nöbetlerin sıklaştı.'",
       "image": "./img/case2/char_aris.jpg",
-      "hint": "Aris, Selin'in akıl sağlığını sorguluyor. Klasik bir manipülasyon mu yoksa gerçek mi?",
+      "hint": "Aris, Selin'in akıl sağlığını sorguluyor. Ama Yatakhanedeki UV yazıları 'Doktor Yalan Söylüyor' diyordu.",
       "choices": [
         { "text": "Sahneye çık ve yüzleş.", "next": "sahneye_cikis" }
       ]
@@ -266,6 +282,7 @@
       "scene_id": "sahneye_cikis",
       "text": "Yer kapağını tekmeleyip sahneye fırlıyorsun! Silahın hazır. 'Kıpırdamayın!' Herkes sana dönüyor. Kerem Komiser yavaşça ayılıyor. Ortamdaki gerilim elle tutulur cinsten. Şimdi bir taraf seçmek zorundasın. Kim doğruyu söylüyor?",
       "image": "./img/case2/kukla_ceset_dummy.jpg",
+      "hint": "UV feneriyle gördüklerini, Müdürün odasındaki kasetleri hatırla. Doktor Aris çok tehlikeli.",
       "choices": [
         { "text": "Silahını Selin'e doğrult. (Dr. Aris haklı görünüyor)", "next": "secim_selin_suclu" },
         { "text": "Silahını Dr. Aris'e doğrult. (Yatakhanedeki yazılar!)", "next": "secim_aris_suclu" },
